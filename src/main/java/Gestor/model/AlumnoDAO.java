@@ -10,9 +10,9 @@ public class AlumnoDAO {
 	public static int eliminarAlumno(int idAlumno, Connection con) {
 
 		try {
-			// Borramos el koala con un determinado id
-			// de koala
-			String query = "DELETE FROM alumno WHERE idAlumno=?";
+			// Borramos el alumno con un determinado id
+			// de alumno
+			String query = "DELETE FROM Alumno WHERE idAlumno=?";
 			// Creamos statement
 			PreparedStatement pstmt = con.prepareStatement(query);
 			// Establecemos el primer parametro de la
@@ -35,37 +35,37 @@ public class AlumnoDAO {
 	public static int insertAlumno(Connection con, AlumnoDO alumno) {
 		try {
 
-			// Comprobar que no existe un avestruz con
+			// Comprobar que no existe un alumno con
 			// ese id en bd
 			String selectID = "Select * From Alumno Where idAlumno=?";
 			PreparedStatement pstmt = con.prepareStatement(selectID);
 			// Establecemos el primer parametro de la
 			// query
-			pstmt.setInt(1, alumno.getDniA());
+			pstmt.setInt(1, alumno.getIdAlumno());
 			ResultSet rs = pstmt.executeQuery();
 
 			// Si existe lo metemos sin id
-			if (rs.next() || alumno.getDniA() < -1) {
-				String query = "INSERT INTO Alumno (fechNa, nombre, apellido, telefono, email, Curso_idCurso) VALUES(?,?,?,?,?,?)";
+			if (rs.next() || alumno.getIdAlumno() < -1) {
+				String query = "INSERT INTO Alumno (dniA, fechNa, nombre, apellido, telefono, email, Curso_idCurso) VALUES(?,?,?,?,?,?,?)";
 
 				PreparedStatement pstmt2 = con.prepareStatement(query);
-				// Establecemos los 6 parametros para
-				// introducir un avestruz a la base de
+				// Establecemos los 7 parametros para
+				// introducir un alumno a la base de
 				// datos
-				pstmt2.setString(1, alumno.getFechNa());
-				pstmt2.setString(2, alumno.getNombre());
-				pstmt2.setString(3, alumno.getApellido());
-				pstmt2.setInt(4, alumno.getTelefono());
-				pstmt2.setString(5, alumno.getEmail());
-				pstmt2.setInt(6, alumno.getCurso_idCurso());
-				// Si el nombre o el nick son nulos
-				// devolvemos 0
+				pstmt2.setInt(1, alumno.getDniA());
+				pstmt2.setString(2, alumno.getFechNa());
+				pstmt2.setString(3, alumno.getNombre());
+				pstmt2.setString(4, alumno.getApellido());
+				pstmt2.setInt(5, alumno.getTelefono());
+				pstmt2.setString(6, alumno.getEmail());
+				pstmt2.setInt(7, alumno.getCurso_idCurso());
+				// Si alguno de los String son nulos devolvemos 0
 				if (alumno.getNombre().equals(null))
 					return 0;
 				if (alumno.getApellido().equals(null))
 					return 0;
 				if (alumno.getEmail().equals(null))
-					pstmt2.setString(5, alumno.getEmail());
+					pstmt2.setString(6, null);
 				if (alumno.getFechNa().equals(null))
 					return 0;
 
@@ -75,27 +75,27 @@ public class AlumnoDAO {
 				return 1;
 				// Si no existe el id lo introducimos
 			} else {
-				String query = "INSERT INTO Alumno (dniA, fechNa, nombre, apellido, telefono, email, Curso_idCurso) VALUES(?,?,?,?,?,?,?)";
+				String query = "INSERT INTO Alumno (idAlumno, dniA, fechNa, nombre, apellido, telefono, email, Curso_idCurso) VALUES(?,?,?,?,?,?,?,?)";
 
 				PreparedStatement pstmt3 = con.prepareStatement(query);
-				// De nuevo, establecemos, esta vez 7
+				// De nuevo, establecemos, esta vez 8
 				// parametros para introducir un
-				// avestruz a la base de datos
-				pstmt3.setInt(1, alumno.getDniA());
-				pstmt3.setString(2, alumno.getFechNa());
-				pstmt3.setString(3, alumno.getNombre());
-				pstmt3.setString(4, alumno.getApellido());
-				pstmt3.setInt(5, alumno.getTelefono());
-				pstmt3.setString(6, alumno.getEmail());
-				pstmt3.setInt(7, alumno.getCurso_idCurso());
-				// Si el nombre o el nick son nulos
-				// devolvemos 0
+				// alumno a la base de datos
+				pstmt3.setInt(1, alumno.getIdAlumno());
+				pstmt3.setInt(2, alumno.getDniA());
+				pstmt3.setString(3, alumno.getFechNa());
+				pstmt3.setString(4, alumno.getNombre());
+				pstmt3.setString(5, alumno.getApellido());
+				pstmt3.setInt(6, alumno.getTelefono());
+				pstmt3.setString(7, alumno.getEmail());
+				pstmt3.setInt(8, alumno.getCurso_idCurso());
+				// Si alguno de los String son nulos devolvemos 0
 				if (alumno.getNombre().equals(null))
 					return 0;
 				if (alumno.getApellido().equals(null))
 					return 0;
 				if (alumno.getEmail().equals(null))
-					return 0;
+					pstmt3.setString(7, null);
 				if (alumno.getFechNa().equals(null))
 					return 0;
 
@@ -121,7 +121,14 @@ public class AlumnoDAO {
 			PreparedStatement pstmt = con.prepareStatement(query);
 			// Si los campos no son nulos, los vamos
 			// añadiendo a la sentencia
+			if (alumno.getDniA() != -1) {
+				query = query + "dniA = ?";
+				campoPrevio = true;
+			}
 			if (alumno.getFechNa() != null) {
+				if (campoPrevio) {
+					query = query + ", ";
+				}
 				query = query + "fechNa = ?";
 				campoPrevio = true;
 			}
@@ -165,14 +172,18 @@ public class AlumnoDAO {
 				query = query + "Curso_idCurso = ?";
 			}
 
-			query = query + " WHERE idAvestruz = ?";
+			query = query + " WHERE idAlumno = ?";
 
 			int dpsSigno = 1;
 			// Si los campos no son nulos vamos
 			// añadiendo como parametros los atributos
-			// de avestruz
+			// de alumno
+			if (alumno.getDniA() != -1) {
+				pstmt.setInt(dpsSigno, alumno.getDniA());
+				dpsSigno++;
+			}
 			if (alumno.getFechNa() != null) {
-				pstmt.setString(dpsSigno, alumno.getNombre());
+				pstmt.setString(dpsSigno, alumno.getFechNa());
 				dpsSigno++;
 			}
 			if (alumno.getNombre() != null) {
@@ -189,6 +200,10 @@ public class AlumnoDAO {
 			}
 			if (alumno.getEmail() != null) {
 				pstmt.setString(dpsSigno, alumno.getEmail());
+				dpsSigno++;
+			}
+			if (alumno.getEmail() == null) {
+				pstmt.setString(dpsSigno, null);
 				dpsSigno++;
 			}
 			if (alumno.getCurso_idCurso() != -1) {
@@ -218,22 +233,24 @@ public class AlumnoDAO {
 			String query = "SELECT * FROM Alumno WHERE idAlumno = ?";
 			PreparedStatement pstmt = con.prepareStatement(query);
 			// Introducimos como parametro el id de
-			// avestruz
+			// alumno
 			pstmt.setInt(1, id);
 			// Creamos un resultset y ejecutamos la
 			// consulta
 			ResultSet rs = pstmt.executeQuery();
-			// Creamos un avestruz y le asignamos los
+			// Creamos un alumno y le asignamos los
 			// datos de resultset
 			AlumnoDO Alumno1 = new AlumnoDO();
+
 			Alumno1.setIdAlumno(rs.getInt(1));
-			Alumno1.setFechNa(rs.getString(2));
-			Alumno1.setNombre(rs.getString(3));
-			Alumno1.setApellido(rs.getString(4));
-			Alumno1.setTelefono(rs.getInt(5));
-			Alumno1.setEmail(rs.getString(6));
-			Alumno1.setCurso_idCurso(rs.getInt(7));
-			// Devolvemos avestruz
+			Alumno1.setDniA(rs.getInt(2));
+			Alumno1.setFechNa(rs.getString(3));
+			Alumno1.setNombre(rs.getString(4));
+			Alumno1.setApellido(rs.getString(5));
+			Alumno1.setTelefono(rs.getInt(6));
+			Alumno1.setEmail(rs.getString(7));
+			Alumno1.setCurso_idCurso(rs.getInt(8));
+			// Devolvemos alumno
 			return Alumno1;
 		} catch (SQLException e) {
 			// TODO: handle exception

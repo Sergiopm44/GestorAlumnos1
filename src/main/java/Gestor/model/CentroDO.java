@@ -32,7 +32,7 @@ public class CentroDO {
 		return idCentro;
 	}
 
-	public void setIdCentro() {
+	public void setIdCentro(int idCentro) {
 		this.idCentro = idCentro;
 	}
 

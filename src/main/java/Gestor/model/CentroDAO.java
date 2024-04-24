@@ -9,8 +9,8 @@ public class CentroDAO {
 	public static int eliminarCentro(int idCentro, Connection con) {
 
 		try {
-			// Borramos el koala con un determinado id
-			// de koala
+			// Borramos el centro con un determinado id
+			// de centro
 			String query = "DELETE FROM Centro WHERE idCentro=?";
 			// Creamos statement
 			PreparedStatement pstmt = con.prepareStatement(query);
@@ -34,7 +34,7 @@ public class CentroDAO {
 	public static int insertCentro(Connection con, CentroDO centro) {
 		try {
 
-			// Comprobar que no existe un avestruz con
+			// Comprobar que no existe un centro con
 			// ese id en bd
 			String selectID = "Select * From Centro Where idCentro=?";
 			PreparedStatement pstmt = con.prepareStatement(selectID);
@@ -48,8 +48,8 @@ public class CentroDAO {
 				String query = "INSERT INTO Centro (nif, direccion, localidad, provincia, cPostal, Telefono, email) VALUES(?,?,?,?,?,?,?)";
 
 				PreparedStatement pstmt2 = con.prepareStatement(query);
-				// Establecemos los 6 parametros para
-				// introducir un avestruz a la base de
+				// Establecemos los 7 parametros para
+				// introducir un centro a la base de
 				// datos
 				pstmt2.setInt(1, centro.getNif());
 				pstmt2.setString(2, centro.getDireccion());
@@ -58,8 +58,7 @@ public class CentroDAO {
 				pstmt2.setInt(5, centro.getcPostal());
 				pstmt2.setInt(6, centro.getTelefono());
 				pstmt2.setString(7, centro.getEmail());
-				// Si el nombre o el nick son nulos
-				// devolvemos 0
+				// Si algun String es nulo devolvemos 0
 				if (centro.getDireccion().equals(null))
 					return 0;
 				if (centro.getLocalidad().equals(null))
@@ -67,7 +66,7 @@ public class CentroDAO {
 				if (centro.getProvincia().equals(null))
 					return 0;
 				if (centro.getEmail().equals(null))
-					pstmt2.setString(7, null);
+					return 0;
 
 				// Ejecutamos la query
 				pstmt2.executeUpdate();
@@ -78,9 +77,9 @@ public class CentroDAO {
 				String query = "INSERT INTO Centro (idCentro, nif, direccion, localidad, provincia, cPostal, Telefono, email) VALUES(?,?,?,?,?,?,?,?)";
 
 				PreparedStatement pstmt3 = con.prepareStatement(query);
-				// De nuevo, establecemos, esta vez 7
+				// De nuevo, establecemos, esta vez 8
 				// parametros para introducir un
-				// avestruz a la base de datos
+				// centro a la base de datos
 				pstmt3.setInt(1, centro.getIdCentro());
 				pstmt3.setInt(2, centro.getNif());
 				pstmt3.setString(3, centro.getDireccion());
@@ -89,8 +88,7 @@ public class CentroDAO {
 				pstmt3.setInt(6, centro.getcPostal());
 				pstmt3.setInt(7, centro.getTelefono());
 				pstmt3.setString(8, centro.getEmail());
-				// Si el nombre o el nick son nulos
-				// devolvemos 0
+				// Si algun String es nulo devolvemos 0
 				if (centro.getDireccion().equals(null))
 					return 0;
 				if (centro.getLocalidad().equals(null))
@@ -98,7 +96,7 @@ public class CentroDAO {
 				if (centro.getProvincia().equals(null))
 					return 0;
 				if (centro.getEmail().equals(null))
-					pstmt3.setString(8, null);
+					return 0;
 
 				// Ejecutamos la query
 				pstmt3.executeUpdate(query);
@@ -178,7 +176,7 @@ public class CentroDAO {
 			int dpsSigno = 1;
 			// Si los campos no son nulos vamos
 			// añadiendo como parametros los atributos
-			// de avestruz
+			// de centro
 			if (centro.getNif() != -1) {
 				pstmt.setInt(dpsSigno, centro.getNif());
 				dpsSigno++;
@@ -230,12 +228,12 @@ public class CentroDAO {
 			String query = "SELECT * FROM Centro WHERE idCentro = ?";
 			PreparedStatement pstmt = con.prepareStatement(query);
 			// Introducimos como parametro el id de
-			// avestruz
+			// centro
 			pstmt.setInt(1, id);
 			// Creamos un resultset y ejecutamos la
 			// consulta
 			ResultSet rs = pstmt.executeQuery();
-			// Creamos un avestruz y le asignamos los
+			// Creamos un centro y le asignamos los
 			// datos de resultset
 			CentroDO Centro1 = new CentroDO();
 			Centro1.setIdCentro(rs.getInt(1));
@@ -246,7 +244,7 @@ public class CentroDAO {
 			Centro1.setcPostal(rs.getInt(6)); // ok
 			Centro1.setTelefono(rs.getInt(7));
 			Centro1.setEmail(rs.getString(8));
-			// Devolvemos avestruz
+			// Devolvemos centro
 			return Centro1;
 		} catch (SQLException e) {
 			// TODO: handle exception

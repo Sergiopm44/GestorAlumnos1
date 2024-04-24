@@ -13,7 +13,7 @@ public class ProfesorDAO {
 		try {
 
 			// Borramos el dniP (dni de profesores )
-			String query = "DELETE FROM Profesores WHERE dniP=?";
+			String query = "DELETE FROM Profesores WHERE idProfesor=?";
 			// Creamos statement
 			PreparedStatement pstmt = con.prepareStatement(query);
 
@@ -34,36 +34,34 @@ public class ProfesorDAO {
 	public static int insertProfesor(Connection con, ProfesorDO Profesor) {
 		try {
 
-			String selectID = "Select * From Profesor Where=?";
+			String selectID = "Select * From Profesor Where idProfesor=?";
 			PreparedStatement pstmt = con.prepareStatement(selectID);
 
-			pstmt.setInt(1, Profesor.getDniP());
+			pstmt.setInt(1, Profesor.getIdProfesor());
 			ResultSet rs = pstmt.executeQuery();
 
 			// Si existe lo metemos sin id
-			if (rs.next() || Profesor.getDniP() < -1) {
-				String query = "INSERT INTO Profesor (idProfesor, dniP, fechNa, nombre, apellido, telefono, email, Curso_idCurso) VALUES(?,?,?,?,?,?,?,?)";
+			if (rs.next() || Profesor.getIdProfesor() < -1) {
+				String query = "INSERT INTO Profesor (dniP, fechNa, nombre, apellido, telefono, email, Curso_idCurso) VALUES(?,?,?,?,?,?,?,?)";
 
 				PreparedStatement pstmt2 = con.prepareStatement(query);
 
-				pstmt2.setInt(1, Profesor.getIdProfesor());
-				pstmt2.setInt(2, Profesor.getDniP());
-				pstmt2.setString(3, Profesor.getFechNa());
-				pstmt2.setString(4, Profesor.getNombre());
-				pstmt2.setString(5, Profesor.getApellido());
-				pstmt2.setInt(6, Profesor.getTelefono());
-				pstmt2.setString(7, Profesor.getEmail());
-				pstmt2.setInt(8, Profesor.getDepartamentos_idDepartamentos());
+				pstmt2.setInt(1, Profesor.getDniP());
+				pstmt2.setString(2, Profesor.getFechNa());
+				pstmt2.setString(3, Profesor.getNombre());
+				pstmt2.setString(4, Profesor.getApellido());
+				pstmt2.setInt(5, Profesor.getTelefono());
+				pstmt2.setString(6, Profesor.getEmail());
+				pstmt2.setInt(7, Profesor.getDepartamentos_idDepartamentos());
 
-				// Si el nombre o el nick son nulos
-				// devolvemos 0
+				// Si alguno de los String es nulo devolvemos 0
 
 				if (Profesor.getNombre().equals(null))
 					return 0;
 				if (Profesor.getApellido().equals(null))
 					return 0;
 				if (Profesor.getEmail().equals(null))
-					return 0;
+					pstmt2.setString(6, null);
 				if (Profesor.getFechNa().equals(null))
 					return 0;
 
@@ -89,14 +87,13 @@ public class ProfesorDAO {
 				pstmt3.setString(7, Profesor.getEmail());
 				pstmt3.setInt(8, Profesor.getDepartamentos_idDepartamentos());
 
-				// Si el nombre o el nick son nulos
-				// devolvemos 0
+				// Si alguno de los String es nulo devolvemos 0
 				if (Profesor.getNombre().equals(null))
 					return 0;
 				if (Profesor.getApellido().equals(null))
 					return 0;
 				if (Profesor.getEmail().equals(null))
-					return 0;
+					pstmt3.setString(7, null);
 				if (Profesor.getFechNa().equals(null))
 					return 0;
 
@@ -122,7 +119,14 @@ public class ProfesorDAO {
 			PreparedStatement pstmt = con.prepareStatement(query);
 			// Si los campos no son nulos, los vamos
 			// añadiendo a la sentencia
+			if (Profesor.getDniP() != -1) {
+				query = query + "dniP = ?";
+				campoPrevio = true;
+			}
 			if (Profesor.getFechNa() != null) {
+				if (campoPrevio) {
+					query = query + ", ";
+				}
 				query = query + "fechNa = ?";
 				campoPrevio = true;
 			}
@@ -163,7 +167,7 @@ public class ProfesorDAO {
 				if (campoPrevio) {
 					query = query + ", ";
 				}
-				query = query + "departamento_idDepartamento = ?";
+				query = query + "Departamentos_idDepartamentos = ?";
 			}
 
 			query = query + " WHERE idProfesor = ?";
@@ -172,8 +176,12 @@ public class ProfesorDAO {
 			// Si los campos no son nulos vamos
 			// añadiendo como parametros los atributos
 			// de profesor
+			if (Profesor.getDniP() != -1) {
+				pstmt.setInt(dpsSigno, Profesor.getDniP());
+				dpsSigno++;
+			}
 			if (Profesor.getFechNa() != null) {
-				pstmt.setString(dpsSigno, Profesor.getNombre());
+				pstmt.setString(dpsSigno, Profesor.getFechNa());
 				dpsSigno++;
 			}
 			if (Profesor.getNombre() != null) {
@@ -190,6 +198,10 @@ public class ProfesorDAO {
 			}
 			if (Profesor.getEmail() != null) {
 				pstmt.setString(dpsSigno, Profesor.getEmail());
+				dpsSigno++;
+			}
+			if (Profesor.getEmail() == null) {
+				pstmt.setString(dpsSigno, null);
 				dpsSigno++;
 			}
 			if (Profesor.getDepartamentos_idDepartamentos() != -1) {
@@ -219,22 +231,23 @@ public class ProfesorDAO {
 			String query = "SELECT * FROM Profesor WHERE idProfesor = ?";
 			PreparedStatement pstmt = con.prepareStatement(query);
 			// Introducimos como parametro el id de
-			// avestruz
+			// profesor
 			pstmt.setInt(1, id);
 			// Creamos un resultset y ejecutamos la
 			// consulta
 			ResultSet rs = pstmt.executeQuery();
-			// Creamos un avestruz y le asignamos los
+			// Creamos un profesor y le asignamos los
 			// datos de resultset
 			ProfesorDO Profesor1 = new ProfesorDO();
 			Profesor1.setIdProfesor(rs.getInt(1));
-			Profesor1.setFechNa(rs.getString(2));
-			Profesor1.setNombre(rs.getString(3));
-			Profesor1.setApellido(rs.getString(4));
-			Profesor1.setTelefono(rs.getInt(5));
-			Profesor1.setEmail(rs.getString(6));
-			Profesor1.setDepartamentos_idDepartamentos(rs.getInt(7));
-			// Devolvemos avestruz
+			Profesor1.setDniP(rs.getInt(2));
+			Profesor1.setFechNa(rs.getString(3));
+			Profesor1.setNombre(rs.getString(4));
+			Profesor1.setApellido(rs.getString(5));
+			Profesor1.setTelefono(rs.getInt(6));
+			Profesor1.setEmail(rs.getString(7));
+			Profesor1.setDepartamentos_idDepartamentos(rs.getInt(8));
+			// Devolvemos profesor
 			return Profesor1;
 		} catch (SQLException e) {
 			// TODO: handle exception
