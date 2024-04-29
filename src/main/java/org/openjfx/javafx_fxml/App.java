@@ -73,7 +73,7 @@ public class App extends Application {
 		// Añadimos a la escena el panel vertical
 		Scene scene = new Scene(panelVertical, 600, 600);
 
-		stage.setTitle("Formulario de Contacto");
+		stage.setTitle("Gestor de Alumnos");
 		stage.setScene(scene);
 		stage.show();
 
@@ -84,8 +84,8 @@ public class App extends Application {
 
 		if (tipoAlerta == Alert.AlertType.INFORMATION) {
 			Alert infoAlert = new Alert(tipoAlerta);
-			infoAlert.setTitle("Informacion Relevante");
-			infoAlert.setHeaderText("Ultimas noticias");
+			infoAlert.setTitle("Búsqueda de alumno");
+			infoAlert.setHeaderText("");
 			infoAlert.setContentText(
 					"Si  no lees esta informacion te vasa a perder lo último en crypto, pasame tu clave privada, please");
 			infoAlert.showAndWait();
@@ -128,7 +128,7 @@ public class App extends Application {
 
 		StackPane stackPane = new StackPane();
 
-		stackPane.getChildren().add(new Label("Contenido de prueba"));
+		stackPane.getChildren().add(new Label("Introduzca el nombre de usuario:"));
 
 		Scene scene = new Scene(stackPane, 300, 300);
 
@@ -137,11 +137,11 @@ public class App extends Application {
 		ventanaEmergente.initOwner(stage);
 		ventanaEmergente.initModality(Modality.WINDOW_MODAL);
 
-		ventanaEmergente.setTitle("Ventana modal");
+		ventanaEmergente.setTitle("Actualizar Usuario");
 		ventanaEmergente.setScene(scene);
 		ventanaEmergente.show();
 
-		scene = new Scene(vent, 640, 480);
+		scene = new Scene(stackPane, 640, 480);
 		stage.setScene(scene);
 		stage.show();
 	}
