@@ -6,6 +6,8 @@ public class AlumnoDO {
 	private String fechNa;
 	private String nombre;
 	private String apellido;
+	private String usuario;
+	private String contrasenia;
 	private int telefono;
 	private String email;
 	private int Curso_idCurso;
@@ -15,14 +17,16 @@ public class AlumnoDO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AlumnoDO(int idAlumno, int dniA, String fechNa, String nombre, String apellido, int telefono, String email,
-			int curso_idCurso) {
+	public AlumnoDO(int idAlumno, int dniA, String fechNa, String nombre, String apellido, String usuario,
+			String contrasenia, int telefono, String email, int curso_idCurso) {
 		super();
 		this.idAlumno = idAlumno;
 		this.dniA = dniA;
 		this.fechNa = fechNa;
 		this.nombre = nombre;
 		this.apellido = apellido;
+		this.usuario = usuario;
+		this.contrasenia = contrasenia;
 		this.telefono = telefono;
 		this.email = email;
 		Curso_idCurso = curso_idCurso;
@@ -34,6 +38,22 @@ public class AlumnoDO {
 
 	public void setIdAlumno(int idAlumno) {
 		this.idAlumno = idAlumno;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getContrasenia() {
+		return contrasenia;
+	}
+
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
 	}
 
 	/**
@@ -136,9 +156,9 @@ public class AlumnoDO {
 
 	@Override
 	public String toString() {
-		return "AlumnoDO [idAlumno=" + idAlumno + "dniA=" + dniA + ", fechNa=" + fechNa + ", nombre=" + nombre
-				+ ", apellido=" + apellido + ", telefono=" + telefono + ", email=" + email + ", Curso_idCurso="
-				+ Curso_idCurso + "]";
+		return "AlumnoDO [idAlumno=" + idAlumno + ", dniA=" + dniA + ", fechNa=" + fechNa + ", nombre=" + nombre
+				+ ", apellido=" + apellido + ", usuario=" + usuario + ", contrasenia=" + contrasenia + ", telefono="
+				+ telefono + ", email=" + email + ", Curso_idCurso=" + Curso_idCurso + "]";
 	}
 
 }
