@@ -7,6 +7,8 @@ public class ProfesorDO {
 	private String fechNa;
 	private String nombre;
 	private String apellido;
+	private String usuario;
+	private String contrasenia;
 	private int telefono;
 	private String email;
 	private int Departamentos_idDepartamentos;
@@ -16,14 +18,16 @@ public class ProfesorDO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ProfesorDO(int idProfesor, int dniP, String fechNa, String nombre, String apellido, int telefono,
-			String email, int departamentos_idDepartamentos) {
+	public ProfesorDO(int idProfesor, int dniP, String fechNa, String nombre, String apellido, String usuario,
+			String contrasenia, int telefono, String email, int departamentos_idDepartamentos) {
 		super();
 		this.idProfesor = idProfesor;
 		this.dniP = dniP;
 		this.fechNa = fechNa;
 		this.nombre = nombre;
 		this.apellido = apellido;
+		this.usuario = usuario;
+		this.contrasenia = contrasenia;
 		this.telefono = telefono;
 		this.email = email;
 		Departamentos_idDepartamentos = departamentos_idDepartamentos;
@@ -99,6 +103,22 @@ public class ProfesorDO {
 		this.apellido = apellido;
 	}
 
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getContrasenia() {
+		return contrasenia;
+	}
+
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
+	}
+
 	/**
 	 * @return the telefono
 	 */
@@ -144,8 +164,9 @@ public class ProfesorDO {
 	@Override
 	public String toString() {
 		return "ProfesorDO [idProfesor=" + idProfesor + ", dniP=" + dniP + ", fechNa=" + fechNa + ", nombre=" + nombre
-				+ ", apellido=" + apellido + ", telefono=" + telefono + ", email=" + email
-				+ ", Departamentos_idDepartamentos=" + Departamentos_idDepartamentos + "]";
+				+ ", apellido=" + apellido + ", usuario=" + usuario + ", contrasenia=" + contrasenia + ", telefono="
+				+ telefono + ", email=" + email + ", Departamentos_idDepartamentos=" + Departamentos_idDepartamentos
+				+ "]";
 	}
 
 }

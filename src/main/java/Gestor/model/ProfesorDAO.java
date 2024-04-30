@@ -42,7 +42,7 @@ public class ProfesorDAO {
 
 			// Si existe lo metemos sin id
 			if (rs.next() || Profesor.getIdProfesor() < -1) {
-				String query = "INSERT INTO Profesor (dniP, fechNa, nombre, apellido, telefono, email, Curso_idCurso) VALUES(?,?,?,?,?,?,?,?)";
+				String query = "INSERT INTO Profesor (dniP, fechNa, nombre, apellido, usuario, contrasenia, telefono, email, Curso_idCurso) VALUES(?,?,?,?,?,?,?,?,?,?)";
 
 				PreparedStatement pstmt2 = con.prepareStatement(query);
 
@@ -50,15 +50,21 @@ public class ProfesorDAO {
 				pstmt2.setString(2, Profesor.getFechNa());
 				pstmt2.setString(3, Profesor.getNombre());
 				pstmt2.setString(4, Profesor.getApellido());
-				pstmt2.setInt(5, Profesor.getTelefono());
-				pstmt2.setString(6, Profesor.getEmail());
-				pstmt2.setInt(7, Profesor.getDepartamentos_idDepartamentos());
+				pstmt2.setString(5, Profesor.getUsuario());
+				pstmt2.setString(6, Profesor.getContrasenia());
+				pstmt2.setInt(7, Profesor.getTelefono());
+				pstmt2.setString(8, Profesor.getEmail());
+				pstmt2.setInt(9, Profesor.getDepartamentos_idDepartamentos());
 
 				// Si alguno de los String es nulo devolvemos 0
 
 				if (Profesor.getNombre().equals(null))
 					return 0;
 				if (Profesor.getApellido().equals(null))
+					return 0;
+				if (Profesor.getUsuario().equals(null))
+					return 0;
+				if (Profesor.getContrasenia().equals(null))
 					return 0;
 				if (Profesor.getEmail().equals(null))
 					pstmt2.setString(6, null);
@@ -74,7 +80,7 @@ public class ProfesorDAO {
 				return 1;
 				// Si no existe el id lo introducimos
 			} else {
-				String query = "INSERT INTO Profesor (idProfesor, dniP, fechNa, nombre, apellido, telefono, email, Curso_idCurso) VALUES(?,?,?,?,?,?,?)";
+				String query = "INSERT INTO Profesor (idProfesor, dniP, fechNa, nombre, apellido, usuario, contrasenia, telefono, email, Curso_idCurso) VALUES(?,?,?,?,?,?,?,?,?)";
 
 				PreparedStatement pstmt3 = con.prepareStatement(query);
 
@@ -83,14 +89,20 @@ public class ProfesorDAO {
 				pstmt3.setString(3, Profesor.getFechNa());
 				pstmt3.setString(4, Profesor.getNombre());
 				pstmt3.setString(5, Profesor.getApellido());
-				pstmt3.setInt(6, Profesor.getTelefono());
-				pstmt3.setString(7, Profesor.getEmail());
-				pstmt3.setInt(8, Profesor.getDepartamentos_idDepartamentos());
+				pstmt3.setString(6, Profesor.getUsuario());
+				pstmt3.setString(7, Profesor.getContrasenia());
+				pstmt3.setInt(8, Profesor.getTelefono());
+				pstmt3.setString(9, Profesor.getEmail());
+				pstmt3.setInt(10, Profesor.getDepartamentos_idDepartamentos());
 
 				// Si alguno de los String es nulo devolvemos 0
 				if (Profesor.getNombre().equals(null))
 					return 0;
 				if (Profesor.getApellido().equals(null))
+					return 0;
+				if (Profesor.getUsuario().equals(null))
+					return 0;
+				if (Profesor.getContrasenia().equals(null))
 					return 0;
 				if (Profesor.getEmail().equals(null))
 					pstmt3.setString(7, null);
@@ -146,6 +158,20 @@ public class ProfesorDAO {
 				query = query + "apellido = ?";
 				campoPrevio = true;
 			}
+			if (Profesor.getUsuario() != null) {
+				if (campoPrevio) {
+					query = query + ", ";
+				}
+				query = query + "usuario = ?";
+				campoPrevio = true;
+			}
+			if (Profesor.getContrasenia() != null) {
+				if (campoPrevio) {
+					query = query + ", ";
+				}
+				query = query + "contrasenia = ?";
+				campoPrevio = true;
+			}
 
 			if (Profesor.getTelefono() != -1) {
 				if (campoPrevio) {
@@ -190,6 +216,14 @@ public class ProfesorDAO {
 			}
 			if (Profesor.getApellido() != null) {
 				pstmt.setString(dpsSigno, Profesor.getApellido());
+				dpsSigno++;
+			}
+			if (Profesor.getUsuario() != null) {
+				pstmt.setString(dpsSigno, Profesor.getUsuario());
+				dpsSigno++;
+			}
+			if (Profesor.getContrasenia() != null) {
+				pstmt.setString(dpsSigno, Profesor.getContrasenia());
 				dpsSigno++;
 			}
 			if (Profesor.getTelefono() != -1) {
@@ -244,9 +278,11 @@ public class ProfesorDAO {
 			Profesor1.setFechNa(rs.getString(3));
 			Profesor1.setNombre(rs.getString(4));
 			Profesor1.setApellido(rs.getString(5));
-			Profesor1.setTelefono(rs.getInt(6));
-			Profesor1.setEmail(rs.getString(7));
-			Profesor1.setDepartamentos_idDepartamentos(rs.getInt(8));
+			Profesor1.setUsuario(rs.getString(6));
+			Profesor1.setContrasenia(rs.getString(7));
+			Profesor1.setTelefono(rs.getInt(8));
+			Profesor1.setEmail(rs.getString(9));
+			Profesor1.setDepartamentos_idDepartamentos(rs.getInt(10));
 			// Devolvemos profesor
 			return Profesor1;
 		} catch (SQLException e) {
