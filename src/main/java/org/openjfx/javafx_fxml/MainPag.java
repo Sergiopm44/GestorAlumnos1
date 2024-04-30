@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import Gestor.model.AlumnoDO;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
@@ -63,52 +62,62 @@ public class MainPag extends Application {
 	// Registro para un alumno
 	public static void registroAlumno(Connection con) {
 		try {
-			int idAlumno = 1;
-			AlumnoDO alumno = new AlumnoDO();
-			String query = "INSERT INTO alumno (idAlumno,dniA,fechNa, nombre, apellido, telefono,email,Curso_idCurso) VALUES (?,?,?,?,?,?,?,?)";
+
+			String query = "INSERT INTO alumno (dniA,fechNa, nombre, apellido,usuario,contrasenia, telefono,email,Curso_idCurso) VALUES (?,?,?,?,?,?,?,?,?)";
 			PreparedStatement pstmt = con.prepareStatement(query);
-
-			// Campo para el alumno
-			Label lbluser = new Label("Introduzca el usuario: ");
-			TextField txtUser = new TextField("Usuario");
-			pstmt.setString(2, txtUser.toString());
-
-			// Campo para el idAlumno
-			idAlumno += 1;
-			pstmt.setInt(1, idAlumno);
 
 			// Campo dniA
 			Label lbldniA = new Label("Introduzca su dni: ");
 			TextField txtdniA = new TextField("dni");
-			pstmt.setString(2, txtdniA.toString());
+			pstmt.setString(1, txtdniA.getText().toString());
 
 			// Campo fecha Nacimiento
 			Label lblfecNa = new Label("Introduzca su fecha de Nacimiento: ");
 			TextField txtfecNa = new TextField("Fecha");
 			String fecNa = txtfecNa.getText();
-			pstmt.setInt(3, Integer.parseInt(fecNa));
+			pstmt.setInt(2, Integer.parseInt(fecNa));
 
 			// Campo de nombre
 			Label lblNombre = new Label("Introduzca su nombre: ");
 			TextField txtNombre = new TextField("Nombre");
-			pstmt.setString(4, txtNombre.toString());
+			pstmt.setString(3, txtNombre.getText().toString());
 
 			// Campo del Apellido
 			Label lblApell = new Label("Introduzca su apellido: ");
 			TextField txtApell = new TextField("Apellido");
-			pstmt.setString(5, txtApell.toString());
+			pstmt.setString(4, txtApell.getText().toString());
+
+			// Campo para el alumno
+			Label lbluser = new Label("Introduzca el usuario: ");
+			TextField txtUser = new TextField("Usuario");
+			pstmt.setString(5, txtUser.getText().toString());
+
+			// Campo para la contraseña
+			Label lblPass = new Label("Introduzca la contraseña: ");
+			TextField txtPass = new TextField("Contraseña");
+			pstmt.setString(6, txtUser.getText().toString());
 
 			// Campo para el telefono
 			Label lblTel = new Label("Introduzca su número telefónico: ");
 			TextField txtTel = new TextField("Número");
 			String tel = txtfecNa.getText();
-			pstmt.setInt(6, Integer.parseInt(tel));
+			pstmt.setInt(7, Integer.parseInt(tel));
 
-			return alumno;
+			// Campo para el telefono
+			Label lblMail = new Label("Introduzca su correo electrónico: ");
+			TextField txtMail = new TextField("Correo");
+			pstmt.setString(8, txtMail.getText().toString());
+
+			Label lblCurso = new Label("Introduzca el curso (1º,2º,3º...): ");
+			TextField txtCurso = new TextField("Curso");
+			String Curso = txtfecNa.getText();
+			pstmt.setInt(9, Integer.parseInt(Curso));
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			return null;
+			System.out.println("Se ha producido un error, intentelo más tarde.");
+
 		}
 	}
 
