@@ -61,9 +61,9 @@ public class MainPag extends Application {
 	}
 
 	// Registro para un alumno
-	public static AlumnoDO registroAlumno(Connection con) {
+	public static void registroAlumno(Connection con) {
 		try {
-			int idAlumno = 0;
+			int idAlumno = 1;
 			AlumnoDO alumno = new AlumnoDO();
 			String query = "INSERT INTO alumno (idAlumno,dniA,fechNa, nombre, apellido, telefono,email,Curso_idCurso) VALUES (?,?,?,?,?,?,?,?)";
 			PreparedStatement pstmt = con.prepareStatement(query);
@@ -74,9 +74,7 @@ public class MainPag extends Application {
 			pstmt.setString(2, txtUser.toString());
 
 			// Campo para el idAlumno
-			while (idAlumno == alumno.getIdAlumno()) {
-				idAlumno++;
-			}
+			idAlumno += 1;
 			pstmt.setInt(1, idAlumno);
 
 			// Campo dniA

@@ -121,7 +121,7 @@ public class MenuPrueba extends Application {
 			alert.setHeaderText("Pruebas de Programación");
 			alert.setContentText("Esta aplicación es un gestor de alumnos para el centro IES Mar de Cádiz.\n"
 					+ "Autores: Sergio Pinto Morales, Miguel Gallardo Cota, Francisco Javier Rodríguez Ruiz\n"
-					+ "Profesor: Victor Pablo Galván Flores" + "Estado de la aplicación: Beta\n" + "Versión: 1.0");
+					+ "Profesor: Victor Pablo Galván Flores\n" + "Estado de la aplicación: Beta\n" + "Versión: 1.0");
 			// Mostramos el diálogo
 			alert.showAndWait();
 		});
