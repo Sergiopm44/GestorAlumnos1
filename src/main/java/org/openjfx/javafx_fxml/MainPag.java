@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import Gestor.utils.ConexionBD;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
@@ -25,8 +26,10 @@ public class MainPag extends Application {
 		boolean profesor = false;
 		boolean alumno = false;
 
+		Connection con = ConexionBD.conectarBD();
+
 		// Objetos
-		ChoiceBox profOrNo = new ChoiceBox();
+		ChoiceBox<String> profOrNo = new ChoiceBox<String>();
 		VBox cajon = new VBox();
 
 		welcome = new Label("Bienvenido a eRegister");
@@ -39,15 +42,16 @@ public class MainPag extends Application {
 
 		// Si es si, el bolean de profesor es verdadero y
 		// si es no, el del alumno
-		if (profOrNo.equals("Si")) {
+		if (profOrNo.getItems().toString().equals("Si")) {
 			profesor = true;
-		} else
+		} else if (profOrNo.getItems().toString().equals("No")) {
 			alumno = true;
+		}
 
 		// Llamamos a las funciones dependiendo de si es
 		// alumno o no
-		if (profesor) {
-
+		if (alumno == true) {
+			registroAlumno(con);
 		}
 
 		cajon.getChildren().addAll(welcome, profOrAl, log, profOrNo);
@@ -60,127 +64,132 @@ public class MainPag extends Application {
 
 	}
 
-	// Registro para un alumno
 	public static void registroAlumno(Connection con) {
 		try {
-
+			VBox panelVAl = new VBox();
 			String query = "INSERT INTO alumno (dniA,fechNa, nombre, apellido,usuario,contrasenia, telefono,email,Curso_idCurso) VALUES (?,?,?,?,?,?,?,?,?)";
 			PreparedStatement pstmt = con.prepareStatement(query);
 
-			// Campo dniA
 			Label lbldniA = new Label("Introduzca su dni: ");
-			TextField txtdniA = new TextField("dni");
-			pstmt.setString(1, txtdniA.getText().toString());
+			TextField txtdniA = new TextField();
+			panelVAl.getChildren().addAll(lbldniA, txtdniA);
 
-			// Campo fecha Nacimiento
 			Label lblfecNa = new Label("Introduzca su fecha de Nacimiento: ");
-			TextField txtfecNa = new TextField("Fecha");
-			String fecNa = txtfecNa.getText();
-			pstmt.setInt(2, Integer.parseInt(fecNa));
+			TextField txtfecNa = new TextField();
+			panelVAl.getChildren().addAll(lblfecNa, txtfecNa);
 
-			// Campo de nombre
 			Label lblNombre = new Label("Introduzca su nombre: ");
-			TextField txtNombre = new TextField("Nombre");
-			pstmt.setString(3, txtNombre.getText().toString());
+			TextField txtNombre = new TextField();
+			panelVAl.getChildren().addAll(lblNombre, txtNombre);
 
-			// Campo del Apellido
 			Label lblApell = new Label("Introduzca su apellido: ");
-			TextField txtApell = new TextField("Apellido");
-			pstmt.setString(4, txtApell.getText().toString());
+			TextField txtApell = new TextField();
+			panelVAl.getChildren().addAll(lblApell, txtApell);
 
-			// Campo para el alumno
 			Label lbluser = new Label("Introduzca el usuario: ");
-			TextField txtUser = new TextField("Usuario");
-			pstmt.setString(5, txtUser.getText().toString());
+			TextField txtUser = new TextField();
+			panelVAl.getChildren().addAll(lbluser, txtUser);
 
-			// Campo para la contraseña
 			Label lblPass = new Label("Introduzca la contraseña: ");
-			TextField txtPass = new TextField("Contraseña");
-			pstmt.setString(6, txtUser.getText().toString());
+			TextField txtPass = new TextField();
+			panelVAl.getChildren().addAll(lblPass, txtPass);
 
-			// Campo para el telefono
 			Label lblTel = new Label("Introduzca su número telefónico: ");
-			TextField txtTel = new TextField("Número");
-			String tel = txtfecNa.getText();
-			pstmt.setInt(7, Integer.parseInt(tel));
+			TextField txtTel = new TextField();
+			panelVAl.getChildren().addAll(lblTel, txtTel);
 
-			// Campo para el telefono
 			Label lblMail = new Label("Introduzca su correo electrónico: ");
-			TextField txtMail = new TextField("Correo");
-			pstmt.setString(8, txtMail.getText().toString());
+			TextField txtMail = new TextField();
+			panelVAl.getChildren().addAll(lblMail, txtMail);
 
 			Label lblCurso = new Label("Introduzca el curso (1º,2º,3º...): ");
-			TextField txtCurso = new TextField("Curso");
-			String Curso = txtCurso.getText();
-			pstmt.setInt(9, Integer.parseInt(Curso));
+			TextField txtCurso = new TextField();
+			panelVAl.getChildren().addAll(lblCurso, txtCurso);
 
-		} catch (Exception e) {
-			// TODO: handle exception
+			pstmt.setString(1, txtdniA.getText());
+			pstmt.setInt(2, Integer.parseInt(txtfecNa.getText()));
+			pstmt.setString(3, txtNombre.getText());
+			pstmt.setString(4, txtApell.getText());
+			pstmt.setString(5, txtUser.getText());
+			pstmt.setString(6, txtPass.getText());
+			pstmt.setInt(7, Integer.parseInt(txtTel.getText()));
+			pstmt.setString(8, txtMail.getText());
+			pstmt.setInt(9, Integer.parseInt(txtCurso.getText()));
+
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Se ha producido un error, intentelo más tarde.");
-
 		}
 	}
 
-	// Registro para un alumno
+	// Registro para un profesor
 	public static void registroProfesor(Connection con) {
 		try {
-
+			VBox panelVPr = new VBox();
 			String query = "INSERT INTO profesor (dniP,fechNa, nombre, apellido,usuario,contrasenia, telefono,email,Departamentos_idDepartamentos) VALUES (?,?,?,?,?,?,?,?,?)";
 			PreparedStatement pstmt = con.prepareStatement(query);
 
-			// Campo dniA
 			Label lbldniP = new Label("Introduzca su dni: ");
-			TextField txtdniP = new TextField("dni");
-			pstmt.setString(1, txtdniP.getText().toString());
+			TextField txtdniP = new TextField();
+			panelVPr.getChildren().add(lbldniP);
+			panelVPr.getChildren().add(txtdniP);
 
-			// Campo fecha Nacimiento
 			Label lblfecNa = new Label("Introduzca su fecha de Nacimiento: ");
-			TextField txtfecNa = new TextField("Fecha");
-			String fecNa = txtfecNa.getText();
-			pstmt.setInt(2, Integer.parseInt(fecNa));
+			TextField txtfecNa = new TextField();
+			panelVPr.getChildren().add(lblfecNa);
+			panelVPr.getChildren().add(txtfecNa);
 
-			// Campo de nombre
 			Label lblNombre = new Label("Introduzca su nombre: ");
-			TextField txtNombre = new TextField("Nombre");
-			pstmt.setString(3, txtNombre.getText().toString());
+			TextField txtNombre = new TextField();
+			panelVPr.getChildren().add(lblNombre);
+			panelVPr.getChildren().add(txtNombre);
 
-			// Campo del Apellido
 			Label lblApell = new Label("Introduzca su apellido: ");
-			TextField txtApell = new TextField("Apellido");
-			pstmt.setString(4, txtApell.getText().toString());
+			TextField txtApell = new TextField();
+			panelVPr.getChildren().add(lblApell);
+			panelVPr.getChildren().add(txtApell);
 
-			// Campo para el alumno
 			Label lbluser = new Label("Introduzca el usuario: ");
-			TextField txtUser = new TextField("Usuario");
-			pstmt.setString(5, txtUser.getText().toString());
+			TextField txtUser = new TextField();
+			panelVPr.getChildren().add(lbluser);
+			panelVPr.getChildren().add(txtUser);
 
-			// Campo para la contraseña
 			Label lblPass = new Label("Introduzca la contraseña: ");
-			TextField txtPass = new TextField("Contraseña");
-			pstmt.setString(6, txtUser.getText().toString());
+			TextField txtPass = new TextField();
+			panelVPr.getChildren().add(lblPass);
+			panelVPr.getChildren().add(txtPass);
 
-			// Campo para el telefono
 			Label lblTel = new Label("Introduzca su número telefónico: ");
-			TextField txtTel = new TextField("Número");
-			String tel = txtfecNa.getText();
-			pstmt.setInt(7, Integer.parseInt(tel));
+			TextField txtTel = new TextField();
+			panelVPr.getChildren().add(lblTel);
+			panelVPr.getChildren().add(txtTel);
 
-			// Campo para el telefono
 			Label lblMail = new Label("Introduzca su correo electrónico: ");
-			TextField txtMail = new TextField("Correo");
-			pstmt.setString(8, txtMail.getText().toString());
+			TextField txtMail = new TextField();
+			panelVPr.getChildren().add(lblMail);
+			panelVPr.getChildren().add(txtMail);
 
 			Label lblDep = new Label("Introduzca el número de departamento al que pertenece (1º,2º,3º...): ");
-			TextField txtDep = new TextField("Departamento");
-			String Dep = txtDep.getText();
-			pstmt.setInt(9, Integer.parseInt(Dep));
+			TextField txtDep = new TextField();
+			panelVPr.getChildren().add(lblDep);
+			panelVPr.getChildren().add(txtDep);
 
-		} catch (Exception e) {
-			// TODO: handle exception
+			pstmt.setString(1, txtdniP.getText());
+			pstmt.setInt(2, Integer.parseInt(txtfecNa.getText()));
+			pstmt.setString(3, txtNombre.getText());
+			pstmt.setString(4, txtApell.getText());
+			pstmt.setString(5, txtUser.getText());
+			pstmt.setString(6, txtPass.getText());
+			pstmt.setInt(7, Integer.parseInt(txtTel.getText()));
+			pstmt.setString(8, txtMail.getText());
+			pstmt.setInt(9, Integer.parseInt(txtDep.getText()));
+
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Se ha producido un error, intentelo más tarde.");
-
 		}
 	}
 

@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
+import com.aspose.pdf.WebHyperlink;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -119,9 +121,10 @@ public class MenuPrueba extends Application {
 			alert.setTitle("Acerca de...");
 			// Establecemos el mensaje del diálogo
 			alert.setHeaderText("Pruebas de Programación");
-			alert.setContentText("Esta aplicación es un gestor de alumnos para el centro IES Mar de Cádiz.\n"
+			alert.setContentText("Github: https://github.com/Sergiopm44/GestorAlumnos1.git\n"
 					+ "Autores: Sergio Pinto Morales, Miguel Gallardo Cota, Francisco Javier Rodríguez Ruiz\n"
-					+ "Profesor: Victor Pablo Galván Flores\n" + "Estado de la aplicación: Beta\n" + "Versión: 1.0");
+					+ "Profesor: Victor Pablo Galván Flores\n" + "Estado de la aplicación: Beta\n" + "Versión: 1.0\n"
+					+ "©eRegister");
 			// Mostramos el diálogo
 			alert.showAndWait();
 		});
@@ -129,6 +132,26 @@ public class MenuPrueba extends Application {
 		// Por hacer
 		MenuItem manualMenuItem = new MenuItem("Manual");
 		manualMenuItem.setOnAction(event -> {
+			// Manual
+			// Creamos un nuevo documento PDF
+			Document pdfDocument = new Document();
+			// Agregar una página al documento
+			Page page = pdfDocument.getPages().add();
+
+			// Crea un rectángulo para el área del
+			// hipervínculo
+			Rectangle linkRect = new Rectangle(100, 100, 200, 150);
+
+			// Crear un hipervínculo web
+			WebHyperlink hyperlink = new WebHyperlink();
+			hyperlink.setURL("https://www.ejemplo.com");
+			hyperlink.setRectangle(linkRect);
+
+			// Agregamos el hipervínculo a la página
+			page.getAnnotations().add(hyperlink);
+
+			// Guarde el documento PDF
+			pdfDocument.save("hyperlink_example.pdf");
 
 		});
 

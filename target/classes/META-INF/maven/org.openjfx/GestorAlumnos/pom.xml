@@ -44,6 +44,13 @@
     		<artifactId>javafx-archetype-simple</artifactId>
     		<version>0.0.6</version>
     	</dependency>
+<!-- https://mvnrepository.com/artifact/com.luhuiguo/aspose-pdf -->
+<dependency>
+    <groupId>com.luhuiguo</groupId>
+    <artifactId>aspose-pdf</artifactId>
+    <version>23.1</version>
+</dependency>
+    	
     </dependencies>
     <build>
         <plugins>
