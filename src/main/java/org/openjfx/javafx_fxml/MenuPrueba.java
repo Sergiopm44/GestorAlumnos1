@@ -4,7 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-import com.aspose.pdf.WebHyperlink;
+//Java doc test
+import com.aspose.pdf.Document;
+import com.itextpdf.text.Anchor;
+import com.itextpdf.text.pdf.PdfDocument;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -133,26 +137,23 @@ public class MenuPrueba extends Application {
 		MenuItem manualMenuItem = new MenuItem("Manual");
 		manualMenuItem.setOnAction(event -> {
 			// Manual
-			// Creamos un nuevo documento PDF
-			Document pdfDocument = new Document();
-			// Agregar una página al documento
-			Page page = pdfDocument.getPages().add();
+			Document document = new Document();
+			try (PdfWriter writer = new PdfWriter("hyperlink_example.pdf")) {
+				writer.setInitialLeading(12);
+				PdfDocument pdfDoc = writer.getDocument();
+				pdfDoc.addNewPage();
+				document.setPdfDocument(pdfDoc);
+				document.setRenderer(new PdfDocumentRenderer(document));
 
-			// Crea un rectángulo para el área del
-			// hipervínculo
-			Rectangle linkRect = new Rectangle(100, 100, 200, 150);
+				Anchor anchor = new Anchor("Enlace a ejemplo.com");
+				anchor.setReference("https://www.ejemplo.com");
+				document.add(anchor);
 
-			// Crear un hipervínculo web
-			WebHyperlink hyperlink = new WebHyperlink();
-			hyperlink.setURL("https://www.ejemplo.com");
-			hyperlink.setRectangle(linkRect);
-
-			// Agregamos el hipervínculo a la página
-			page.getAnnotations().add(hyperlink);
-
-			// Guarde el documento PDF
-			pdfDocument.save("hyperlink_example.pdf");
-
+				document.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.out.println("No se pudo guardar el documento PDF");
+			}
 		});
 
 		fileMenu.getItems().addAll(openMenuItem, saveMenuItem, exitMenuItem);
