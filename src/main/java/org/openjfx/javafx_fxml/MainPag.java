@@ -3,6 +3,7 @@ package org.openjfx.javafx_fxml;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -110,7 +111,7 @@ public class MainPag extends Application {
 
 			Label lblCurso = new Label("Introduzca el curso (1º,2º,3º...): ");
 			TextField txtCurso = new TextField("Curso");
-			String Curso = txtfecNa.getText();
+			String Curso = txtCurso.getText();
 			pstmt.setInt(9, Integer.parseInt(Curso));
 
 		} catch (Exception e) {
@@ -119,6 +120,92 @@ public class MainPag extends Application {
 			System.out.println("Se ha producido un error, intentelo más tarde.");
 
 		}
+	}
+
+	// Registro para un alumno
+	public static void registroProfesor(Connection con) {
+		try {
+
+			String query = "INSERT INTO profesor (dniP,fechNa, nombre, apellido,usuario,contrasenia, telefono,email,Departamentos_idDepartamentos) VALUES (?,?,?,?,?,?,?,?,?)";
+			PreparedStatement pstmt = con.prepareStatement(query);
+
+			// Campo dniA
+			Label lbldniP = new Label("Introduzca su dni: ");
+			TextField txtdniP = new TextField("dni");
+			pstmt.setString(1, txtdniP.getText().toString());
+
+			// Campo fecha Nacimiento
+			Label lblfecNa = new Label("Introduzca su fecha de Nacimiento: ");
+			TextField txtfecNa = new TextField("Fecha");
+			String fecNa = txtfecNa.getText();
+			pstmt.setInt(2, Integer.parseInt(fecNa));
+
+			// Campo de nombre
+			Label lblNombre = new Label("Introduzca su nombre: ");
+			TextField txtNombre = new TextField("Nombre");
+			pstmt.setString(3, txtNombre.getText().toString());
+
+			// Campo del Apellido
+			Label lblApell = new Label("Introduzca su apellido: ");
+			TextField txtApell = new TextField("Apellido");
+			pstmt.setString(4, txtApell.getText().toString());
+
+			// Campo para el alumno
+			Label lbluser = new Label("Introduzca el usuario: ");
+			TextField txtUser = new TextField("Usuario");
+			pstmt.setString(5, txtUser.getText().toString());
+
+			// Campo para la contraseña
+			Label lblPass = new Label("Introduzca la contraseña: ");
+			TextField txtPass = new TextField("Contraseña");
+			pstmt.setString(6, txtUser.getText().toString());
+
+			// Campo para el telefono
+			Label lblTel = new Label("Introduzca su número telefónico: ");
+			TextField txtTel = new TextField("Número");
+			String tel = txtfecNa.getText();
+			pstmt.setInt(7, Integer.parseInt(tel));
+
+			// Campo para el telefono
+			Label lblMail = new Label("Introduzca su correo electrónico: ");
+			TextField txtMail = new TextField("Correo");
+			pstmt.setString(8, txtMail.getText().toString());
+
+			Label lblDep = new Label("Introduzca el número de departamento al que pertenece (1º,2º,3º...): ");
+			TextField txtDep = new TextField("Departamento");
+			String Dep = txtDep.getText();
+			pstmt.setInt(9, Integer.parseInt(Dep));
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			System.out.println("Se ha producido un error, intentelo más tarde.");
+
+		}
+	}
+
+	public static void loginAl(Connection con) {
+
+		try {
+			String query = "SELECT usuario, contrasenia FROM alumno WHERE usuario=? AND contrasenia=?";
+			PreparedStatement pstmt = con.prepareStatement(query);
+
+			// Campo para el alumno
+			Label lbluser = new Label("Introduzca el usuario: ");
+			TextField txtUser = new TextField("Usuario");
+			pstmt.setString(1, txtUser.getText().toString());
+
+			// Campo para la contraseña
+			Label lblPass = new Label("Introduzca la contraseña: ");
+			TextField txtPass = new TextField("Contraseña");
+			pstmt.setString(6, txtUser.getText().toString());
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("El usuario no se ha encontrado o ha ocurrido un error, intentelo de nuevo");
+		}
+
 	}
 
 	public static void main(String[] args) {
