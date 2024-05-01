@@ -16,7 +16,7 @@ public class RegistroProfesor extends GridPane {
 
 		Button btnConf = new Button("Confirmar");
 		// Almacen del usuario nuevo
-		ProfesorDO alumno = new ProfesorDO();
+		ProfesorDO profesor = new ProfesorDO();
 
 		// Espaciado o diferencia en lo horizontal
 		this.setHgap(10);
@@ -25,8 +25,8 @@ public class RegistroProfesor extends GridPane {
 		// Espaciado entre los elementos
 		this.setPadding(new Insets(10, 10, 10, 10));
 
-		Label lbldniA = new Label("Introduzca su dni: ");
-		TextField txtdniA = new TextField();
+		Label lbldniP = new Label("Introduzca su dni: ");
+		TextField txtdniP = new TextField();
 
 		Label lblfecNa = new Label("Introduzca su fecha de Nacimiento: ");
 		TextField txtfecNa = new TextField();
@@ -49,11 +49,11 @@ public class RegistroProfesor extends GridPane {
 		Label lblMail = new Label("Introduzca su correo electrónico: ");
 		TextField txtMail = new TextField();
 
-		Label lblCurso = new Label("Introduzca el curso (1º,2º,3º...): ");
-		TextField txtCurso = new TextField();
+		Label lblDep = new Label("Introduzca el numero de departamento (1,2,3...): ");
+		TextField txtDep = new TextField();
 
-		this.add(txtdniA, 1, 0);
-		this.add(lbldniA, 0, 0);
+		this.add(txtdniP, 1, 0);
+		this.add(lbldniP, 0, 0);
 		this.add(txtfecNa, 1, 1);
 		this.add(lblfecNa, 0, 1);
 		this.add(txtNombre, 1, 2);
@@ -68,20 +68,20 @@ public class RegistroProfesor extends GridPane {
 		this.add(lblTel, 0, 6);
 		this.add(txtMail, 1, 7);
 		this.add(lblMail, 0, 7);
-		this.add(txtCurso, 1, 8);
-		this.add(lblCurso, 0, 8);
+		this.add(txtDep, 1, 8);
+		this.add(lblDep, 0, 8);
 
 		btnConf.setOnAction(e -> {
-			alumno.setDniP(txtdniA.getText());
-			alumno.setFechNa(txtfecNa.getText());
-			alumno.setNombre(txtNombre.getText());
-			alumno.setApellido(txtApell.getText());
-			alumno.setUsuario(txtUser.getText());
-			alumno.setContrasenia(txtPass.getText());
-			alumno.setTelefono(Integer.parseInt(txtTel.getText()));
-			alumno.setEmail(txtMail.getText());
-			alumno.setDepartamentos_idDepartamentos(Integer.parseInt(txtCurso.getText()));
-			ProfesorDAO.insertProfesor(con, alumno);
+			profesor.setDniP(txtdniP.getText());
+			profesor.setFechNa(txtfecNa.getText());
+			profesor.setNombre(txtNombre.getText());
+			profesor.setApellido(txtApell.getText());
+			profesor.setUsuario(txtUser.getText());
+			profesor.setContrasenia(txtPass.getText());
+			profesor.setTelefono(Integer.parseInt(txtTel.getText()));
+			profesor.setEmail(txtMail.getText());
+			profesor.setDepartamentos_idDepartamentos(Integer.parseInt(txtDep.getText()));
+			ProfesorDAO.insertProfesor(con, profesor);
 		});
 
 		this.add(btnConf, 0, 9, 2, 1);
