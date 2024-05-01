@@ -85,7 +85,7 @@ public class MainPag extends Application {
 	public static void registroProfesor(Connection con) {
 		try {
 			VBox panelVPr = new VBox();
-			String query = "INSERT INTO profesor (dniP,fechNa, nombre, apellido,usuario,contrasenia, telefono,email,Departamentos_idDepartamentos) VALUES (?,?,?,?,?,?,?,?,?)";
+			String query = "INSERT INTO profesores (dniP,fechNa, nombre, apellido,usuario,contrasenia, telefono,email,Departamentos_idDepartamentos) VALUES (?,?,?,?,?,?,?,?,?)";
 			PreparedStatement pstmt = con.prepareStatement(query);
 
 			Label lbldniP = new Label("Introduzca su dni: ");
@@ -113,9 +113,11 @@ public class MainPag extends Application {
 			panelVPr.getChildren().add(lbluser);
 			panelVPr.getChildren().add(txtUser);
 
+			// Usamos PassWordField paa que se vean * en vez
+			// de la contraseña
 			Label lblPass = new Label("Introduzca la contraseña: ");
 			PasswordField txtPass = new PasswordField();
-			// TextField txtPass = new TextField();
+
 			panelVPr.getChildren().add(lblPass);
 			panelVPr.getChildren().add(txtPass);
 

@@ -2,13 +2,12 @@ package Gestor.pane;
 
 import java.sql.Connection;
 
-import org.openjfx.javafx_fxml.MainPag;
-
 import Gestor.model.AlumnoDAO;
 import Gestor.model.AlumnoDO;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
@@ -30,7 +29,7 @@ public class RegistroAlumno extends GridPane {
 		Label lbldniA = new Label("Introduzca su dni: ");
 		TextField txtdniA = new TextField();
 
-		Label lblfecNa = new Label("Introduzca su fecha de Nacimiento: ");
+		Label lblfecNa = new Label("Introduzca su fecha de Nacimiento (YYYY-MM-DD): ");
 		TextField txtfecNa = new TextField();
 
 		Label lblNombre = new Label("Introduzca su nombre: ");
@@ -42,8 +41,10 @@ public class RegistroAlumno extends GridPane {
 		Label lbluser = new Label("Introduzca el usuario: ");
 		TextField txtUser = new TextField();
 
+		// Usamos PassWordField paa que se vean * en vez
+		// de la contraseña
 		Label lblPass = new Label("Introduzca la contraseña: ");
-		TextField txtPass = new TextField();
+		PasswordField txtPass = new PasswordField();
 
 		Label lblTel = new Label("Introduzca su número telefónico: ");
 		TextField txtTel = new TextField();
@@ -84,8 +85,6 @@ public class RegistroAlumno extends GridPane {
 			alumno.setEmail(txtMail.getText());
 			alumno.setCurso_idCurso(Integer.parseInt(txtCurso.getText()));
 			AlumnoDAO.insertAlumno(con, alumno);
-
-			MainPag.stage.close();
 		});
 
 		this.add(btnConf, 0, 9, 2, 1);

@@ -21,7 +21,6 @@ public class Pruebas extends Application {
 		Connection con = ConexionBD.conectarBD();
 
 		MainPag prueba = new MainPag();
-		prueba.registroAlumno(con);
 
 		Scene scene = new Scene(cajon, 600, 600);
 

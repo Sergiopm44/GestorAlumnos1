@@ -12,7 +12,7 @@ public class AlumnoDAO {
 		try {
 			// Borramos el alumno con un determinado id
 			// de alumno
-			String query = "DELETE FROM Alumno WHERE idAlumno=?";
+			String query = "DELETE FROM alumno WHERE idAlumno=?";
 			// Creamos statement
 			PreparedStatement pstmt = con.prepareStatement(query);
 			// Establecemos el primer parametro de la
@@ -34,24 +34,17 @@ public class AlumnoDAO {
 
 	public static int insertAlumno(Connection con, AlumnoDO alumno) {
 		try {
-
-			// Comprobar que no existe un alumno con
-			// ese id en bd
-			String selectID = "Select * From Alumno Where idAlumno=?";
+			String selectID = "SELECT * FROM alumno WHERE idAlumno=?";
 			PreparedStatement pstmt = con.prepareStatement(selectID);
-			// Establecemos el primer parametro de la
-			// query
+
 			pstmt.setInt(1, alumno.getIdAlumno());
 			ResultSet rs = pstmt.executeQuery();
 
-			// Si existe lo metemos sin id
 			if (rs.next() || alumno.getIdAlumno() < -1) {
-				String query = "INSERT INTO Alumno (dniA, fechNa, nombre, apellido, usuario, contrasenia, telefono, email, Curso_idCurso) VALUES(?,?,?,?,?,?,?,?,?)";
+				String query = "INSERT INTO alumno (dniA, fechNa, nombre, apellido, usuario, contrasenia, telefono, email, Curso_idCurso) VALUES(?,?,?,?,?,?,?,?,?)";
 
 				PreparedStatement pstmt2 = con.prepareStatement(query);
-				// Establecemos los 7 parametros para
-				// introducir un alumno a la base de
-				// datos
+
 				pstmt2.setString(1, alumno.getDniA());
 				pstmt2.setString(2, alumno.getFechNa());
 				pstmt2.setString(3, alumno.getNombre());
@@ -61,32 +54,17 @@ public class AlumnoDAO {
 				pstmt2.setInt(7, alumno.getTelefono());
 				pstmt2.setString(8, alumno.getEmail());
 				pstmt2.setInt(9, alumno.getCurso_idCurso());
-				// Si alguno de los String son nulos devolvemos 0
-				if (alumno.getNombre().equals(null))
-					return 0;
-				if (alumno.getApellido().equals(null))
-					return 0;
-				if (alumno.getUsuario().equals(null))
-					return 0;
-				if (alumno.getContrasenia().equals(null))
-					return 0;
-				if (alumno.getEmail().equals(null))
-					pstmt2.setString(6, null);
-				if (alumno.getFechNa().equals(null))
-					return 0;
 
 				// Ejecutamos la query
 				pstmt2.executeUpdate();
-				// Si ha ido bien devolvera 1
+
+				// Si ha ido bien devolverá 1
 				return 1;
-				// Si no existe el id lo introducimos
 			} else {
-				String query = "INSERT INTO Alumno (idAlumno, dniA, fechNa, nombre, apellido, usuario, contrasenia, telefono, email, Curso_idCurso) VALUES(?,?,?,?,?,?,?,?)";
+				String query = "INSERT INTO alumno (idAlumno, dniA, fechNa, nombre, apellido, usuario, contrasenia, telefono, email, Curso_idCurso) VALUES(?,?,?,?,?,?,?,?,?,?)";
 
 				PreparedStatement pstmt3 = con.prepareStatement(query);
-				// De nuevo, establecemos, esta vez 8
-				// parametros para introducir un
-				// alumno a la base de datos
+
 				pstmt3.setInt(1, alumno.getIdAlumno());
 				pstmt3.setString(2, alumno.getDniA());
 				pstmt3.setString(3, alumno.getFechNa());
@@ -97,39 +75,24 @@ public class AlumnoDAO {
 				pstmt3.setInt(8, alumno.getTelefono());
 				pstmt3.setString(9, alumno.getEmail());
 				pstmt3.setInt(10, alumno.getCurso_idCurso());
-				// Si alguno de los String son nulos devolvemos 0
-				if (alumno.getNombre().equals(null))
-					return 0;
-				if (alumno.getApellido().equals(null))
-					return 0;
-				if (alumno.getUsuario().equals(null))
-					return 0;
-				if (alumno.getContrasenia().equals(null))
-					return 0;
-				if (alumno.getEmail().equals(null))
-					pstmt3.setString(7, null);
-				if (alumno.getFechNa().equals(null))
-					return 0;
 
 				// Ejecutamos la query
-				pstmt3.executeUpdate(query);
+				pstmt3.executeUpdate();
+
 				return 0;
 			}
-
 		} catch (SQLException e) {
-			// TODO: handle exception
-			// Si ha ido mal devolvera 0
+			// Si ha ido mal devolverá -1
 			e.printStackTrace();
 			return -1;
 		}
-
 	}
 
 	public static int actualizarAlumno(AlumnoDO alumno, Connection con) {
 		try {
 
 			boolean campoPrevio = false;
-			String query = "UPDATE Alumno SET ";
+			String query = "UPDATE alumno SET ";
 			PreparedStatement pstmt = con.prepareStatement(query);
 			// Si los campos no son nulos, los vamos
 			// añadiendo a la sentencia
@@ -261,40 +224,47 @@ public class AlumnoDAO {
 		}
 	}
 
-	public static AlumnoDO cargar(Connection con, int id) {
+	public static boolean cargar(Connection con, AlumnoDO alumno) {
 		try {
 			// Creamos query
-			String query = "SELECT * FROM Alumno WHERE idAlumno = ?";
+			String query = "SELECT * FROM alumno WHERE usuario = ?";
 			PreparedStatement pstmt = con.prepareStatement(query);
-			// Introducimos como parametro el id de
+			// Introducimos como parámetro el usuario del
 			// alumno
-			pstmt.setInt(1, id);
-			// Creamos un resultset y ejecutamos la
-			// consulta
+			pstmt.setString(1, alumno.getUsuario());
+			// Ejecutamos la consulta
 			ResultSet rs = pstmt.executeQuery();
-			// Creamos un alumno y le asignamos los
-			// datos de resultset
-			AlumnoDO Alumno1 = new AlumnoDO();
 
-			Alumno1.setIdAlumno(rs.getInt(1));
-			Alumno1.setDniA(rs.getString(2));
-			Alumno1.setFechNa(rs.getString(3));
-			Alumno1.setNombre(rs.getString(4));
-			Alumno1.setApellido(rs.getString(5));
-			Alumno1.setUsuario(rs.getString(6));
-			Alumno1.setContrasenia(rs.getString(7));
-			Alumno1.setTelefono(rs.getInt(8));
-			Alumno1.setEmail(rs.getString(9));
-			Alumno1.setCurso_idCurso(rs.getInt(10));
-			// Devolvemos alumno
-			return Alumno1;
+			// Verificamos si hay al menos una fila en el
+			// ResultSet
+			if (rs.next()) {
+				// Creamos un alumno y le asignamos los datos del
+				// ResultSet
+				AlumnoDO Alumno1 = new AlumnoDO();
+
+				Alumno1.setIdAlumno(rs.getInt("idAlumno"));
+				Alumno1.setDniA(rs.getString("dniA"));
+				Alumno1.setFechNa(rs.getString("fechNa"));
+				Alumno1.setNombre(rs.getString("nombre"));
+				Alumno1.setApellido(rs.getString("apellido"));
+				Alumno1.setUsuario(rs.getString("usuario"));
+				Alumno1.setContrasenia(rs.getString("contrasenia"));
+				Alumno1.setTelefono(rs.getInt("telefono"));
+				Alumno1.setEmail(rs.getString("email"));
+				Alumno1.setCurso_idCurso(rs.getInt("Curso_idCurso"));
+
+				// Devolvemos true si las contraseñas son iguales
+				return alumno.getContrasenia().equals(Alumno1.getContrasenia());
+			} else {
+				// No se encontró ningún alumno con el usuario
+				// proporcionado
+				return false;
+			}
 		} catch (SQLException e) {
-			// TODO: handle exception
+			// Manejo de excepciones
 			e.printStackTrace();
-			// Si sale mal devolvemos null
-			return null;
+			return false;
 		}
-
 	}
 
 }

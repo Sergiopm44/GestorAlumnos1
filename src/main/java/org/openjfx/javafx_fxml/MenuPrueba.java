@@ -144,18 +144,24 @@ public class MenuPrueba extends Application {
 		manualMenuItem.setOnAction(event -> {
 			// Manual
 			try {
+				// Creamos el pdf
 				FileOutputStream archivo = new FileOutputStream("Manual.pdf");
 
+				// Creamos el documento
 				Document documen = new Document();
 				PdfWriter.getInstance(documen, archivo);
+
 				documen.open();
 
+				// Añadimos la informacion
 				Paragraph TextoManual = new Paragraph(
 						"Esta aplicacion usa un sistema sencillo manejo de iniciar sesion o registrarse.\n"
 								+ " Si no tiene una cuenta puede crearla poniendo sus datos personales,"
 								+ "como su nombre de usuario, su contraseña y elegir si es un almuno u profesor\n");
 				TextoManual.setAlignment(1);
+
 				documen.add(TextoManual);
+				documen.close();
 
 			} catch (Exception e) {
 				// TODO: handle exception
