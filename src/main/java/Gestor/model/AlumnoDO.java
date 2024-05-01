@@ -2,7 +2,7 @@ package Gestor.model;
 
 public class AlumnoDO {
 	private int idAlumno;
-	private int dniA;
+	private String dniA;
 	private String fechNa;
 	private String nombre;
 	private String apellido;
@@ -17,7 +17,7 @@ public class AlumnoDO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AlumnoDO(int idAlumno, int dniA, String fechNa, String nombre, String apellido, String usuario,
+	public AlumnoDO(int idAlumno, String dniA, String fechNa, String nombre, String apellido, String usuario,
 			String contrasenia, int telefono, String email, int curso_idCurso) {
 		super();
 		this.idAlumno = idAlumno;
@@ -59,14 +59,14 @@ public class AlumnoDO {
 	/**
 	 * @return the dniA
 	 */
-	public int getDniA() {
+	public String getDniA() {
 		return dniA;
 	}
 
 	/**
 	 * @param dniA the dniA to set
 	 */
-	public void setDniA(int dniA) {
+	public void setDniA(String dniA) {
 		this.dniA = dniA;
 	}
 

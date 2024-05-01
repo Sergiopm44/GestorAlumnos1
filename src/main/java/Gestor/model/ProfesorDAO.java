@@ -46,7 +46,7 @@ public class ProfesorDAO {
 
 				PreparedStatement pstmt2 = con.prepareStatement(query);
 
-				pstmt2.setInt(1, Profesor.getDniP());
+				pstmt2.setString(1, Profesor.getDniP());
 				pstmt2.setString(2, Profesor.getFechNa());
 				pstmt2.setString(3, Profesor.getNombre());
 				pstmt2.setString(4, Profesor.getApellido());
@@ -85,7 +85,7 @@ public class ProfesorDAO {
 				PreparedStatement pstmt3 = con.prepareStatement(query);
 
 				pstmt3.setInt(1, Profesor.getIdProfesor());
-				pstmt3.setInt(2, Profesor.getDniP());
+				pstmt3.setString(2, Profesor.getDniP());
 				pstmt3.setString(3, Profesor.getFechNa());
 				pstmt3.setString(4, Profesor.getNombre());
 				pstmt3.setString(5, Profesor.getApellido());
@@ -131,7 +131,7 @@ public class ProfesorDAO {
 			PreparedStatement pstmt = con.prepareStatement(query);
 			// Si los campos no son nulos, los vamos
 			// añadiendo a la sentencia
-			if (Profesor.getDniP() != -1) {
+			if (Profesor.getDniP() != null) {
 				query = query + "dniP = ?";
 				campoPrevio = true;
 			}
@@ -202,8 +202,8 @@ public class ProfesorDAO {
 			// Si los campos no son nulos vamos
 			// añadiendo como parametros los atributos
 			// de profesor
-			if (Profesor.getDniP() != -1) {
-				pstmt.setInt(dpsSigno, Profesor.getDniP());
+			if (Profesor.getDniP() != null) {
+				pstmt.setString(dpsSigno, Profesor.getDniP());
 				dpsSigno++;
 			}
 			if (Profesor.getFechNa() != null) {
@@ -274,7 +274,7 @@ public class ProfesorDAO {
 			// datos de resultset
 			ProfesorDO Profesor1 = new ProfesorDO();
 			Profesor1.setIdProfesor(rs.getInt(1));
-			Profesor1.setDniP(rs.getInt(2));
+			Profesor1.setDniP(rs.getString(2));
 			Profesor1.setFechNa(rs.getString(3));
 			Profesor1.setNombre(rs.getString(4));
 			Profesor1.setApellido(rs.getString(5));

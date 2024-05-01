@@ -52,7 +52,7 @@ public class AlumnoDAO {
 				// Establecemos los 7 parametros para
 				// introducir un alumno a la base de
 				// datos
-				pstmt2.setInt(1, alumno.getDniA());
+				pstmt2.setString(1, alumno.getDniA());
 				pstmt2.setString(2, alumno.getFechNa());
 				pstmt2.setString(3, alumno.getNombre());
 				pstmt2.setString(4, alumno.getApellido());
@@ -88,7 +88,7 @@ public class AlumnoDAO {
 				// parametros para introducir un
 				// alumno a la base de datos
 				pstmt3.setInt(1, alumno.getIdAlumno());
-				pstmt3.setInt(2, alumno.getDniA());
+				pstmt3.setString(2, alumno.getDniA());
 				pstmt3.setString(3, alumno.getFechNa());
 				pstmt3.setString(4, alumno.getNombre());
 				pstmt3.setString(5, alumno.getApellido());
@@ -133,7 +133,7 @@ public class AlumnoDAO {
 			PreparedStatement pstmt = con.prepareStatement(query);
 			// Si los campos no son nulos, los vamos
 			// añadiendo a la sentencia
-			if (alumno.getDniA() != -1) {
+			if (alumno.getDniA() != null) {
 				query = query + "dniA = ?";
 				campoPrevio = true;
 			}
@@ -204,8 +204,8 @@ public class AlumnoDAO {
 			// Si los campos no son nulos vamos
 			// añadiendo como parametros los atributos
 			// de alumno
-			if (alumno.getDniA() != -1) {
-				pstmt.setInt(dpsSigno, alumno.getDniA());
+			if (alumno.getDniA() != null) {
+				pstmt.setString(dpsSigno, alumno.getDniA());
 				dpsSigno++;
 			}
 			if (alumno.getFechNa() != null) {
@@ -277,7 +277,7 @@ public class AlumnoDAO {
 			AlumnoDO Alumno1 = new AlumnoDO();
 
 			Alumno1.setIdAlumno(rs.getInt(1));
-			Alumno1.setDniA(rs.getInt(2));
+			Alumno1.setDniA(rs.getString(2));
 			Alumno1.setFechNa(rs.getString(3));
 			Alumno1.setNombre(rs.getString(4));
 			Alumno1.setApellido(rs.getString(5));

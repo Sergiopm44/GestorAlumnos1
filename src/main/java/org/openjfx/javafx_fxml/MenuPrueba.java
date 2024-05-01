@@ -1,13 +1,12 @@
 package org.openjfx.javafx_fxml;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 
-//Java doc test
-import com.aspose.pdf.Document;
-import com.itextpdf.text.Anchor;
-import com.itextpdf.text.pdf.PdfDocument;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import javafx.application.Application;
@@ -74,6 +73,12 @@ public class MenuPrueba extends Application {
 					// Si ocurre un error durante la lectura del
 					// archivo se imprime el stacktrace
 					e.printStackTrace();
+					Alert alert = new Alert(Alert.AlertType.INFORMATION);
+					alert.setTitle("Error inesperado");
+					// Establecemos el mensaje del diálogo
+					alert.setHeaderText("Error al abrir el archivo");
+					alert.setContentText(
+							"Se ha producido un al abrir el archivo, recarge la pagina o intente mas tarde ");
 				}
 			}
 		});
@@ -106,6 +111,7 @@ public class MenuPrueba extends Application {
 					// Si ocurre un error durante la escritura se
 					// imprime el stacktrace
 					e.printStackTrace();
+
 				}
 			}
 
@@ -137,23 +143,30 @@ public class MenuPrueba extends Application {
 		MenuItem manualMenuItem = new MenuItem("Manual");
 		manualMenuItem.setOnAction(event -> {
 			// Manual
-			Document document = new Document();
-			try (PdfWriter writer = new PdfWriter("hyperlink_example.pdf")) {
-				writer.setInitialLeading(12);
-				PdfDocument pdfDoc = writer.getDocument();
-				pdfDoc.addNewPage();
-				document.setPdfDocument(pdfDoc);
-				document.setRenderer(new PdfDocumentRenderer(document));
+			try {
+				FileOutputStream archivo = new FileOutputStream("Manual.pdf");
 
-				Anchor anchor = new Anchor("Enlace a ejemplo.com");
-				anchor.setReference("https://www.ejemplo.com");
-				document.add(anchor);
+				Document documen = new Document();
+				PdfWriter.getInstance(documen, archivo);
+				documen.open();
 
-				document.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-				System.out.println("No se pudo guardar el documento PDF");
+				Paragraph TextoManual = new Paragraph(
+						"Esta aplicacion usa un sistema sencillo manejo de iniciar sesion o registrarse.\n"
+								+ " Si no tiene una cuenta puede crearla poniendo sus datos personales,"
+								+ "como su nombre de usuario, su contraseña y elegir si es un almuno u profesor\n");
+				TextoManual.setAlignment(1);
+				documen.add(TextoManual);
+
+			} catch (Exception e) {
+				// TODO: handle exception
+				Alert alert = new Alert(Alert.AlertType.INFORMATION);
+				alert.setTitle("Error inesperado");
+				// Establecemos el mensaje del diálogo
+				alert.setHeaderText("Error al generear el manual");
+				alert.setContentText("Se ha producido un al generear el manual, porfavor recarge e intente de nuevo ");
+
 			}
+
 		});
 
 		fileMenu.getItems().addAll(openMenuItem, saveMenuItem, exitMenuItem);

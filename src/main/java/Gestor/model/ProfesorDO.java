@@ -3,7 +3,7 @@ package Gestor.model;
 public class ProfesorDO {
 
 	private int idProfesor;
-	private int dniP;
+	private String dniP;
 	private String fechNa;
 	private String nombre;
 	private String apellido;
@@ -18,7 +18,7 @@ public class ProfesorDO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ProfesorDO(int idProfesor, int dniP, String fechNa, String nombre, String apellido, String usuario,
+	public ProfesorDO(int idProfesor, String dniP, String fechNa, String nombre, String apellido, String usuario,
 			String contrasenia, int telefono, String email, int departamentos_idDepartamentos) {
 		super();
 		this.idProfesor = idProfesor;
@@ -50,14 +50,14 @@ public class ProfesorDO {
 	/**
 	 * @return the dniP
 	 */
-	public int getDniP() {
+	public String getDniP() {
 		return dniP;
 	}
 
 	/**
 	 * @param dniP the dniP to set
 	 */
-	public void setDniP(int dniP) {
+	public void setDniP(String dniP) {
 		this.dniP = dniP;
 	}
 

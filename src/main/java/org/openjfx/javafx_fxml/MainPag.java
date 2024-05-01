@@ -5,11 +5,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import Gestor.pane.RegistroAlumno;
 import Gestor.utils.ConexionBD;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -19,6 +23,8 @@ public class MainPag extends Application {
 	public Label log;
 	public Label profOrAl;
 	private static Scene scene;
+	public static Stage stage;
+	Connection con;
 
 	@Override
 	public void start(Stage stage) throws IOException {
@@ -31,6 +37,10 @@ public class MainPag extends Application {
 		// Objetos
 		ChoiceBox<String> profOrNo = new ChoiceBox<String>();
 		VBox cajon = new VBox();
+
+		// Boton de Inicio de sesion y Registro
+		Button btnRegis = new Button();
+		Button btnLogin = new Button();
 
 		welcome = new Label("Bienvenido a eRegister");
 		profOrAl = new Label("¿Es usted Alumno o profesor?");
@@ -51,10 +61,17 @@ public class MainPag extends Application {
 		// Llamamos a las funciones dependiendo de si es
 		// alumno o no
 		if (alumno == true) {
-			registroAlumno(con);
+			btnRegis.setOnAction(e -> {
+				RegistroAlumno regisAl = new RegistroAlumno(con);
+				scene = new Scene(regisAl, 600, 300);
+
+				stage.setScene(scene);
+				stage.show();
+
+			});
 		}
 
-		cajon.getChildren().addAll(welcome, profOrAl, log, profOrNo);
+		cajon.getChildren().addAll(welcome, profOrAl, log, profOrNo, btnLogin, btnRegis);
 
 		scene = new Scene(cajon, 600, 700);
 
@@ -62,65 +79,6 @@ public class MainPag extends Application {
 		stage.setScene(scene);
 		stage.show();
 
-	}
-
-	public static void registroAlumno(Connection con) {
-		try {
-			VBox panelVAl = new VBox();
-			String query = "INSERT INTO alumno (dniA,fechNa, nombre, apellido,usuario,contrasenia, telefono,email,Curso_idCurso) VALUES (?,?,?,?,?,?,?,?,?)";
-			PreparedStatement pstmt = con.prepareStatement(query);
-
-			Label lbldniA = new Label("Introduzca su dni: ");
-			TextField txtdniA = new TextField();
-			panelVAl.getChildren().addAll(lbldniA, txtdniA);
-
-			Label lblfecNa = new Label("Introduzca su fecha de Nacimiento: ");
-			TextField txtfecNa = new TextField();
-			panelVAl.getChildren().addAll(lblfecNa, txtfecNa);
-
-			Label lblNombre = new Label("Introduzca su nombre: ");
-			TextField txtNombre = new TextField();
-			panelVAl.getChildren().addAll(lblNombre, txtNombre);
-
-			Label lblApell = new Label("Introduzca su apellido: ");
-			TextField txtApell = new TextField();
-			panelVAl.getChildren().addAll(lblApell, txtApell);
-
-			Label lbluser = new Label("Introduzca el usuario: ");
-			TextField txtUser = new TextField();
-			panelVAl.getChildren().addAll(lbluser, txtUser);
-
-			Label lblPass = new Label("Introduzca la contraseña: ");
-			TextField txtPass = new TextField();
-			panelVAl.getChildren().addAll(lblPass, txtPass);
-
-			Label lblTel = new Label("Introduzca su número telefónico: ");
-			TextField txtTel = new TextField();
-			panelVAl.getChildren().addAll(lblTel, txtTel);
-
-			Label lblMail = new Label("Introduzca su correo electrónico: ");
-			TextField txtMail = new TextField();
-			panelVAl.getChildren().addAll(lblMail, txtMail);
-
-			Label lblCurso = new Label("Introduzca el curso (1º,2º,3º...): ");
-			TextField txtCurso = new TextField();
-			panelVAl.getChildren().addAll(lblCurso, txtCurso);
-
-			pstmt.setString(1, txtdniA.getText());
-			pstmt.setInt(2, Integer.parseInt(txtfecNa.getText()));
-			pstmt.setString(3, txtNombre.getText());
-			pstmt.setString(4, txtApell.getText());
-			pstmt.setString(5, txtUser.getText());
-			pstmt.setString(6, txtPass.getText());
-			pstmt.setInt(7, Integer.parseInt(txtTel.getText()));
-			pstmt.setString(8, txtMail.getText());
-			pstmt.setInt(9, Integer.parseInt(txtCurso.getText()));
-
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("Se ha producido un error, intentelo más tarde.");
-		}
 	}
 
 	// Registro para un profesor
@@ -156,7 +114,8 @@ public class MainPag extends Application {
 			panelVPr.getChildren().add(txtUser);
 
 			Label lblPass = new Label("Introduzca la contraseña: ");
-			TextField txtPass = new TextField();
+			PasswordField txtPass = new PasswordField();
+			// TextField txtPass = new TextField();
 			panelVPr.getChildren().add(lblPass);
 			panelVPr.getChildren().add(txtPass);
 
@@ -189,7 +148,13 @@ public class MainPag extends Application {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Se ha producido un error, intentelo más tarde.");
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Error inesperado");
+			// Establecemos el mensaje del diálogo
+			alert.setHeaderText("Error del registro");
+			alert.setContentText("Se ha producido un error al registrse como profesor, porfavor revise "
+					+ "los datos ingresados o recarge e intente de nuevo ");
+
 		}
 	}
 
@@ -212,7 +177,13 @@ public class MainPag extends Application {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("El usuario no se ha encontrado o ha ocurrido un error, intentelo de nuevo");
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Error inesperado");
+			// Establecemos el mensaje del diálogo
+			alert.setHeaderText("Error del login");
+			alert.setContentText("Se ha producido un error, al logearse revise si ha escrito "
+					+ "bien su nombre de usuario o la contraseña");
+
 		}
 
 	}

@@ -36,7 +36,8 @@ public class BarraMenu extends Application {
 		Menu mAyuda = new Menu("Ayuda");
 		Menu mHerr = new Menu("Herramientas");
 
-		// Opciones de menu quee aparecen cuando seleccionamos el menu que las contiene
+		// Opciones de menu quee aparecen cuando
+		// seleccionamos el menu que las contiene
 		MenuItem ICargar = new MenuItem("Cargar");
 		MenuItem IGuardar = new MenuItem("Guardar");
 		MenuItem ISalir = new MenuItem("Salir");
@@ -76,7 +77,8 @@ public class BarraMenu extends Application {
 		// Añadimos los dos botones al panel vertical
 		panelLateral.getChildren().addAll(btnCargar, btnGuardar);
 
-		// En la zona izquieda del borderpane ponemos el Vbox con los botones
+		// En la zona izquieda del borderpane ponemos el
+		// Vbox con los botones
 		pnlDistribucion.setLeft(panelLateral);
 		panelLateral.setMargin(btnCargar, new Insets(5, 7, 5, 7));
 		panelLateral.setMargin(btnGuardar, new Insets(5, 7, 5, 7));
@@ -86,7 +88,8 @@ public class BarraMenu extends Application {
 		TextField txtValorNota = new TextField("5");
 		txtValorNota.setMaxWidth(300);
 
-		// Cuando pulsamos en la opcion de menu salir cerramos la app
+		// Cuando pulsamos en la opcion de menu salir
+		// cerramos la app
 		ISalir.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -96,9 +99,11 @@ public class BarraMenu extends Application {
 
 		});
 
-		// La scene es el contenido de la ventana cuando se crea se define su tamaño por
+		// La scene es el contenido de la ventana cuando
+		// se crea se define su tamaño por
 		// defecto
-		// Cuando creamos la escena le asignamos el ontenido que es compatible con node
+		// Cuando creamos la escena le asignamos el
+		// ontenido que es compatible con node
 		var scene = new Scene(pnlDistribucion, 800, 600);
 
 		stage.setScene(scene);
