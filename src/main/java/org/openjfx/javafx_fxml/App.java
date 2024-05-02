@@ -3,9 +3,6 @@ package org.openjfx.javafx_fxml;
 import java.io.IOException;
 import java.sql.Connection;
 
-import Gestor.pane.InicioAlumno;
-import Gestor.pane.RegistroAlumno;
-import Gestor.pane.RegistroProfesor;
 import Gestor.utils.ConexionBD;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -24,11 +21,9 @@ public class App extends Application {
 	@Override
 	public void start(Stage stage) throws IOException {
 
-		RegistroAlumno registroA = new RegistroAlumno(con);
-		RegistroProfesor registroP = new RegistroProfesor(con);
-		InicioAlumno inicioA = new InicioAlumno(con);
+		MainPag mainPag = new MainPag(con, stage);
 
-		scene = new Scene(inicioA, 600, 450);
+		scene = new Scene(mainPag, 920, 460);
 
 		stage.setTitle("Gestor de Alumnos");
 		stage.setScene(scene);

@@ -2,36 +2,48 @@ package Gestor.pane;
 
 import java.sql.Connection;
 
-import Gestor.model.AlumnoDO;
 import Gestor.model.ProfesorDAO;
 import Gestor.model.ProfesorDO;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
-public class InicioProfesor {
+public class InicioProfesor extends GridPane {
 
-	public static Label lbluser;
-	public static TextField txtUser;
-	public static Label lblPass;
-	public static PasswordField txtHiddenPass;
-	public static TextField txtShowedPass;
+	private static Label lbluser;
+	private static TextField txtUser;
+	private static Label lblPass;
+	private static PasswordField txtHiddenPass;
+	private static TextField txtShowedPass;
+	public static String userName;
+	public static String passName;
+	private static boolean isOnDBase;
+	private static Stage stage;
+	private static Scene scene;
 
 	public InicioProfesor(Connection con) {
 
 		Button btnConf = new Button("Confirmar");
-		ProfesorDO profesor = new AlumnoDO();
+		ProfesorDO profesor = new ProfesorDO();
 		CheckBox showPassCheckBox = new CheckBox("Mostrar Contraseña");
 		isOnDBase = false;
+		stage = new Stage();
+
+		GridPane caja = new GridPane();
 
 		// Espaciado o diferencia en lo horizontal
-		this.setHgap(10);
+		caja.setHgap(10);
 		// Espaciado o diferencia en lo vertical
-		this.setVgap(10);
+		caja.setVgap(10);
 		// Espaciado entre los elementos
-		this.setPadding(new Insets(10, 10, 10, 10));
+		caja.setPadding(new Insets(10, 10, 10, 10));
 
 		lbluser = new Label("Introduzca el usuario: ");
 		txtUser = new TextField();
@@ -40,6 +52,8 @@ public class InicioProfesor {
 		lblPass = new Label("Introduzca la contraseña: ");
 		txtHiddenPass = new PasswordField();
 		txtShowedPass = new TextField();
+		passName = txtHiddenPass.getText();
+		passName = txtShowedPass.getText();
 
 		// Agregar listener al CheckBox para controlar la
 		// visibilidad de la contraseña
@@ -61,6 +75,21 @@ public class InicioProfesor {
 			// Aquí deberías mostrar el resultado de la
 			// autenticación en lugar de mostrar un diálogo
 			// vacío
+			if (isOnDBase) {
+				Alert isOk = new Alert(Alert.AlertType.INFORMATION);
+				isOk.setTitle("Sesion Iniciada");
+				isOk.setHeaderText("Bienvenido " + txtUser.getText());
+				isOk.setContentText("Puede continuar usando la Aplicación");
+				isOk.show();
+				stage.close();
+			} else {
+				Alert goneWrong = new Alert(Alert.AlertType.INFORMATION);
+				goneWrong.setTitle("Algo ha ido mal");
+				goneWrong.setHeaderText("Ha ocurrido un error");
+				goneWrong.setContentText(
+						"No se ha encontrado el usuario o la contraseña\n" + "Porfavor, inténtelo de nuevo.\n");
+				goneWrong.show();
+			}
 		});
 
 		// Por defecto, se muestra el campo de contraseña
@@ -68,13 +97,19 @@ public class InicioProfesor {
 		txtHiddenPass.setVisible(true);
 		txtShowedPass.setVisible(false);
 
-		this.add(txtUser, 1, 0);
-		this.add(lbluser, 0, 0);
-		this.add(txtHiddenPass, 1, 1);
-		this.add(txtShowedPass, 1, 1);
-		this.add(showPassCheckBox, 0, 2);
-		this.add(lblPass, 0, 1);
-		this.add(btnConf, 0, 9, 2, 1);
+		caja.add(txtUser, 1, 0);
+		caja.add(lbluser, 0, 0);
+		caja.add(txtHiddenPass, 1, 1);
+		caja.add(txtShowedPass, 1, 1);
+		caja.add(showPassCheckBox, 0, 2);
+		caja.add(lblPass, 0, 1);
+		caja.add(btnConf, 0, 9, 2, 1);
+
+		scene = new Scene(caja, 600, 700);
+
+		stage.setTitle("Inicio Sesión");
+		stage.setScene(scene);
+		stage.show();
 
 	}
 }

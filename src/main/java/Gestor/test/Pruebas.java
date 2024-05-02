@@ -3,8 +3,6 @@ package Gestor.test;
 import java.io.IOException;
 import java.sql.Connection;
 
-import org.openjfx.javafx_fxml.MainPag;
-
 import Gestor.utils.ConexionBD;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -19,8 +17,6 @@ public class Pruebas extends Application {
 		VBox cajon = new VBox();
 
 		Connection con = ConexionBD.conectarBD();
-
-		MainPag prueba = new MainPag();
 
 		Scene scene = new Scene(cajon, 600, 600);
 

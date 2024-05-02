@@ -1,5 +1,6 @@
 package org.openjfx.javafx_fxml;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -20,7 +21,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class MenuPrueba extends Application {
+public class AppMenu extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -162,6 +163,11 @@ public class MenuPrueba extends Application {
 
 				documen.add(TextoManual);
 				documen.close();
+
+				File file = new File("Manual.pdf");
+				if (file.exists()) {
+					Desktop.getDesktop().open(file);
+				}
 
 			} catch (Exception e) {
 				// TODO: handle exception

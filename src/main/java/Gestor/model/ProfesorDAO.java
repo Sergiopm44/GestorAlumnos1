@@ -228,37 +228,42 @@ public class ProfesorDAO {
 			// Creamos query
 			String query = "SELECT * FROM profesores WHERE usuario = ?";
 			PreparedStatement pstmt = con.prepareStatement(query);
-			// Introducimos como parametro el id de
-			// profesor
+			// Introducimos como parámetro el usuario del
+			// alumno
 			pstmt.setString(1, profesor.getUsuario());
-			// Creamos un resultset y ejecutamos la
-			// consulta
+			// Ejecutamos la consulta
 			ResultSet rs = pstmt.executeQuery();
-			// Creamos un profesor y le asignamos los
-			// datos de resultset
-			ProfesorDO Profesor1 = new ProfesorDO();
 
-			Profesor1.setIdProfesor(rs.getInt(1));
-			Profesor1.setDniP(rs.getString(2));
-			Profesor1.setFechNa(rs.getString(3));
-			Profesor1.setNombre(rs.getString(4));
-			Profesor1.setApellido(rs.getString(5));
-			Profesor1.setUsuario(rs.getString(6));
-			Profesor1.setContrasenia(rs.getString(7));
-			Profesor1.setTelefono(rs.getInt(8));
-			Profesor1.setEmail(rs.getString(9));
-			Profesor1.setDepartamentos_idDepartamentos(rs.getInt(10));
+			// Verificamos si hay al menos una fila en el
+			// ResultSet
+			if (rs.next()) {
+				// Creamos un alumno y le asignamos los datos del
+				// ResultSet
+				ProfesorDO profesor1 = new ProfesorDO();
 
-			// Devolvemos la contraseña si son iguales
-			return profesor.getContrasenia().equals(Profesor1.getContrasenia());
+				profesor1.setIdProfesor(rs.getInt("idProfesor"));
+				profesor1.setDniP(rs.getString("dniP"));
+				profesor1.setFechNa(rs.getString("fechNa"));
+				profesor1.setNombre(rs.getString("nombre"));
+				profesor1.setApellido(rs.getString("apellido"));
+				profesor1.setUsuario(rs.getString("usuario"));
+				profesor1.setContrasenia(rs.getString("contrasenia"));
+				profesor1.setTelefono(rs.getInt("telefono"));
+				profesor1.setEmail(rs.getString("email"));
+				profesor1.setDepartamentos_idDepartamentos(rs.getInt("Departamentos_idDepartamentos"));
 
+				// Devolvemos true si las contraseñas son iguales
+				return profesor.getContrasenia().equals(profesor1.getContrasenia());
+			} else {
+				// No se encontró ningún alumno con el usuario
+				// proporcionado
+				return false;
+			}
 		} catch (SQLException e) {
-			// TODO: handle exception
+			// Manejo de excepciones
 			e.printStackTrace();
-			// Si sale mal devolvemos null
 			return false;
 		}
-
 	}
 
 }
