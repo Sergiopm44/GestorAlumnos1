@@ -1,14 +1,8 @@
 package org.openjfx.javafx_fxml;
 
-import java.awt.Desktop;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
-
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -144,40 +138,6 @@ public class AppMenu extends Application {
 		MenuItem manualMenuItem = new MenuItem("Manual");
 		manualMenuItem.setOnAction(event -> {
 			// Manual
-			try {
-				// Creamos el pdf
-				FileOutputStream archivo = new FileOutputStream("Manual.pdf");
-
-				// Creamos el documento
-				Document documen = new Document();
-				PdfWriter.getInstance(documen, archivo);
-
-				documen.open();
-
-				// Añadimos la informacion
-				Paragraph TextoManual = new Paragraph(
-						"Esta aplicacion usa un sistema sencillo manejo de iniciar sesion o registrarse.\n"
-								+ " Si no tiene una cuenta puede crearla poniendo sus datos personales,"
-								+ "como su nombre de usuario, su contraseña y elegir si es un almuno u profesor\n");
-				TextoManual.setAlignment(1);
-
-				documen.add(TextoManual);
-				documen.close();
-
-				File file = new File("Manual.pdf");
-				if (file.exists()) {
-					Desktop.getDesktop().open(file);
-				}
-
-			} catch (Exception e) {
-				// TODO: handle exception
-				Alert alert = new Alert(Alert.AlertType.INFORMATION);
-				alert.setTitle("Error inesperado");
-				// Establecemos el mensaje del diálogo
-				alert.setHeaderText("Error al generear el manual");
-				alert.setContentText("Se ha producido un al generear el manual, porfavor recarge e intente de nuevo ");
-
-			}
 
 		});
 

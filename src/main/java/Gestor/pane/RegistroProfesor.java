@@ -97,7 +97,7 @@ public class RegistroProfesor extends GridPane {
 		});
 
 		btnVolver.setOnAction(e -> {
-
+			stage.close();
 		});
 
 		caja.add(btnVolver, 0, 10);

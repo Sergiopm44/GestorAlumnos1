@@ -109,7 +109,7 @@ public class InicioAlumno extends GridPane {
 
 		scene = new Scene(caja, 600, 700);
 
-		stage.setTitle("Inicio Sesión");
+		stage.setTitle("Inicio Sesión Alumno");
 		stage.setScene(scene);
 		stage.show();
 

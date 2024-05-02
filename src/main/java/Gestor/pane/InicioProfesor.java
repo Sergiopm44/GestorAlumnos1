@@ -80,7 +80,7 @@ public class InicioProfesor extends GridPane {
 				isOk.setTitle("Sesion Iniciada");
 				isOk.setHeaderText("Bienvenido " + txtUser.getText());
 				isOk.setContentText("Puede continuar usando la Aplicación");
-				isOk.show();
+				isOk.showAndWait();
 				stage.close();
 			} else {
 				Alert goneWrong = new Alert(Alert.AlertType.INFORMATION);
@@ -88,7 +88,7 @@ public class InicioProfesor extends GridPane {
 				goneWrong.setHeaderText("Ha ocurrido un error");
 				goneWrong.setContentText(
 						"No se ha encontrado el usuario o la contraseña\n" + "Porfavor, inténtelo de nuevo.\n");
-				goneWrong.show();
+				goneWrong.showAndWait();
 			}
 		});
 
@@ -107,7 +107,7 @@ public class InicioProfesor extends GridPane {
 
 		scene = new Scene(caja, 600, 700);
 
-		stage.setTitle("Inicio Sesión");
+		stage.setTitle("Inicio Sesión Profesor");
 		stage.setScene(scene);
 		stage.show();
 

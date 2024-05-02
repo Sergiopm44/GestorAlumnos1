@@ -3,6 +3,7 @@ package org.openjfx.javafx_fxml;
 import java.sql.Connection;
 
 import Gestor.pane.InicioAlumno;
+import Gestor.pane.InicioProfesor;
 import Gestor.pane.RegistroAlumno;
 import Gestor.pane.RegistroProfesor;
 import javafx.geometry.Insets;
@@ -93,7 +94,7 @@ public class MainPag extends GridPane {
 
 		// Boton para inicio de sesión de profesor
 		btnLoginP.setOnAction(e -> {
-			InicioAlumno inicioP = new InicioAlumno(con);
+			InicioProfesor inicioP = new InicioProfesor(con);
 
 		});
 
