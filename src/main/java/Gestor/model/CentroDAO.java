@@ -247,7 +247,7 @@ public class CentroDAO {
 	}
 
 	/**
-	 * 
+	 * Es una función que está hecha para el inicio de sesión, para comprobar si está en la base de datos
 	 * @param con
 	 * @param id
 	 * @return un centro si sale bien o nulo si sale mal

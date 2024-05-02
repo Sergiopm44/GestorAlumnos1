@@ -2,6 +2,7 @@ package org.openjfx.javafx_fxml;
 
 import java.sql.Connection;
 
+import Gestor.pane.BuscadorP;
 import Gestor.pane.InicioAlumno;
 import Gestor.pane.InicioProfesor;
 import Gestor.pane.RegistroAlumno;
@@ -20,6 +21,9 @@ public class MainPag extends GridPane {
 	public Label welcome;
 	public Label log;
 	public Label profOrAl;
+	public static boolean isIniOk;
+	public static boolean isProf;
+	public static boolean isAlum;
 	private static Scene scene;
 	private static Stage stage;
 	private Connection con;
@@ -35,6 +39,11 @@ public class MainPag extends GridPane {
 	public MainPag(Connection con, Stage primaryStage) {
 		stage = primaryStage;
 		this.con = con;
+
+		// Declaracion variable
+		isIniOk = false;
+		isAlum = false;
+		isProf = false;
 
 		// Objetos
 		ChoiceBox<String> profOrNo = new ChoiceBox<>();
@@ -56,17 +65,21 @@ public class MainPag extends GridPane {
 		log = new Label("¿Tiene una cuenta o desea registrarse?");
 
 		// ChoiceBox, opciones y obtener el resultado
-		// Añade las opciones "Alumno" y "Profesor" al ChoiceBox
+		// Añade las opciones "Alumno" y "Profesor" al
+		// ChoiceBox
 		profOrNo.getItems().addAll("Alumno", "Profesor");
 
-		// Agrega un listener al ChoiceBox para detectar cambios en la selección del
+		// Agrega un listener al ChoiceBox para detectar
+		// cambios en la selección del
 		// usuario
 		profOrNo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-			// Verifica si el nuevo valor seleccionado no es nulo
+			// Verifica si el nuevo valor seleccionado no es
+			// nulo
 			if (newValue != null) {
 				// Verifica si el nuevo valor es "Alumno"
 				if (newValue.equals("Alumno")) {
-					// Muestra los botones relacionados con el registro e inicio de sesión como
+					// Muestra los botones relacionados con el
+					// registro e inicio de sesión como
 					// alumno y oculta los del profesor
 					btnRegisA.setVisible(true);
 					btnLoginA.setVisible(true);
@@ -75,7 +88,8 @@ public class MainPag extends GridPane {
 				}
 				// Verifica si el nuevo valor es "Profesor"
 				else if (newValue.equals("Profesor")) {
-					// Muestra los botones relacionados con el registro e inicio de sesión como
+					// Muestra los botones relacionados con el
+					// registro e inicio de sesión como
 					// profesor y oculta los del alumno
 					btnRegisP.setVisible(true);
 					btnLoginP.setVisible(true);
@@ -88,23 +102,29 @@ public class MainPag extends GridPane {
 		// Boton para registro de alumno
 		btnRegisA.setOnAction(e -> {
 			RegistroAlumno regisAl = new RegistroAlumno(con, new Stage());
-
+			isAlum = true;
 		});
 		// Boton para inicio de sesión de alumno
 		btnLoginA.setOnAction(e -> {
 			InicioAlumno inicioA = new InicioAlumno(con);
+			isIniOk = true;
+			isAlum = true;
 
 		});
 		// Boton para registro de profesor
 		btnRegisP.setOnAction(e -> {
 			RegistroProfesor regisP = new RegistroProfesor(con, new Stage());
-
+			isProf = true;
 		});
 
 		// Boton para inicio de sesión de profesor
 		btnLoginP.setOnAction(e -> {
 			InicioProfesor inicioP = new InicioProfesor(con);
+			isIniOk = true;
+			isProf = true;
 
+			BuscadorP buscadorP = new BuscadorP(con, stage);
+			stage.setScene(buscadorP.getScene());
 		});
 
 		// Se agregan los nodos a la cuadrícula
@@ -126,7 +146,8 @@ public class MainPag extends GridPane {
 		this.setHalignment(btnRegisA, HPos.CENTER);
 		this.setHalignment(btnRegisP, HPos.CENTER);
 
-		// Puedes ajustar el valor del margen según sea necesario
+		// Puedes ajustar el valor del margen según sea
+		// necesario
 		Insets margen = new Insets(10);
 		GridPane.setMargin(welcome, margen);
 		GridPane.setMargin(profOrAl, margen);

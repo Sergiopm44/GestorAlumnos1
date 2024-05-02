@@ -85,11 +85,21 @@ public class InicioAlumno extends GridPane {
 			// isOnDBase
 			if (isOnDBase) {
 				Alert isOk = new Alert(Alert.AlertType.INFORMATION);
-				isOk.setTitle("Sesion Iniciada");
-				isOk.setHeaderText("Bienvenido " + txtUser.getText());
-				isOk.setContentText("Puede continuar usando la Aplicación");
-				isOk.show();
-				stage.close();
+
+				isOk.setTitle("Sesión Iniciada");
+				isOk.setHeaderText("¡Bienvenido " + txtUser.getText() + "!");
+				isOk.setContentText("Puede continuar usando la Aplicación.");
+				// Configuramos el evento que se activa cuando se
+				// cierra la alerta
+				isOk.setOnCloseRequest(event -> {
+					// Creamos una nueva instancia de BuscadorA y
+					// mostramos su escena
+					BuscadorA buscadorA = new BuscadorA(con, new Stage());
+				});
+
+				// Mostramos la alerta y esperamos a que se cierre
+				isOk.showAndWait();
+
 			} else {
 				Alert goneWrong = new Alert(Alert.AlertType.INFORMATION);
 				goneWrong.setTitle("Algo ha ido mal");

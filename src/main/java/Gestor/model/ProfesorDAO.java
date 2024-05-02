@@ -246,7 +246,7 @@ public class ProfesorDAO {
 	}
 
 	/**
-	 * 
+	 * Es una función que está hecha para el inicio de sesión, para comprobar si está en la base de datos
 	 * @param con
 	 * @param profesor
 	 * @return la contraseña del profesor que se mete como parametro que sea igual
@@ -293,6 +293,49 @@ public class ProfesorDAO {
 			e.printStackTrace();
 			return false;
 		}
+
+	}
+
+	/**
+	* Funcion que recoge todos los datos de un profesor y los almacena en un array
+	*@param con
+	*@param profesor
+	*@return profesor1 si ha funcionado bien y nulo si no ha funcionado
+	*/
+	public static ProfesorDO busqueda(Connection con, String dniP) {
+		try {
+			// Creamos query
+			String query = "SELECT * FROM profesores WHERE dniP = ?";
+			PreparedStatement pstmt = con.prepareStatement(query);
+			// Introducimos como parametro el id de
+			// alumno
+			pstmt.setString(1, dniP);
+			// Creamos un resultset y ejecutamos la
+			// consulta
+			ResultSet rs = pstmt.executeQuery();
+			// Creamos un alumno y le asignamos los
+			// datos de resultset
+			ProfesorDO profesor1 = new ProfesorDO();
+
+			profesor1.setIdProfesor(rs.getInt(1));
+			profesor1.setDniP(rs.getString(2));
+			profesor1.setFechNa(rs.getString(3));
+			profesor1.setNombre(rs.getString(4));
+			profesor1.setApellido(rs.getString(5));
+			profesor1.setUsuario(rs.getString(6));
+			profesor1.setContrasenia(rs.getString(7));
+			profesor1.setTelefono(rs.getInt(8));
+			profesor1.setEmail(rs.getString(9));
+			profesor1.setDepartamentos_idDepartamentos(rs.getInt(10));
+			// Devolvemos alumno
+			return profesor1;
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			// Si sale mal devolvemos null
+			return null;
+		}
+
 	}
 
 }
