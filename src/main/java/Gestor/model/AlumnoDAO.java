@@ -6,7 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AlumnoDAO {
-
+	/**
+	 * Funcion que elimina un Alumno de la base de datos segun el id del alumno
+	 * introducido
+	 * 
+	 * @param idAlumno
+	 * @param con
+	 * @return 0 si sale bien o -1 si sale man
+	 */
 	public static int eliminarAlumno(int idAlumno, Connection con) {
 
 		try {
@@ -32,6 +39,15 @@ public class AlumnoDAO {
 		}
 	}
 
+	/**
+	 * Funcion que inserta un nuevo Alumno en la base de datos segun el id de Alumno
+	 * introducido. El id de alumno ya existe se introduce el Alumno sin id, por el
+	 * contrario si el id de alumno no existe se introduce el Alumno con id.
+	 * 
+	 * @param con
+	 * @param alumno
+	 * @return 1 si sale bien o -1 si sale man
+	 */
 	public static int insertAlumno(Connection con, AlumnoDO alumno) {
 		try {
 			String selectID = "SELECT * FROM alumno WHERE idAlumno=?";
@@ -88,6 +104,14 @@ public class AlumnoDAO {
 		}
 	}
 
+	/**
+	 * Actualiza los datos de un Alumno en la base de datos. Se puede modificar
+	 * cualquier campo que se desee de al tabla alumno segun el id del alumno
+	 * 
+	 * @param alumno
+	 * @param con
+	 * @return 1 si ha salido bien o 0 si ha salido mal
+	 */
 	public static int actualizarAlumno(AlumnoDO alumno, Connection con) {
 		try {
 
@@ -224,6 +248,13 @@ public class AlumnoDAO {
 		}
 	}
 
+	/**
+	 * 
+	 * @param con
+	 * @param alumno
+	 * @return la contraseña del alumno que se mete como parametro que sea igual que
+	 *         la contraseña del alumno o false si sale mal
+	 */
 	public static boolean cargar(Connection con, AlumnoDO alumno) {
 		try {
 			// Creamos query

@@ -12,11 +12,28 @@ public class AlumnoDO {
 	private String email;
 	private int Curso_idCurso;
 
+	/**
+	 * Constructor vacio de alumno
+	 */
 	public AlumnoDO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Constructor con todos los campos de alumno
+	 * 
+	 * @param idAlumno
+	 * @param dniA
+	 * @param fechNa
+	 * @param nombre
+	 * @param apellido
+	 * @param usuario
+	 * @param contrasenia
+	 * @param telefono
+	 * @param email
+	 * @param curso_idCurso
+	 */
 	public AlumnoDO(int idAlumno, String dniA, String fechNa, String nombre, String apellido, String usuario,
 			String contrasenia, int telefono, String email, int curso_idCurso) {
 		super();
@@ -32,26 +49,56 @@ public class AlumnoDO {
 		Curso_idCurso = curso_idCurso;
 	}
 
+	/**
+	 * Getter idAlumno
+	 * 
+	 * @return El idAlumno
+	 */
 	public int getIdAlumno() {
 		return idAlumno;
 	}
 
+	/**
+	 * Setter idAlumno
+	 * 
+	 * @param idAlumno
+	 */
 	public void setIdAlumno(int idAlumno) {
 		this.idAlumno = idAlumno;
 	}
 
+	/**
+	 * Getter usuario
+	 * 
+	 * @return El usuario
+	 */
 	public String getUsuario() {
 		return usuario;
 	}
 
+	/**
+	 * Setter usuario
+	 * 
+	 * @param usuario
+	 */
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
 
+	/**
+	 * Getter contrasenia
+	 * 
+	 * @return contrasenia
+	 */
 	public String getContrasenia() {
 		return contrasenia;
 	}
 
+	/**
+	 * Setter contrasenia
+	 * 
+	 * @param contrasenia
+	 */
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
 	}
@@ -154,6 +201,9 @@ public class AlumnoDO {
 		Curso_idCurso = curso_idCurso;
 	}
 
+	/**
+	 * To string de todos los campos de alumno
+	 */
 	@Override
 	public String toString() {
 		return "AlumnoDO [idAlumno=" + idAlumno + ", dniA=" + dniA + ", fechNa=" + fechNa + ", nombre=" + nombre

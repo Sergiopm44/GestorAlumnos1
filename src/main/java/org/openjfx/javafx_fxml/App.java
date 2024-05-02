@@ -36,10 +36,23 @@ public class App extends Application {
 
 	}
 
+	/**
+	 * Funcion que da permisos a fxml
+	 * 
+	 * @param fxml
+	 * @throws IOException
+	 */
 	static void setRoot(String fxml) throws IOException {
 		scene.setRoot(loadFXML(fxml));
 	}
 
+	/**
+	 * Funcion que carga el fxml
+	 * 
+	 * @param fxml
+	 * @return carga el fxmlLoader
+	 * @throws IOException
+	 */
 	private static Parent loadFXML(String fxml) throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
 		return fxmlLoader.load();

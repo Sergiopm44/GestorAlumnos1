@@ -6,11 +6,22 @@ public class DepartamentoDO {
 	private String descripcion;
 	private int numDepartamento;
 
+	/**
+	 * Constructor vacio departamento
+	 */
 	public DepartamentoDO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Constructor con todos los campos de departamento
+	 * 
+	 * @param idDepartamentos
+	 * @param nombre
+	 * @param descripcion
+	 * @param numDepartamento
+	 */
 	public DepartamentoDO(int idDepartamentos, String nombre, String descripcion, int numDepartamento) {
 		super();
 		this.idDepartamentos = idDepartamentos;
@@ -75,6 +86,9 @@ public class DepartamentoDO {
 		this.numDepartamento = numDepartamento;
 	}
 
+	/**
+	 * To string de todos los campos de departamento
+	 */
 	@Override
 	public String toString() {
 		return "DepartamentoDO [idDepartamentos=" + idDepartamentos + ", nombre=" + nombre + ", descripcion="

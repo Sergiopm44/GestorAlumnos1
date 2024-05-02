@@ -18,6 +18,13 @@ public class RegistroAlumno extends GridPane {
 	private Stage stage;
 	private Scene scene;
 
+	/**
+	 * Funcion que añade un alumno a la base de datos segun los datos que se
+	 * proporcionan en la aplicacion
+	 * 
+	 * @param con
+	 * @param primaryStage
+	 */
 	public RegistroAlumno(Connection con, Stage primaryStage) {
 		this.stage = primaryStage;
 

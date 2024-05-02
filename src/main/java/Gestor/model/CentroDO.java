@@ -10,11 +10,26 @@ public class CentroDO {
 	private int Telefono;
 	private String email;
 
+	/**
+	 * Constructor vacio de centro
+	 */
 	public CentroDO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Constructor con todos los campos de centro
+	 * 
+	 * @param idCentro
+	 * @param nif
+	 * @param direccion
+	 * @param localidad
+	 * @param provincia
+	 * @param cPostal
+	 * @param telefono
+	 * @param email
+	 */
 	public CentroDO(int idCentro, int nif, String direccion, String localidad, String provincia, int cPostal,
 			int telefono, String email) {
 		super();
@@ -28,6 +43,11 @@ public class CentroDO {
 		this.email = email;
 	}
 
+	/**
+	 * getter de centro
+	 * 
+	 * @return el idCentro
+	 */
 	public int getIdCentro() {
 		return idCentro;
 	}
@@ -134,6 +154,9 @@ public class CentroDO {
 		this.email = email;
 	}
 
+	/**
+	 * To string de todos los campos de centro
+	 */
 	@Override
 	public String toString() {
 		return "CentroDO [nif=" + nif + ", direccion=" + direccion + ", localidad=" + localidad + ", provincia="

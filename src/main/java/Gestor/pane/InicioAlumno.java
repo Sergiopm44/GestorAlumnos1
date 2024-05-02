@@ -28,6 +28,13 @@ public class InicioAlumno extends GridPane {
 	private static Stage stage;
 	private static Scene scene;
 
+	/**
+	 * Funcion que inicia sesion del alumno con un usuario y una contraseña, si
+	 * estos son los mismos que en la base de datos el alumno entrara en la
+	 * aplicacion
+	 * 
+	 * @param con
+	 */
 	public InicioAlumno(Connection con) {
 		Button btnConf = new Button("Confirmar");
 		AlumnoDO alumno = new AlumnoDO();

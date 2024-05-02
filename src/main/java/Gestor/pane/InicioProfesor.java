@@ -29,6 +29,13 @@ public class InicioProfesor extends GridPane {
 	private static Scene scene;
 	public boolean passOk;
 
+	/**
+	 * Funcion que inicia sesion del profesor con un usuario y una contraseña, si
+	 * estos son los mismos que en la base de datos el profesor entrara en la
+	 * aplicacion
+	 * 
+	 * @param con
+	 */
 	public InicioProfesor(Connection con) {
 
 		passOk = false;

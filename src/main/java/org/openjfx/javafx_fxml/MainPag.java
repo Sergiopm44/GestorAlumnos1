@@ -24,6 +24,14 @@ public class MainPag extends GridPane {
 	private static Stage stage;
 	private Connection con;
 
+	/**
+	 * Funcion que crea el menu principal de bienvenida, que alberga el inicio de
+	 * sesion y el registro, ya sea de alumno o de profesor, eleccion que se hace en
+	 * la misma pagina principal
+	 * 
+	 * @param con
+	 * @param primaryStage
+	 */
 	public MainPag(Connection con, Stage primaryStage) {
 		stage = primaryStage;
 		this.con = con;

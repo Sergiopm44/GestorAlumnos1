@@ -7,7 +7,13 @@ import java.sql.SQLException;
 
 public class ProfesorDAO {
 
-	// Funcion que elimina los profesores
+	/**
+	 * Elimina un profesor con un determinado id de profesor
+	 * 
+	 * @param idProfesores
+	 * @param con
+	 * @return 0 si ha ido bien o -1 si ha ido mal
+	 */
 	public static int eliminarProfesor(int idProfesores, Connection con) {
 
 		try {
@@ -31,6 +37,15 @@ public class ProfesorDAO {
 
 	}
 
+	/**
+	 * Inserta un profesor con un determinado id, si este existe se le introduciran
+	 * los campos sin id, por el contrario si no existe se le meteran los campos y
+	 * el id de profesor
+	 * 
+	 * @param con
+	 * @param Profesor
+	 * @return 1 si ha ido bien o 0 si ha ido mal
+	 */
 	public static int insertProfesor(Connection con, ProfesorDO Profesor) {
 		try {
 			String selectID = "SELECT * FROM profesores WHERE idProfesor=?";
@@ -87,6 +102,13 @@ public class ProfesorDAO {
 		}
 	}
 
+	/**
+	 * Actualiza uno o varios campos segun el id de profesor
+	 * 
+	 * @param Profesor
+	 * @param con
+	 * @return 1 si ha ido bien o 0 si ha ido mal
+	 */
 	public static int actualizarProfesor(ProfesorDO Profesor, Connection con) {
 		try {
 
@@ -223,6 +245,13 @@ public class ProfesorDAO {
 		}
 	}
 
+	/**
+	 * 
+	 * @param con
+	 * @param profesor
+	 * @return la contraseña del profesor que se mete como parametro que sea igual
+	 *         que la contraseña del profesor o false si sale mal
+	 */
 	public static boolean cargar(Connection con, ProfesorDO profesor) {
 		try {
 			// Creamos query

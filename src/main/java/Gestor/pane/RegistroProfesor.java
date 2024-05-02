@@ -18,6 +18,13 @@ public class RegistroProfesor extends GridPane {
 	private static Stage stage;
 	private static Scene scene;
 
+	/**
+	 * Funcion que añade un alumno a la base de datos segun los datos que se
+	 * proporcionan en la aplicacion
+	 * 
+	 * @param con
+	 * @param primaryStage
+	 */
 	public RegistroProfesor(Connection con, Stage primaryStage) {
 
 		this.stage = primaryStage;

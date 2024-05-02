@@ -6,6 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CentroDAO {
+	/**
+	 * Elimina un centro dependiendo del id del centro
+	 * 
+	 * @param idCentro
+	 * @param con
+	 * @return 0 si sale bien o -1 si sale bien
+	 */
 	public static int eliminarCentro(int idCentro, Connection con) {
 
 		try {
@@ -31,6 +38,15 @@ public class CentroDAO {
 		}
 	}
 
+	/**
+	 * Inserta un centro con un determinado id de centro. Si el id ya existe se le
+	 * introduciran los demas datos, si no existe se le introducira con un
+	 * determinado id
+	 * 
+	 * @param con
+	 * @param centro
+	 * @return 0 si sale bien o -1 si sale mal
+	 */
 	public static int insertCentro(Connection con, CentroDO centro) {
 		try {
 
@@ -112,6 +128,14 @@ public class CentroDAO {
 
 	}
 
+	/**
+	 * Actualiza un determinado centro segun el id introducido, se puede modificar
+	 * cualquier campo de centro
+	 * 
+	 * @param centro
+	 * @param con
+	 * @return 1 si ha salido bien o 0 si ha salido mal
+	 */
 	public static int actualizarCentro(CentroDO centro, Connection con) {
 		try {
 
@@ -222,6 +246,12 @@ public class CentroDAO {
 		}
 	}
 
+	/**
+	 * 
+	 * @param con
+	 * @param id
+	 * @return un centro si sale bien o nulo si sale mal
+	 */
 	public static CentroDO cargar(Connection con, int id) {
 		try {
 			// Creamos query
@@ -241,7 +271,7 @@ public class CentroDAO {
 			Centro1.setDireccion(rs.getString(3));
 			Centro1.setLocalidad(rs.getString(4));
 			Centro1.setProvincia(rs.getString(5));
-			Centro1.setcPostal(rs.getInt(6)); // ok
+			Centro1.setcPostal(rs.getInt(6));
 			Centro1.setTelefono(rs.getInt(7));
 			Centro1.setEmail(rs.getString(8));
 			// Devolvemos centro

@@ -13,11 +13,28 @@ public class ProfesorDO {
 	private String email;
 	private int Departamentos_idDepartamentos;
 
+	/**
+	 * Constructor vacio de profesor
+	 */
 	public ProfesorDO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Constructor con todos los campos de profesor
+	 * 
+	 * @param idProfesor
+	 * @param dniP
+	 * @param fechNa
+	 * @param nombre
+	 * @param apellido
+	 * @param usuario
+	 * @param contrasenia
+	 * @param telefono
+	 * @param email
+	 * @param departamentos_idDepartamentos
+	 */
 	public ProfesorDO(int idProfesor, String dniP, String fechNa, String nombre, String apellido, String usuario,
 			String contrasenia, int telefono, String email, int departamentos_idDepartamentos) {
 		super();
@@ -161,6 +178,9 @@ public class ProfesorDO {
 		Departamentos_idDepartamentos = departamentos_idDepartamentos;
 	}
 
+	/**
+	 * To string de todo los campos de profesor
+	 */
 	@Override
 	public String toString() {
 		return "ProfesorDO [idProfesor=" + idProfesor + ", dniP=" + dniP + ", fechNa=" + fechNa + ", nombre=" + nombre

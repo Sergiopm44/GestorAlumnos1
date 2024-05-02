@@ -6,6 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CursoDAO {
+	/**
+	 * Elimina un curso con un determinado id de curso
+	 * 
+	 * @param idCurso
+	 * @param con
+	 * @return 0 si ha ido bien o -1 si ha ido mal
+	 */
 	public static int eliminarCurso(int idCurso, Connection con) {
 
 		try {
@@ -31,6 +38,15 @@ public class CursoDAO {
 		}
 	}
 
+	/**
+	 * Inserta un curso con un determinado id, el cual si existe se le meten los
+	 * campos sin id y si por el contrario si no existe se le mete el id junto a los
+	 * campos
+	 * 
+	 * @param con
+	 * @param curso
+	 * @return 0 si ha ido bien o -1 si ha ido mal
+	 */
 	public static int insertCurso(Connection con, CursoDO curso) {
 		try {
 
@@ -95,6 +111,13 @@ public class CursoDAO {
 
 	}
 
+	/**
+	 * Actualiza uno o varios campos de curso segun el id de curso introducido
+	 * 
+	 * @param curso
+	 * @param con
+	 * @return 1 si ha ido bien o 0 si ha ido mal
+	 */
 	public static int actualizarCurso(CursoDO curso, Connection con) {
 		try {
 
@@ -147,6 +170,12 @@ public class CursoDAO {
 		}
 	}
 
+	/**
+	 * 
+	 * @param con
+	 * @param id
+	 * @return un curso si ha ido bien o nulo si ha ido mal
+	 */
 	public static CursoDO cargar(Connection con, int id) {
 		try {
 			// Creamos query

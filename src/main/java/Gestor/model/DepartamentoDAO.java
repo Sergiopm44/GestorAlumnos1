@@ -6,6 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DepartamentoDAO {
+	/**
+	 * Elimina un departamento con un id determinado
+	 * 
+	 * @param idDepartamentos
+	 * @param con
+	 * @return 0 si ha ido bien o -1 si ha ido mal
+	 */
 	public static int eliminarDepartamento(int idDepartamentos, Connection con) {
 
 		try {
@@ -31,6 +38,15 @@ public class DepartamentoDAO {
 		}
 	}
 
+	/**
+	 * Inserta un departamento con un determinado id, si el id existe se le
+	 * introducen los campos sin id, y si el id no existe se le introducen todos los
+	 * campos pero con id
+	 * 
+	 * @param con
+	 * @param departamento
+	 * @return 0 si ha ido bien o -1 si ha ido mal
+	 */
 	public static int insertDepartamento(Connection con, DepartamentoDO departamento) {
 		try {
 
@@ -95,6 +111,13 @@ public class DepartamentoDAO {
 
 	}
 
+	/**
+	 * Actualiza cualquier campo de departamento segun un id de departamento
+	 * 
+	 * @param departamento
+	 * @param con
+	 * @return 1 si ha ido bien o 0 si ha ido mal
+	 */
 	public static int actualizarDepartamento(DepartamentoDO departamento, Connection con) {
 		try {
 
@@ -147,6 +170,12 @@ public class DepartamentoDAO {
 		}
 	}
 
+	/**
+	 * 
+	 * @param con
+	 * @param id
+	 * @return un departamento si ha ido bien o nulo si ha ido mal
+	 */
 	public static DepartamentoDO cargar(Connection con, int id) {
 		try {
 			// Creamos query

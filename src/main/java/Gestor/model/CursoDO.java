@@ -5,11 +5,21 @@ public class CursoDO {
 	private String nombre;
 	private String descripcion;
 
+	/**
+	 * Constructor vacio de curso
+	 */
 	public CursoDO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Constructor con todos los campos curso
+	 * 
+	 * @param idCurso
+	 * @param nombre
+	 * @param descripcion
+	 */
 	public CursoDO(int idCurso, String nombre, String descripcion) {
 		super();
 		this.idCurso = idCurso;
@@ -59,6 +69,9 @@ public class CursoDO {
 		this.descripcion = descripcion;
 	}
 
+	/**
+	 * To string de todos los campos de curso
+	 */
 	@Override
 	public String toString() {
 		return "CursoDO [idCurso=" + idCurso + ", nombre=" + nombre + ", descripcion=" + descripcion + "]";

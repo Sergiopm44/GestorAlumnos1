@@ -16,7 +16,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class AppMenu extends Application {
-
+	/**
+	 * Funcion que crea el menu en la aplicacion java y que tiene todos los eventos
+	 * funcionales de los menus
+	 * 
+	 * @param primaryStage
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle("Pruebas de Programación");
