@@ -6,6 +6,7 @@ import Gestor.pane.InicioAlumno;
 import Gestor.pane.InicioProfesor;
 import Gestor.pane.RegistroAlumno;
 import Gestor.pane.RegistroProfesor;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -107,6 +108,15 @@ public class MainPag extends GridPane {
 		this.add(btnRegisA, 0, 5);
 		this.add(btnLoginP, 0, 4);
 		this.add(btnRegisP, 0, 5);
+
+		this.setHalignment(welcome, HPos.CENTER);
+		this.setHalignment(profOrAl, HPos.CENTER);
+		this.setHalignment(log, HPos.CENTER);
+		this.setHalignment(profOrNo, HPos.CENTER);
+		this.setHalignment(btnLoginA, HPos.CENTER);
+		this.setHalignment(btnLoginP, HPos.CENTER);
+		this.setHalignment(btnRegisA, HPos.CENTER);
+		this.setHalignment(btnRegisP, HPos.CENTER);
 
 		// Puedes ajustar el valor del margen según sea necesario
 		Insets margen = new Insets(10);

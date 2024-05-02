@@ -27,9 +27,11 @@ public class InicioProfesor extends GridPane {
 	private static boolean isOnDBase;
 	private static Stage stage;
 	private static Scene scene;
+	public boolean passOk;
 
 	public InicioProfesor(Connection con) {
 
+		passOk = false;
 		Button btnConf = new Button("Confirmar");
 		ProfesorDO profesor = new ProfesorDO();
 		CheckBox showPassCheckBox = new CheckBox("Mostrar Contraseña");
@@ -82,6 +84,7 @@ public class InicioProfesor extends GridPane {
 				isOk.setContentText("Puede continuar usando la Aplicación");
 				isOk.showAndWait();
 				stage.close();
+				passOk = true;
 			} else {
 				Alert goneWrong = new Alert(Alert.AlertType.INFORMATION);
 				goneWrong.setTitle("Algo ha ido mal");

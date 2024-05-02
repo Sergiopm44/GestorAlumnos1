@@ -6,6 +6,7 @@ import java.sql.Connection;
 import Gestor.utils.ConexionBD;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -22,8 +23,12 @@ public class App extends Application {
 	public void start(Stage stage) throws IOException {
 
 		MainPag mainPag = new MainPag(con, stage);
+		mainPag.setAlignment(Pos.TOP_CENTER);
 
 		scene = new Scene(mainPag, 920, 460);
+
+		scene.getStylesheets().add(getClass().getResource("/css/css.css").toExternalForm());
+		scene.getRoot().getStyleClass().add("body");
 
 		stage.setTitle("Gestor de Alumnos");
 		stage.setScene(scene);
