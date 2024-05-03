@@ -1,5 +1,6 @@
 package Gestor.pane;
 
+import java.net.URL;
 import java.sql.Connection;
 
 import Gestor.model.ProfesorDAO;
@@ -16,7 +17,7 @@ import javafx.stage.Stage;
 
 public class BuscadorP extends GridPane {
 
-	public static Scene scene;
+	public static Scene sceneBuscadorP;
 	public static Stage stage;
 
 	public BuscadorP(Connection con, Stage primaryStage) {
@@ -74,7 +75,8 @@ public class BuscadorP extends GridPane {
 					GridPane.setHalignment(lblGetDniP, HPos.CENTER);
 					GridPane.setHalignment(txtGetDniP, HPos.CENTER);
 
-					// Puede ajustar el valor del margen según sea necesario
+					// Puede ajustar el valor del margen según sea
+					// necesario
 
 					caja.add(txtfecNa, 1, 1);
 					caja.add(txtNombre, 1, 2);
@@ -149,10 +151,18 @@ public class BuscadorP extends GridPane {
 		caja.add(txtGetDniP, 1, 0);
 		caja.add(lblGetDniP, 0, 0);
 
-		scene = new Scene(caja, 600, 700);
+		sceneBuscadorP = new Scene(caja, 600, 700);
 
 		stage.setTitle("Buscador profesores");
-		stage.setScene(scene);
+		sceneBuscadorP.getRoot().getStyleClass().add("BuscadorP");
+		URL cssFile = getClass().getResource("/css/css.css");
+		if (cssFile == null) {
+			System.out.println("No se pudo encontrar el archivo CSS");
+		} else {
+			sceneBuscadorP.getStylesheets().add(cssFile.toExternalForm());
+		}
+
+		stage.setScene(sceneBuscadorP);
 		stage.show();
 	}
 }

@@ -301,10 +301,10 @@ public class AlumnoDAO {
 	}
 
 	/**
-	 * Funcion que recoge todos los datos de un alumno y los almacena en un array
+	 * Funcion que recoge todos los datos de un alumno y los almacena en un array segun el dni
 	 * 
 	 * @param con
-	 * @param alumno
+	 * @param dniA
 	 * @return alumno1 si ha funcionado bien y nulo si no ha funcionado
 	 */
 	public static AlumnoDO busqueda(Connection con, String dniA) {
@@ -318,9 +318,11 @@ public class AlumnoDAO {
 			ResultSet rs = pstmt.executeQuery();
 			// Creamos un alumno
 			AlumnoDO alumno = null;
-			// Verificamos si hay una fila válida en el ResultSet
+			// Verificamos si hay una fila válida en el
+			// ResultSet
 			if (rs.next()) {
-				// Si hay una fila válida, creamos un objeto AlumnoDO
+				// Si hay una fila válida, creamos un objeto
+				// AlumnoDO
 				alumno = new AlumnoDO();
 				// Y le asignamos los datos del ResultSet
 				alumno.setIdAlumno(rs.getInt("idAlumno"));
@@ -334,7 +336,56 @@ public class AlumnoDAO {
 				alumno.setEmail(rs.getString("email"));
 				alumno.setCurso_idCurso(rs.getInt("curso_idCurso"));
 			}
-			// Devolvemos el objeto AlumnoDO (puede ser null si no se encontró ningún
+			// Devolvemos el objeto AlumnoDO (puede ser null
+			// si no se encontró ningún
+			// alumno)
+			return alumno;
+		} catch (SQLException e) {
+			// Manejo de excepciones
+			e.printStackTrace();
+			// Si ocurre un error, devolvemos null
+			return null;
+		}
+	}
+
+	/**
+	 * Funcion que recoge todos los datos de un alumno y los almacena en un array segun el usuario
+	 * 
+	 * @param con
+	 * @param usuario
+	 * @return alumno1 si ha funcionado bien y nulo si no ha funcionado
+	 */
+	public static AlumnoDO searchAUser(Connection con, String usuario) {
+		try {
+			// Creamos query
+			String query = "SELECT * FROM alumno WHERE usuario = ?";
+			PreparedStatement pstmt = con.prepareStatement(query);
+			// Introducimos como parametro el id de alumno
+			pstmt.setString(1, usuario);
+			// Creamos un resultset y ejecutamos la consulta
+			ResultSet rs = pstmt.executeQuery();
+			// Creamos un alumno
+			AlumnoDO alumno = null;
+			// Verificamos si hay una fila vÃ¡lida en el
+			// ResultSet
+			if (rs.next()) {
+				// Si hay una fila vÃ¡lida, creamos un objeto
+				// AlumnoDO
+				alumno = new AlumnoDO();
+				// Y le asignamos los datos del ResultSet
+				alumno.setIdAlumno(rs.getInt("idAlumno"));
+				alumno.setDniA(rs.getString("dniA"));
+				alumno.setFechNa(rs.getString("fechNa"));
+				alumno.setNombre(rs.getString("nombre"));
+				alumno.setApellido(rs.getString("apellido"));
+				alumno.setUsuario(rs.getString("usuario"));
+				alumno.setContrasenia(rs.getString("contrasenia"));
+				alumno.setTelefono(rs.getInt("telefono"));
+				alumno.setEmail(rs.getString("email"));
+				alumno.setCurso_idCurso(rs.getInt("curso_idCurso"));
+			}
+			// Devolvemos el objeto AlumnoDO (puede ser null
+			// si no se encontrÃ³ ningÃºn
 			// alumno)
 			return alumno;
 		} catch (SQLException e) {

@@ -1,0 +1,64 @@
+.body{
+    -fx-font-family: 'Courier New', Courier, monospace;
+    -fx-background-color: darkgray;
+    -fx-aligment:center;
+    -fx-font-size: 25;
+    -fx-color: white;
+}
+
+/* Estilos para BuscadorA */
+.BuscadorA {
+    -fx-alignment: center;
+    -fx-font-family: "Courier New";
+    -fx-font-size: 25;
+    -fx-background-color: darkgray;
+    -fx-color: white;
+}
+
+/* Estilos para BuscadorP */
+.BuscadorP {
+    -fx-alignment: center;
+    -fx-font-family: "Courier New";
+    -fx-font-size: 25;
+    -fx-background-color: darkgray;
+    -fx-color: white;
+}
+
+/* Estilos para InicioAlumno */
+.InicioAlumno {
+    -fx-alignment: center;
+    -fx-font-family: "Courier New";
+    -fx-font-size: 25;
+    -fx-background-color: darkgray;
+    -fx-color: white;
+}
+
+/* Estilos para InicioProfesor */
+.InicioProfesor {
+    -fx-alignment: center;
+    -fx-font-family: "Courier New";
+    -fx-font-size: 25;
+    -fx-background-color: darkgray;
+    -fx-color: white;
+}
+
+/* Estilos para RegistroAlumno */
+.RegistroAlumno {
+    -fx-alignment: center;
+    -fx-font-family: "Courier New";
+    -fx-font-size: 25;
+    -fx-background-color: darkgray;
+    -fx-color: white;
+}
+
+/* Estilos para RegistroProfesor */
+.RegistroProfesor {
+    -fx-alignment: center;
+    -fx-font-family: "Courier New";
+    -fx-font-size: 25;
+    -fx-background-color: darkgray;
+    -fx-color: white;
+}
+
+
+

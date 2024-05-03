@@ -1,9 +1,11 @@
 package Gestor.pane;
 
+import java.net.URL;
 import java.sql.Connection;
 
 import Gestor.model.ProfesorDAO;
 import Gestor.model.ProfesorDO;
+import Gestor.model.UsuarioDO;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -26,7 +28,7 @@ public class InicioProfesor extends GridPane {
 	public static String passName;
 	private static boolean isOnDBase;
 	private static Stage stage;
-	private static Scene scene;
+	private static Scene sceneProfIni;
 	public boolean passOk;
 
 	/**
@@ -38,12 +40,15 @@ public class InicioProfesor extends GridPane {
 	 */
 	public InicioProfesor(Connection con) {
 
-		passOk = false;
-		Button btnConf = new Button("Confirmar");
+		// Creacion de objetos
+		UsuarioDO nameStorage = new UsuarioDO();
 		ProfesorDO profesor = new ProfesorDO();
+
+		Button btnConf = new Button("Confirmar");
 		CheckBox showPassCheckBox = new CheckBox("Mostrar Contraseña");
 		isOnDBase = false;
 		stage = new Stage();
+		passOk = false;
 
 		GridPane caja = new GridPane();
 
@@ -81,6 +86,8 @@ public class InicioProfesor extends GridPane {
 			profesor.setUsuario(txtUser.getText());
 			profesor.setContrasenia(txtHiddenPass.getText());
 			isOnDBase = ProfesorDAO.cargar(con, profesor);
+			userProfile usuarioP = new userProfile(con, stage);
+
 			// Aquí deberías mostrar el resultado de la
 			// autenticación en lugar de mostrar un diálogo
 			// vacío
@@ -123,11 +130,19 @@ public class InicioProfesor extends GridPane {
 		caja.add(showPassCheckBox, 0, 2);
 		caja.add(lblPass, 0, 1);
 		caja.add(btnConf, 0, 9, 2, 1);
-
-		scene = new Scene(caja, 600, 700);
+		// Refactor scene a InicioProfesor
+		sceneProfIni = new Scene(caja, 600, 700);
 
 		stage.setTitle("Inicio Sesión Profesor");
-		stage.setScene(scene);
+		sceneProfIni.getRoot().getStyleClass().add("InicioProfesor");
+		// importa el url
+		URL cssFile = getClass().getResource("/css/css.css");
+		if (cssFile == null) {
+			System.out.println("No se pudo encontrar el archivo CSS");
+		} else {
+			sceneProfIni.getStylesheets().add(cssFile.toExternalForm());
+		}
+		stage.setScene(sceneProfIni);
 		stage.show();
 
 	}

@@ -2,6 +2,7 @@ package org.openjfx.javafx_fxml;
 
 import java.sql.Connection;
 
+import Gestor.pane.AppMenu;
 import Gestor.pane.InicioAlumno;
 import Gestor.pane.InicioProfesor;
 import Gestor.pane.RegistroAlumno;
@@ -26,6 +27,7 @@ public class MainPag extends GridPane {
 	private static Scene scene;
 	private static Stage stage;
 	private Connection con;
+	public static ChoiceBox<String> profOrNo;
 
 	/**
 	 * Funcion que crea el menu principal de bienvenida, que alberga el inicio de
@@ -44,10 +46,11 @@ public class MainPag extends GridPane {
 		isAlum = false;
 		isProf = false;
 
-		AppMenu menu = new AppMenu();
+		// Declaracion de objetos
+		AppMenu menu = new AppMenu(primaryStage);
 
 		// Objetos
-		ChoiceBox<String> profOrNo = new ChoiceBox<>();
+		profOrNo = new ChoiceBox<>();
 		VBox cajon = new VBox();
 
 		// Boton de Inicio de sesion y Registro
@@ -96,6 +99,7 @@ public class MainPag extends GridPane {
 					btnLoginP.setVisible(true);
 					btnRegisA.setVisible(false);
 					btnLoginA.setVisible(false);
+
 				}
 			}
 		});
@@ -127,7 +131,7 @@ public class MainPag extends GridPane {
 		});
 
 		// Se agregan los nodos a la cuadrícula
-		this.add(welcome, 0, 0);
+
 		this.add(profOrAl, 0, 1);
 		this.add(log, 0, 2);
 		this.add(profOrNo, 0, 3);

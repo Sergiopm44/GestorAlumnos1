@@ -1,5 +1,6 @@
 package Gestor.pane;
 
+import java.net.URL;
 import java.sql.Connection;
 
 import Gestor.model.AlumnoDAO;
@@ -25,8 +26,8 @@ public class InicioAlumno extends GridPane {
 	public static String userName;
 	public static String passName;
 	private static boolean isOnDBase;
-	private static Stage stage;
-	private static Scene scene;
+	private static Stage stageAlumIni;
+	private static Scene sceneInicioAlumno;
 
 	/**
 	 * Funcion que inicia sesion del alumno con un usuario y una contraseña, si
@@ -36,11 +37,13 @@ public class InicioAlumno extends GridPane {
 	 * @param con
 	 */
 	public InicioAlumno(Connection con) {
-		Button btnConf = new Button("Confirmar");
+
 		AlumnoDO alumno = new AlumnoDO();
+
+		Button btnConf = new Button("Confirmar");
 		CheckBox showPassCheckBox = new CheckBox("Mostrar Contraseña");
 		isOnDBase = false;
-		stage = new Stage();
+		stageAlumIni = new Stage();
 
 		GridPane caja = new GridPane();
 
@@ -53,7 +56,6 @@ public class InicioAlumno extends GridPane {
 
 		lbluser = new Label("Introduzca el usuario: ");
 		txtUser = new TextField();
-		userName = txtUser.getText();
 
 		lblPass = new Label("Introduzca la contraseña: ");
 		txtHiddenPass = new PasswordField();
@@ -75,9 +77,13 @@ public class InicioAlumno extends GridPane {
 		});
 
 		btnConf.setOnAction(e -> {
-			alumno.setUsuario(txtUser.getText());
-			alumno.setContrasenia(txtHiddenPass.getText());
+			// Obtiene el valor del usuario y la contraseña
+			// introducidos
+			String usuario = txtUser.getText();
+			alumno.setUsuario(usuario);
+			alumno.setContrasenia(passName);
 			isOnDBase = AlumnoDAO.cargar(con, alumno);
+
 			// Aquí deberías mostrar el resultado de la
 			// autenticación en lugar de mostrar un diálogo
 			// vacío
@@ -93,7 +99,7 @@ public class InicioAlumno extends GridPane {
 				// cierra la alerta
 
 				isOk.setOnCloseRequest(event -> {
-					stage.close();
+					stageAlumIni.close();
 					// Creamos una nueva instancia de BuscadorA y
 					// mostramos su escena
 					BuscadorA buscadorA = new BuscadorA(con, new Stage());
@@ -125,12 +131,21 @@ public class InicioAlumno extends GridPane {
 		caja.add(showPassCheckBox, 0, 2);
 		caja.add(lblPass, 0, 1);
 		caja.add(btnConf, 0, 9, 2, 1);
+		// Refacto scene a InicioAlumno
+		sceneInicioAlumno = new Scene(caja, 600, 700);
 
-		scene = new Scene(caja, 600, 700);
-
-		stage.setTitle("Inicio Sesión Alumno");
-		stage.setScene(scene);
-		stage.show();
+		stageAlumIni.setTitle("Inicio Sesión Alumno");
+		sceneInicioAlumno.getRoot().getStyleClass().add("InicioAlumno");
+		// importa el url
+		URL cssFile = getClass().getResource("/css/css.css");
+		if (cssFile == null) {
+			System.out.println("No se pudo encontrar el archivo CSS");
+		} else {
+			sceneInicioAlumno.getStylesheets().add(cssFile.toExternalForm());
+		}
+		stageAlumIni.setScene(sceneInicioAlumno);
+		stageAlumIni.show();
 
 	}
+
 }

@@ -1,5 +1,6 @@
 package Gestor.pane;
 
+import java.net.URL;
 import java.sql.Connection;
 
 import Gestor.model.ProfesorDAO;
@@ -16,7 +17,7 @@ import javafx.stage.Stage;
 public class RegistroProfesor extends GridPane {
 
 	private static Stage stage;
-	private static Scene scene;
+	private static Scene sceneRegisProf;
 
 	/**
 	 * Funcion que añade un alumno a la base de datos segun los datos que se
@@ -109,11 +110,19 @@ public class RegistroProfesor extends GridPane {
 
 		caja.add(btnVolver, 0, 10);
 		caja.add(btnConf, 0, 9, 2, 1);
-
-		scene = new Scene(caja, 600, 450);
+		// Refactoriza scene a RegistroProfesor
+		sceneRegisProf = new Scene(caja, 600, 450);
 
 		stage.setTitle("Registro de profesores");
-		stage.setScene(scene);
+		sceneRegisProf.getRoot().getStyleClass().add("RegistroProfesor");
+		// importa el url
+		URL cssFile = getClass().getResource("/css/css.css");
+		if (cssFile == null) {
+			System.out.println("No se pudo encontrar el archivo CSS");
+		} else {
+			sceneRegisProf.getStylesheets().add(cssFile.toExternalForm());
+		}
+		stage.setScene(sceneRegisProf);
 		stage.show();
 	}
 }

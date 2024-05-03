@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Connection;
 
 import Gestor.utils.ConexionBD;
+import Gestor.utils.userConfig;
+import Gestor.utils.userConfig.Config;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -16,7 +18,8 @@ import javafx.stage.Stage;
  */
 public class App extends Application {
 
-	private static Scene scene;
+	public static Config configuracion = userConfig.insertarConfig();
+	public static Scene scene;
 	public static Connection con = ConexionBD.conectarBD();
 
 	@Override
@@ -27,12 +30,19 @@ public class App extends Application {
 
 		scene = new Scene(mainPag, 920, 460);
 
-		scene.getStylesheets().add(getClass().getResource("/css/css.css").toExternalForm());
+		if (configuracion.getTheme() == 1)
+			scene.getStylesheets().add(getClass().getResource("/css/darkCss.css").toExternalForm());
+		else
+			scene.getStylesheets().add(getClass().getResource("/css/css.css").toExternalForm());
 		scene.getRoot().getStyleClass().add("body");
 
 		stage.setTitle("Gestor de Alumnos");
 		stage.setScene(scene);
 		stage.show();
+
+		stage.setOnCloseRequest(e -> {
+			userConfig.escribirConfig(configuracion.getTheme());
+		});
 
 	}
 

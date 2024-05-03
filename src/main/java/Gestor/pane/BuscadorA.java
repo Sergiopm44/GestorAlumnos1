@@ -1,5 +1,6 @@
 package Gestor.pane;
 
+import java.net.URL;
 import java.sql.Connection;
 
 import Gestor.model.AlumnoDAO;
@@ -16,12 +17,13 @@ import javafx.stage.Stage;
 
 public class BuscadorA extends GridPane {
 
-	private static Scene scene;
+	private static Scene sceneBuscadorA;
 	private static Stage stage;
 
 	public BuscadorA(Connection con, Stage primaryStage) {
 		this.stage = primaryStage;
 
+		AppMenu menu = new AppMenu(primaryStage);
 		AlumnoDAO searchA = new AlumnoDAO();
 
 		Button btnAcept = new Button("Confirmar");
@@ -122,6 +124,7 @@ public class BuscadorA extends GridPane {
 		caja.add(lblMail, 0, 6);
 		caja.add(lblCur, 0, 7);
 		caja.add(btnAcept, 4, 0);
+		caja.add(menu, 0, 0);
 
 		GridPane.setHalignment(lblfecNa, HPos.CENTER);
 		GridPane.setHalignment(lblNombre, HPos.CENTER);
@@ -148,10 +151,18 @@ public class BuscadorA extends GridPane {
 		caja.add(txtGetDniA, 1, 0);
 		caja.add(lblGetDniA, 0, 0);
 
-		scene = new Scene(caja, 600, 700);
+		sceneBuscadorA = new Scene(caja, 600, 700);
 
 		stage.setTitle("Buscador Alumnos");
-		stage.setScene(scene);
+		sceneBuscadorA.getRoot().getStyleClass().add("BuscadorA");
+		// url css
+		URL cssFile = getClass().getResource("/css/css.css");
+		if (cssFile == null) {
+			System.out.println("No se pudo encontrar el archivo CSS");
+		} else {
+			sceneBuscadorA.getStylesheets().add(cssFile.toExternalForm());
+		}
+		stage.setScene(sceneBuscadorA);
 		stage.show();
 	}
 }
