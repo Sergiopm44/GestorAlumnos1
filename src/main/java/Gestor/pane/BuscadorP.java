@@ -14,8 +14,10 @@ import javafx.stage.Stage;
 public class BuscadorP extends GridPane {
 
 	public static Scene scene;
+	public static Stage stage;
 
-	public BuscadorP(Connection con, Stage stage) {
+	public BuscadorP(Connection con, Stage primaryStage) {
+		this.stage = primaryStage;
 
 		ProfesorDAO searchP = new ProfesorDAO();
 
@@ -29,7 +31,6 @@ public class BuscadorP extends GridPane {
 		txtGetDniP.setOnAction(event -> {
 
 			String dniSearch = txtGetDniP.getText();
-
 			if (!dniSearch.isEmpty()) { // Verificamos si el DNI no está vacío
 				ProfesorDO profesorEncontrado = searchP.busqueda(con, dniSearch);
 				if (profesorEncontrado != null) { // Verificamos si se encontró un alumno
@@ -61,6 +62,9 @@ public class BuscadorP extends GridPane {
 					caja.add(txtMail, 1, 6);
 					caja.add(txtDep, 1, 7);
 
+					// Cerramos la ventana actual despues de mostrar
+					// los detalles del almuno
+					stage.close();
 				} else {
 
 					// Mostramos un mensaje indicando que no se
