@@ -4,8 +4,11 @@ import java.sql.Connection;
 
 import Gestor.model.AlumnoDAO;
 import Gestor.model.AlumnoDO;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -21,6 +24,8 @@ public class BuscadorA extends GridPane {
 
 		AlumnoDAO searchA = new AlumnoDAO();
 
+		Button btnacept = new Button("Confirmar");
+
 		GridPane caja = new GridPane();
 
 		Label lblGetDniA = new Label("Introduzca el DNI del alumno que desea buscar: ");
@@ -28,7 +33,7 @@ public class BuscadorA extends GridPane {
 
 		// Agregamos un EventHandler al TextField para
 		// manejar el evento de presionar Enter
-		txtGetDniA.setOnAction(event -> {
+		btnacept.setOnAction(event -> {
 			String dniSearch = txtGetDniA.getText();
 			if (!dniSearch.isEmpty()) {
 				AlumnoDO alumnoEncontrado = searchA.busqueda(con, dniSearch);
@@ -51,7 +56,20 @@ public class BuscadorA extends GridPane {
 					txtCur.setEditable(false);
 
 					// Agregamos los TextField al GridPane
-					caja.getChildren().clear();
+					GridPane.setHalignment(txtApell, HPos.CENTER);
+					GridPane.setHalignment(txtUser, HPos.CENTER);
+					GridPane.setHalignment(txtTel, HPos.CENTER);
+					GridPane.setHalignment(txtMail, HPos.CENTER);
+					GridPane.setHalignment(txtCur, HPos.CENTER);
+
+					Insets margen = new Insets(10);
+
+					GridPane.setMargin(txtApell, margen);
+					GridPane.setMargin(txtUser, margen);
+					GridPane.setMargin(txtTel, margen);
+					GridPane.setMargin(txtMail, margen);
+					GridPane.setMargin(txtCur, margen);
+
 					caja.add(txtfecNa, 1, 1);
 					caja.add(txtNombre, 1, 2);
 					caja.add(txtApell, 1, 3);
@@ -62,7 +80,6 @@ public class BuscadorA extends GridPane {
 
 					// Cerramos la ventana actual después de mostrar
 					// los detalles del alumno
-					stage.close();
 				} else {
 					// Mostramos un mensaje si no se encuentra ningún
 					// alumno
@@ -102,6 +119,32 @@ public class BuscadorA extends GridPane {
 		caja.add(lblTel, 0, 5);
 		caja.add(lblMail, 0, 6);
 		caja.add(lblCur, 0, 7);
+		caja.add(btnacept, 4, 0);
+
+		GridPane.setHalignment(lblGetDniA, HPos.CENTER);
+		GridPane.setHalignment(txtGetDniA, HPos.CENTER);
+		GridPane.setHalignment(lblfecNa, HPos.CENTER);
+		GridPane.setHalignment(lblNombre, HPos.CENTER);
+		GridPane.setHalignment(lblApell, HPos.CENTER);
+		GridPane.setHalignment(lblUser, HPos.CENTER);
+		GridPane.setHalignment(lblTel, HPos.CENTER);
+		GridPane.setHalignment(lblMail, HPos.CENTER);
+		GridPane.setHalignment(lblCur, HPos.CENTER);
+		GridPane.setHalignment(btnacept, HPos.CENTER);
+
+		// Puedes ajustar el valor del margen según sea
+		// necesario
+		Insets margen = new Insets(10);
+		GridPane.setMargin(lblGetDniA, margen);
+		GridPane.setMargin(txtGetDniA, margen);
+		GridPane.setMargin(lblfecNa, margen);
+		GridPane.setMargin(lblNombre, margen);
+		GridPane.setMargin(lblApell, margen);
+		GridPane.setMargin(lblUser, margen);
+		GridPane.setMargin(lblTel, margen);
+		GridPane.setMargin(lblMail, margen);
+		GridPane.setMargin(lblCur, margen);
+		GridPane.setMargin(btnacept, margen);
 
 		scene = new Scene(caja, 600, 700);
 
