@@ -2,7 +2,6 @@ package org.openjfx.javafx_fxml;
 
 import java.sql.Connection;
 
-import Gestor.pane.BuscadorP;
 import Gestor.pane.InicioAlumno;
 import Gestor.pane.InicioProfesor;
 import Gestor.pane.RegistroAlumno;
@@ -44,6 +43,8 @@ public class MainPag extends GridPane {
 		isIniOk = false;
 		isAlum = false;
 		isProf = false;
+
+		AppMenu menu = new AppMenu();
 
 		// Objetos
 		ChoiceBox<String> profOrNo = new ChoiceBox<>();
@@ -123,8 +124,6 @@ public class MainPag extends GridPane {
 			isIniOk = true;
 			isProf = true;
 
-			BuscadorP buscadorP = new BuscadorP(con, stage);
-			stage.setScene(buscadorP.getScene());
 		});
 
 		// Se agregan los nodos a la cuadrícula
@@ -136,6 +135,7 @@ public class MainPag extends GridPane {
 		this.add(btnRegisA, 0, 5);
 		this.add(btnLoginP, 0, 4);
 		this.add(btnRegisP, 0, 5);
+		this.add(menu, 0, 0);
 
 		this.setHalignment(welcome, HPos.CENTER);
 		this.setHalignment(profOrAl, HPos.CENTER);

@@ -24,7 +24,7 @@ public class BuscadorA extends GridPane {
 
 		AlumnoDAO searchA = new AlumnoDAO();
 
-		Button btnacept = new Button("Confirmar");
+		Button btnAcept = new Button("Confirmar");
 
 		GridPane caja = new GridPane();
 
@@ -33,7 +33,7 @@ public class BuscadorA extends GridPane {
 
 		// Agregamos un EventHandler al TextField para
 		// manejar el evento de presionar Enter
-		btnacept.setOnAction(event -> {
+		btnAcept.setOnAction(event -> {
 			String dniSearch = txtGetDniA.getText();
 			if (!dniSearch.isEmpty()) {
 				AlumnoDO alumnoEncontrado = searchA.busqueda(con, dniSearch);
@@ -70,6 +70,12 @@ public class BuscadorA extends GridPane {
 					GridPane.setMargin(txtMail, margen);
 					GridPane.setMargin(txtCur, margen);
 
+					GridPane.setHalignment(lblGetDniA, HPos.CENTER);
+					GridPane.setHalignment(txtGetDniA, HPos.CENTER);
+
+					// Puedes ajustar el valor del margen según sea
+					// necesario
+
 					caja.add(txtfecNa, 1, 1);
 					caja.add(txtNombre, 1, 2);
 					caja.add(txtApell, 1, 3);
@@ -100,10 +106,6 @@ public class BuscadorA extends GridPane {
 			}
 		});
 
-		// Agregamos el TextField al GridPane
-		caja.add(txtGetDniA, 1, 0);
-		caja.add(lblGetDniA, 0, 0);
-
 		Label lblfecNa = new Label("Fecha de Nacimiento: ");
 		Label lblNombre = new Label("Nombre: ");
 		Label lblApell = new Label("Apellido: ");
@@ -119,10 +121,8 @@ public class BuscadorA extends GridPane {
 		caja.add(lblTel, 0, 5);
 		caja.add(lblMail, 0, 6);
 		caja.add(lblCur, 0, 7);
-		caja.add(btnacept, 4, 0);
+		caja.add(btnAcept, 4, 0);
 
-		GridPane.setHalignment(lblGetDniA, HPos.CENTER);
-		GridPane.setHalignment(txtGetDniA, HPos.CENTER);
 		GridPane.setHalignment(lblfecNa, HPos.CENTER);
 		GridPane.setHalignment(lblNombre, HPos.CENTER);
 		GridPane.setHalignment(lblApell, HPos.CENTER);
@@ -130,13 +130,9 @@ public class BuscadorA extends GridPane {
 		GridPane.setHalignment(lblTel, HPos.CENTER);
 		GridPane.setHalignment(lblMail, HPos.CENTER);
 		GridPane.setHalignment(lblCur, HPos.CENTER);
-		GridPane.setHalignment(btnacept, HPos.CENTER);
+		GridPane.setHalignment(btnAcept, HPos.CENTER);
 
-		// Puedes ajustar el valor del margen según sea
-		// necesario
 		Insets margen = new Insets(10);
-		GridPane.setMargin(lblGetDniA, margen);
-		GridPane.setMargin(txtGetDniA, margen);
 		GridPane.setMargin(lblfecNa, margen);
 		GridPane.setMargin(lblNombre, margen);
 		GridPane.setMargin(lblApell, margen);
@@ -144,7 +140,13 @@ public class BuscadorA extends GridPane {
 		GridPane.setMargin(lblTel, margen);
 		GridPane.setMargin(lblMail, margen);
 		GridPane.setMargin(lblCur, margen);
-		GridPane.setMargin(btnacept, margen);
+		GridPane.setMargin(btnAcept, margen);
+		GridPane.setMargin(lblGetDniA, margen);
+		GridPane.setMargin(txtGetDniA, margen);
+
+		// Agregamos el TextField al GridPane
+		caja.add(txtGetDniA, 1, 0);
+		caja.add(lblGetDniA, 0, 0);
 
 		scene = new Scene(caja, 600, 700);
 

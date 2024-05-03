@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
@@ -12,19 +11,22 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class AppMenu extends Application {
+public class AppMenu extends GridPane {
+
+	private static Stage primaryStage;
+
 	/**
 	 * Funcion que crea el menu en la aplicacion java y que tiene todos los eventos
 	 * funcionales de los menus
 	 * 
 	 * @param primaryStage
 	 */
-	@Override
-	public void start(Stage primaryStage) {
-		primaryStage.setTitle("Pruebas de Programación");
+	public void AppMenu() {
+
 		BorderPane borderPane = new BorderPane();
 
 		MenuBar menuBar = new MenuBar();
@@ -161,7 +163,4 @@ public class AppMenu extends Application {
 		primaryStage.show();
 	}
 
-	public static void main(String[] args) {
-		launch(args);
-	}
 }

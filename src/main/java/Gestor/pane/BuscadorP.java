@@ -4,8 +4,11 @@ import java.sql.Connection;
 
 import Gestor.model.ProfesorDAO;
 import Gestor.model.ProfesorDO;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -21,6 +24,8 @@ public class BuscadorP extends GridPane {
 
 		ProfesorDAO searchP = new ProfesorDAO();
 
+		Button btnAcept = new Button("Confirmar");
+
 		GridPane caja = new GridPane();
 
 		Label lblGetDniP = new Label("Introduzca el dni del profesor que desea buscar: ");
@@ -28,7 +33,7 @@ public class BuscadorP extends GridPane {
 
 		// Agregamos un EventHandler al TextField para
 		// manejar el evento de presionar Enter
-		txtGetDniP.setOnAction(event -> {
+		btnAcept.setOnAction(event -> {
 
 			String dniSearch = txtGetDniP.getText();
 			if (!dniSearch.isEmpty()) { // Verificamos si el DNI no está vacío
@@ -53,7 +58,24 @@ public class BuscadorP extends GridPane {
 					txtDep.setEditable(false);
 
 					// Agregamos los TextField al GridPane
-					caja.getChildren().clear();
+					GridPane.setHalignment(txtApell, HPos.CENTER);
+					GridPane.setHalignment(txtUser, HPos.CENTER);
+					GridPane.setHalignment(txtTel, HPos.CENTER);
+					GridPane.setHalignment(txtMail, HPos.CENTER);
+					GridPane.setHalignment(txtDep, HPos.CENTER);
+
+					Insets margen = new Insets(10);
+
+					GridPane.setMargin(txtApell, margen);
+					GridPane.setMargin(txtUser, margen);
+					GridPane.setMargin(txtTel, margen);
+					GridPane.setMargin(txtMail, margen);
+
+					GridPane.setHalignment(lblGetDniP, HPos.CENTER);
+					GridPane.setHalignment(txtGetDniP, HPos.CENTER);
+
+					// Puede ajustar el valor del margen según sea necesario
+
 					caja.add(txtfecNa, 1, 1);
 					caja.add(txtNombre, 1, 2);
 					caja.add(txtApell, 1, 3);
@@ -64,7 +86,6 @@ public class BuscadorP extends GridPane {
 
 					// Cerramos la ventana actual despues de mostrar
 					// los detalles del almuno
-					stage.close();
 				} else {
 
 					// Mostramos un mensaje indicando que no se
@@ -85,9 +106,6 @@ public class BuscadorP extends GridPane {
 				alert.showAndWait();
 			}
 		});
-		// Agregamos el TextField al GridPane
-		caja.add(txtGetDniP, 1, 0);
-		caja.add(lblGetDniP, 0, 0);
 
 		Label lblfecNa = new Label("Fecha de Nacimiento: ");
 		Label lblNombre = new Label("Nombre: ");
@@ -104,6 +122,32 @@ public class BuscadorP extends GridPane {
 		caja.add(lblTel, 0, 5);
 		caja.add(lblMail, 0, 6);
 		caja.add(lblDep, 0, 7);
+		caja.add(btnAcept, 4, 0);
+
+		GridPane.setHalignment(lblfecNa, HPos.CENTER);
+		GridPane.setHalignment(lblNombre, HPos.CENTER);
+		GridPane.setHalignment(lblApell, HPos.CENTER);
+		GridPane.setHalignment(lblUser, HPos.CENTER);
+		GridPane.setHalignment(lblTel, HPos.CENTER);
+		GridPane.setHalignment(lblMail, HPos.CENTER);
+		GridPane.setHalignment(lblDep, HPos.CENTER);
+		GridPane.setHalignment(btnAcept, HPos.CENTER);
+
+		Insets margen = new Insets(10);
+		GridPane.setMargin(lblfecNa, margen);
+		GridPane.setMargin(lblNombre, margen);
+		GridPane.setMargin(lblApell, margen);
+		GridPane.setMargin(lblUser, margen);
+		GridPane.setMargin(lblTel, margen);
+		GridPane.setMargin(lblMail, margen);
+		GridPane.setMargin(lblDep, margen);
+		GridPane.setMargin(btnAcept, margen);
+		GridPane.setMargin(lblGetDniP, margen);
+		GridPane.setMargin(txtGetDniP, margen);
+
+		// Agregamos el TextField al GridPane
+		caja.add(txtGetDniP, 1, 0);
+		caja.add(lblGetDniP, 0, 0);
 
 		scene = new Scene(caja, 600, 700);
 

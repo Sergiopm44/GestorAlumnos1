@@ -29,6 +29,7 @@ public class RegistroAlumno extends GridPane {
 		this.stage = primaryStage;
 
 		Button btnConf = new Button("Confirmar");
+		Button btnVolver = new Button("Volver");
 		// Almacen del usuario nuevo
 		AlumnoDO alumno = new AlumnoDO();
 
@@ -102,6 +103,11 @@ public class RegistroAlumno extends GridPane {
 			AlumnoDAO.insertAlumno(con, alumno);
 		});
 
+		btnVolver.setOnAction(e -> {
+			stage.close();
+		});
+
+		caja.add(btnVolver, 0, 10);
 		caja.add(btnConf, 0, 9, 2, 1);
 
 		scene = new Scene(caja, 600, 700);

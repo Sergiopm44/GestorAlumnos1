@@ -91,7 +91,9 @@ public class InicioAlumno extends GridPane {
 				isOk.setContentText("Puede continuar usando la Aplicación.");
 				// Configuramos el evento que se activa cuando se
 				// cierra la alerta
+
 				isOk.setOnCloseRequest(event -> {
+					stage.close();
 					// Creamos una nueva instancia de BuscadorA y
 					// mostramos su escena
 					BuscadorA buscadorA = new BuscadorA(con, new Stage());
