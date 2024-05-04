@@ -163,10 +163,7 @@ public class AppMenu extends BorderPane {
 			// Crear una instancia de userProfile y mostrarla
 			// en una nueva ventana
 			userProfile profilePane = new userProfile(con, stage);
-			Stage profileStage = new Stage();
-			profileStage.setScene(new Scene(profilePane, 600, 700));
-			profileStage.setTitle("Perfil de Usuario");
-			profileStage.show();
+
 		});
 
 		MenuItem zoomInMenuItem = new MenuItem("Zoom In");

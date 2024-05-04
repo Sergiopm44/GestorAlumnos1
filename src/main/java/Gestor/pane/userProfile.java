@@ -6,6 +6,7 @@ import Gestor.model.AlumnoDAO;
 import Gestor.model.AlumnoDO;
 import Gestor.model.ProfesorDAO;
 import Gestor.model.ProfesorDO;
+import Gestor.model.UsuarioDO;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -25,11 +26,12 @@ public class userProfile extends GridPane {
 
 		// Declaracion de objetos
 
+		UsuarioDO newUser = new UsuarioDO();
 		GridPane caja = new GridPane();
 
-		if (isAlumno == true) {
+		if (newUser.isAlumno() == true) {
 			AlumnoDAO searchA = new AlumnoDAO();
-			AlumnoDO alumno = searchA.searchAUser(con, usuario);
+			AlumnoDO alumno = searchA.searchAUser(con, newUser.getUserName());
 
 			if (alumno != null) {
 				TextField txtfecNa = new TextField(alumno.getFechNa());
@@ -118,9 +120,9 @@ public class userProfile extends GridPane {
 				alert.setContentText("Hubo un error, porfavor inténtenlo de nuevo Alumno.");
 				alert.showAndWait();
 			}
-		} else if (isAlumno == false) {
+		} else if (newUser.isAlumno() == false) {
 			ProfesorDAO searchP = new ProfesorDAO();
-			ProfesorDO profesor = searchP.searchPUser(con, usuario);
+			ProfesorDO profesor = searchP.searchPUser(con, newUser.getUserName());
 
 			if (profesor != null) {
 				TextField txtfecNa = new TextField(profesor.getFechNa());

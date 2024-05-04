@@ -5,6 +5,7 @@ import java.sql.Connection;
 
 import Gestor.model.AlumnoDAO;
 import Gestor.model.AlumnoDO;
+import Gestor.model.UsuarioDO;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -56,6 +57,7 @@ public class InicioAlumno extends GridPane {
 
 		lbluser = new Label("Introduzca el usuario: ");
 		txtUser = new TextField();
+		userName = txtUser.getText();
 
 		lblPass = new Label("Introduzca la contraseña: ");
 		txtHiddenPass = new PasswordField();
@@ -79,10 +81,15 @@ public class InicioAlumno extends GridPane {
 		btnConf.setOnAction(e -> {
 			// Obtiene el valor del usuario y la contraseña
 			// introducidos
-			String usuario = txtUser.getText();
-			alumno.setUsuario(usuario);
+			alumno.setUsuario(userName);
 			alumno.setContrasenia(passName);
 			isOnDBase = AlumnoDAO.cargar(con, alumno);
+
+			UsuarioDO newUser = new UsuarioDO();
+			boolean isAl = true;
+			String usuario = txtUser.getText();
+			newUser.setUserName(usuario);
+			newUser.setAlumno(isAl);
 
 			// Aquí deberías mostrar el resultado de la
 			// autenticación en lugar de mostrar un diálogo
