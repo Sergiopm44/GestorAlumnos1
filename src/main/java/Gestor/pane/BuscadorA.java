@@ -23,7 +23,10 @@ public class BuscadorA extends GridPane {
 	public BuscadorA(Connection con, Stage primaryStage) {
 		this.stage = primaryStage;
 
+		// Menu
 		AppMenu menu = new AppMenu(primaryStage);
+
+		// Objeto para buscar alumno
 		AlumnoDAO searchA = new AlumnoDAO();
 
 		Button btnAcept = new Button("Confirmar");
@@ -116,14 +119,14 @@ public class BuscadorA extends GridPane {
 		Label lblMail = new Label("Correo electrónico: ");
 		Label lblCur = new Label("Curso: ");
 
-		caja.add(lblfecNa, 0, 1);
-		caja.add(lblNombre, 0, 2);
-		caja.add(lblApell, 0, 3);
-		caja.add(lblUser, 0, 4);
-		caja.add(lblTel, 0, 5);
-		caja.add(lblMail, 0, 6);
-		caja.add(lblCur, 0, 7);
-		caja.add(btnAcept, 4, 0);
+		caja.add(lblfecNa, 0, 2);
+		caja.add(lblNombre, 0, 3);
+		caja.add(lblApell, 0, 4);
+		caja.add(lblUser, 0, 5);
+		caja.add(lblTel, 0, 6);
+		caja.add(lblMail, 0, 7);
+		caja.add(lblCur, 0, 8);
+		caja.add(btnAcept, 4, 1);
 		caja.add(menu, 0, 0);
 
 		GridPane.setHalignment(lblfecNa, HPos.CENTER);
@@ -148,8 +151,8 @@ public class BuscadorA extends GridPane {
 		GridPane.setMargin(txtGetDniA, margen);
 
 		// Agregamos el TextField al GridPane
-		caja.add(txtGetDniA, 1, 0);
-		caja.add(lblGetDniA, 0, 0);
+		caja.add(txtGetDniA, 1, 1);
+		caja.add(lblGetDniA, 0, 1);
 
 		sceneBuscadorA = new Scene(caja, 600, 700);
 

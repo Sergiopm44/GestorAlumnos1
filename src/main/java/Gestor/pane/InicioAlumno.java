@@ -30,6 +30,8 @@ public class InicioAlumno extends GridPane {
 	private static Stage stageAlumIni;
 	private static Scene sceneInicioAlumno;
 
+	public static UsuarioDO newUser;
+
 	/**
 	 * Funcion que inicia sesion del alumno con un usuario y una contraseña, si
 	 * estos son los mismos que en la base de datos el alumno entrara en la
@@ -44,6 +46,7 @@ public class InicioAlumno extends GridPane {
 		Button btnConf = new Button("Confirmar");
 		CheckBox showPassCheckBox = new CheckBox("Mostrar Contraseña");
 		isOnDBase = false;
+
 		stageAlumIni = new Stage();
 
 		GridPane caja = new GridPane();
@@ -57,7 +60,6 @@ public class InicioAlumno extends GridPane {
 
 		lbluser = new Label("Introduzca el usuario: ");
 		txtUser = new TextField();
-		userName = txtUser.getText();
 
 		lblPass = new Label("Introduzca la contraseña: ");
 		txtHiddenPass = new PasswordField();
@@ -81,16 +83,16 @@ public class InicioAlumno extends GridPane {
 		btnConf.setOnAction(e -> {
 			// Obtiene el valor del usuario y la contraseña
 			// introducidos
+			String userName = txtUser.getText();
+			String passName = txtHiddenPass.getText();
 			alumno.setUsuario(userName);
 			alumno.setContrasenia(passName);
 			isOnDBase = AlumnoDAO.cargar(con, alumno);
 
-			UsuarioDO newUser = new UsuarioDO();
+			newUser = new UsuarioDO();
 			boolean isAl = true;
-			String usuario = txtUser.getText();
-			newUser.setUserName(usuario);
+			newUser.setUserNameA(userName);
 			newUser.setAlumno(isAl);
-
 			// Aquí deberías mostrar el resultado de la
 			// autenticación en lugar de mostrar un diálogo
 			// vacío

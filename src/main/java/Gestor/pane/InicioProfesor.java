@@ -31,6 +31,8 @@ public class InicioProfesor extends GridPane {
 	private static Scene sceneProfIni;
 	public boolean passOk;
 
+	public static UsuarioDO newUser;
+
 	/**
 	 * Funcion que inicia sesion del profesor con un usuario y una contraseña, si
 	 * estos son los mismos que en la base de datos el profesor entrara en la
@@ -41,14 +43,12 @@ public class InicioProfesor extends GridPane {
 	public InicioProfesor(Connection con) {
 
 		// Creacion de objetos
-		UsuarioDO nameStorage = new UsuarioDO();
 		ProfesorDO profesor = new ProfesorDO();
 
 		Button btnConf = new Button("Confirmar");
 		CheckBox showPassCheckBox = new CheckBox("Mostrar Contraseña");
 		isOnDBase = false;
 		stage = new Stage();
-		passOk = false;
 
 		GridPane caja = new GridPane();
 
@@ -61,7 +61,6 @@ public class InicioProfesor extends GridPane {
 
 		lbluser = new Label("Introduzca el usuario: ");
 		txtUser = new TextField();
-		userName = txtUser.getText();
 
 		lblPass = new Label("Introduzca la contraseña: ");
 		txtHiddenPass = new PasswordField();
@@ -83,16 +82,19 @@ public class InicioProfesor extends GridPane {
 		});
 
 		btnConf.setOnAction(e -> {
-			profesor.setUsuario(txtUser.getText());
-			profesor.setContrasenia(txtHiddenPass.getText());
+			String userName = txtUser.getText();
+			String passName = txtHiddenPass.getText();
+			profesor.setUsuario(userName);
+			profesor.setContrasenia(passName);
 			isOnDBase = ProfesorDAO.cargar(con, profesor);
-			userProfile usuarioP = new userProfile(con, stage);
 
-			// Aquí deberías mostrar el resultado de la
-			// autenticación en lugar de mostrar un diálogo
-			// vacío
+			newUser = new UsuarioDO();
+			boolean isAl = false;
+			newUser.setUserNameP(userName);
+			newUser.setAlumno(isAl);
 			if (isOnDBase) {
 				Alert isOk = new Alert(Alert.AlertType.INFORMATION);
+
 				isOk.setTitle("Sesión Iniciada");
 				isOk.setHeaderText("¡Bienvenido " + txtUser.getText() + "!");
 				isOk.setContentText("Puede continuar usando la Aplicación.");

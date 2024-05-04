@@ -6,11 +6,11 @@ import Gestor.model.AlumnoDAO;
 import Gestor.model.AlumnoDO;
 import Gestor.model.ProfesorDAO;
 import Gestor.model.ProfesorDO;
-import Gestor.model.UsuarioDO;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -26,12 +26,12 @@ public class userProfile extends GridPane {
 
 		// Declaracion de objetos
 
-		UsuarioDO newUser = new UsuarioDO();
+		Button btnGoBack = new Button("Volver al buscador");
 		GridPane caja = new GridPane();
 
-		if (newUser.isAlumno() == true) {
+		if (InicioAlumno.newUser != null && InicioAlumno.newUser.isAlumno()) {
 			AlumnoDAO searchA = new AlumnoDAO();
-			AlumnoDO alumno = searchA.searchAUser(con, newUser.getUserName());
+			AlumnoDO alumno = searchA.searchAUser(con, InicioAlumno.newUser.getUserNameA());
 
 			if (alumno != null) {
 				TextField txtfecNa = new TextField(alumno.getFechNa());
@@ -49,12 +49,19 @@ public class userProfile extends GridPane {
 				TextField txtCur = new TextField(Integer.toString(alumno.getCurso_idCurso()));
 				txtCur.setEditable(false);
 
+				btnGoBack.setOnAction(e -> {
+					BuscadorA vueltaBusc = new BuscadorA(con, stage);
+					stage.setScene(vueltaBusc.getScene());
+
+				});
+
 				// Agregamos los TextField al GridPane
 				GridPane.setHalignment(txtApell, HPos.CENTER);
 				GridPane.setHalignment(txtUser, HPos.CENTER);
 				GridPane.setHalignment(txtTel, HPos.CENTER);
 				GridPane.setHalignment(txtMail, HPos.CENTER);
 				GridPane.setHalignment(txtCur, HPos.CENTER);
+				GridPane.setHalignment(btnGoBack, HPos.CENTER);
 
 				Insets margen = new Insets(10);
 
@@ -63,6 +70,7 @@ public class userProfile extends GridPane {
 				GridPane.setMargin(txtTel, margen);
 				GridPane.setMargin(txtMail, margen);
 				GridPane.setMargin(txtCur, margen);
+				GridPane.setMargin(btnGoBack, margen);
 
 				// Puedes ajustar el valor del margen según sea
 				// necesario
@@ -74,6 +82,7 @@ public class userProfile extends GridPane {
 				caja.add(txtTel, 1, 5);
 				caja.add(txtMail, 1, 6);
 				caja.add(txtCur, 1, 7);
+				caja.add(btnGoBack, 1, 8);
 
 				Label lblfecNa = new Label("Fecha de Nacimiento: ");
 				Label lblNombre = new Label("Nombre: ");
@@ -120,9 +129,9 @@ public class userProfile extends GridPane {
 				alert.setContentText("Hubo un error, porfavor inténtenlo de nuevo Alumno.");
 				alert.showAndWait();
 			}
-		} else if (newUser.isAlumno() == false) {
+		} else if (InicioProfesor.newUser != null && !InicioProfesor.newUser.isAlumno()) {
 			ProfesorDAO searchP = new ProfesorDAO();
-			ProfesorDO profesor = searchP.searchPUser(con, newUser.getUserName());
+			ProfesorDO profesor = searchP.searchPUser(con, InicioProfesor.newUser.getUserNameP());
 
 			if (profesor != null) {
 				TextField txtfecNa = new TextField(profesor.getFechNa());
@@ -140,12 +149,19 @@ public class userProfile extends GridPane {
 				TextField txtCur = new TextField(Integer.toString(profesor.getDepartamentos_idDepartamentos()));
 				txtCur.setEditable(false);
 
+				btnGoBack.setOnAction(e -> {
+					BuscadorA vueltaBusc = new BuscadorA(con, stage);
+					stage.setScene(vueltaBusc.getScene());
+
+				});
+
 				// Agregamos los TextField al GridPane
 				GridPane.setHalignment(txtApell, HPos.CENTER);
 				GridPane.setHalignment(txtUser, HPos.CENTER);
 				GridPane.setHalignment(txtTel, HPos.CENTER);
 				GridPane.setHalignment(txtMail, HPos.CENTER);
 				GridPane.setHalignment(txtCur, HPos.CENTER);
+				GridPane.setHalignment(btnGoBack, HPos.CENTER);
 
 				Insets margen = new Insets(10);
 
@@ -165,6 +181,8 @@ public class userProfile extends GridPane {
 				caja.add(txtTel, 1, 5);
 				caja.add(txtMail, 1, 6);
 				caja.add(txtCur, 1, 7);
+				caja.add(btnGoBack, 1, 8);
+
 				Label lblfecNa = new Label("Fecha de Nacimiento: ");
 				Label lblNombre = new Label("Nombre: ");
 				Label lblApell = new Label("Apellido: ");
@@ -188,6 +206,7 @@ public class userProfile extends GridPane {
 				GridPane.setHalignment(lblTel, HPos.CENTER);
 				GridPane.setHalignment(lblMail, HPos.CENTER);
 				GridPane.setHalignment(lblCur, HPos.CENTER);
+				GridPane.setHalignment(btnGoBack, HPos.CENTER);
 
 				GridPane.setMargin(lblfecNa, margen);
 				GridPane.setMargin(lblNombre, margen);
@@ -196,6 +215,7 @@ public class userProfile extends GridPane {
 				GridPane.setMargin(lblTel, margen);
 				GridPane.setMargin(lblMail, margen);
 				GridPane.setMargin(lblCur, margen);
+				GridPane.setMargin(btnGoBack, margen);
 
 				sceneProfile = new Scene(caja, 600, 700);
 

@@ -2,7 +2,6 @@ package org.openjfx.javafx_fxml;
 
 import java.sql.Connection;
 
-import Gestor.pane.AppMenu;
 import Gestor.pane.InicioAlumno;
 import Gestor.pane.InicioProfesor;
 import Gestor.pane.RegistroAlumno;
@@ -45,9 +44,6 @@ public class MainPag extends GridPane {
 		isIniOk = false;
 		isAlum = false;
 		isProf = false;
-
-		// Declaracion de objetos
-		AppMenu menu = new AppMenu(primaryStage);
 
 		// Objetos
 		profOrNo = new ChoiceBox<>();
@@ -139,7 +135,6 @@ public class MainPag extends GridPane {
 		this.add(btnRegisA, 0, 5);
 		this.add(btnLoginP, 0, 4);
 		this.add(btnRegisP, 0, 5);
-		this.add(menu, 0, 0);
 
 		this.setHalignment(welcome, HPos.CENTER);
 		this.setHalignment(profOrAl, HPos.CENTER);

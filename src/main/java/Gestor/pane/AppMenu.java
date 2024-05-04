@@ -148,7 +148,7 @@ public class AppMenu extends BorderPane {
 			}
 		});
 
-		MenuItem config = new MenuItem("Configuración");
+		Menu config = new Menu("Configuración");
 		MenuItem profile = new MenuItem("Perfil");
 		fileMenu.getItems().addAll(openMenuItem, exitMenuItem);
 		helpMenu.getItems().addAll(aboutMenuItem, manualMenuItem);
@@ -181,16 +181,7 @@ public class AppMenu extends BorderPane {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// Configuracion para cambiar de negro a blanco.
-			if (App.configuracion.getTheme() == 0) {
-				App.configuracion.setTheme(1);
-				App.scene.getStylesheets().remove(getClass().getResource("/css/css.css").toExternalForm());
-				App.scene.getStylesheets().add(getClass().getResource("/css/darkCss.css").toExternalForm());
-			} else if (App.configuracion.getTheme() == 1) {
-				App.configuracion.setTheme(0);
-				App.scene.getStylesheets().remove(getClass().getResource("/css/darkCss.css").toExternalForm());
-				App.scene.getStylesheets().add(getClass().getResource("/css/css.css").toExternalForm());
-			}
+
 		});
 
 		zoomOutMenuItem.setOnAction(event -> {
@@ -199,6 +190,22 @@ public class AppMenu extends BorderPane {
 				applyScale();
 			} catch (Exception e) {
 				e.printStackTrace();
+			}
+		});
+
+		MenuItem lightBlueMode = new MenuItem("Cambiar tema");
+		config.getItems().addAll(lightBlueMode);
+
+		lightBlueMode.setOnAction(e -> {
+			// Configuracion para cambiar de blanco a azul.
+			if (App.configuracion.getTheme() == 0) {
+				App.configuracion.setTheme(1);
+				App.scene.getStylesheets().remove(getClass().getResource("/css/css.css").toExternalForm());
+				App.scene.getStylesheets().add(getClass().getResource("/css/darkCss.css").toExternalForm());
+			} else if (App.configuracion.getTheme() == 1) {
+				App.configuracion.setTheme(0);
+				App.scene.getStylesheets().remove(getClass().getResource("/css/darkCss.css").toExternalForm());
+				App.scene.getStylesheets().add(getClass().getResource("/css/css.css").toExternalForm());
 			}
 		});
 

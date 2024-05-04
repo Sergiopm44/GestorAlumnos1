@@ -23,6 +23,8 @@ public class BuscadorP extends GridPane {
 	public BuscadorP(Connection con, Stage primaryStage) {
 		this.stage = primaryStage;
 
+		AppMenu menu = new AppMenu(primaryStage);
+
 		ProfesorDAO searchP = new ProfesorDAO();
 
 		Button btnAcept = new Button("Confirmar");
@@ -117,14 +119,15 @@ public class BuscadorP extends GridPane {
 		Label lblMail = new Label("Correo electrónico: ");
 		Label lblDep = new Label("Departamento: ");
 
-		caja.add(lblfecNa, 0, 1);
-		caja.add(lblNombre, 0, 2);
-		caja.add(lblApell, 0, 3);
-		caja.add(lblUser, 0, 4);
-		caja.add(lblTel, 0, 5);
-		caja.add(lblMail, 0, 6);
-		caja.add(lblDep, 0, 7);
-		caja.add(btnAcept, 4, 0);
+		caja.add(lblfecNa, 0, 2);
+		caja.add(lblNombre, 0, 3);
+		caja.add(lblApell, 0, 4);
+		caja.add(lblUser, 0, 5);
+		caja.add(lblTel, 0, 6);
+		caja.add(lblMail, 0, 7);
+		caja.add(lblDep, 0, 8);
+		caja.add(btnAcept, 4, 1);
+		caja.add(menu, 0, 0);
 
 		GridPane.setHalignment(lblfecNa, HPos.CENTER);
 		GridPane.setHalignment(lblNombre, HPos.CENTER);
@@ -134,6 +137,7 @@ public class BuscadorP extends GridPane {
 		GridPane.setHalignment(lblMail, HPos.CENTER);
 		GridPane.setHalignment(lblDep, HPos.CENTER);
 		GridPane.setHalignment(btnAcept, HPos.CENTER);
+		GridPane.setHalignment(menu, HPos.CENTER);
 
 		Insets margen = new Insets(10);
 		GridPane.setMargin(lblfecNa, margen);
@@ -146,10 +150,11 @@ public class BuscadorP extends GridPane {
 		GridPane.setMargin(btnAcept, margen);
 		GridPane.setMargin(lblGetDniP, margen);
 		GridPane.setMargin(txtGetDniP, margen);
+		GridPane.setMargin(menu, margen);
 
 		// Agregamos el TextField al GridPane
-		caja.add(txtGetDniP, 1, 0);
-		caja.add(lblGetDniP, 0, 0);
+		caja.add(txtGetDniP, 1, 1);
+		caja.add(lblGetDniP, 0, 1);
 
 		sceneBuscadorP = new Scene(caja, 600, 700);
 

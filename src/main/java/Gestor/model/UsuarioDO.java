@@ -2,15 +2,24 @@ package Gestor.model;
 
 public class UsuarioDO {
 
-	private String userName;
+	private String userNameA;
+	private String userNameP;
 	private boolean isAlumno;
 
-	public String getUserName() {
-		return userName;
+	public String getUserNameA() {
+		return userNameA;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserNameA(String userNameA) {
+		this.userNameA = userNameA;
+	}
+
+	public String getUserNameP() {
+		return userNameP;
+	}
+
+	public void setUserNameP(String userNameP) {
+		this.userNameP = userNameP;
 	}
 
 	public boolean isAlumno() {
