@@ -80,13 +80,13 @@ public class BuscadorP extends GridPane {
 					// Puede ajustar el valor del margen según sea
 					// necesario
 
-					caja.add(txtfecNa, 1, 1);
-					caja.add(txtNombre, 1, 2);
-					caja.add(txtApell, 1, 3);
-					caja.add(txtUser, 1, 4);
-					caja.add(txtTel, 1, 5);
-					caja.add(txtMail, 1, 6);
-					caja.add(txtDep, 1, 7);
+					caja.add(txtfecNa, 1, 2);
+					caja.add(txtNombre, 1, 3);
+					caja.add(txtApell, 1, 4);
+					caja.add(txtUser, 1, 5);
+					caja.add(txtTel, 1, 6);
+					caja.add(txtMail, 1, 7);
+					caja.add(txtDep, 1, 8);
 
 					// Cerramos la ventana actual despues de mostrar
 					// los detalles del almuno
@@ -156,7 +156,7 @@ public class BuscadorP extends GridPane {
 		caja.add(txtGetDniP, 1, 1);
 		caja.add(lblGetDniP, 0, 1);
 
-		sceneBuscadorP = new Scene(caja, 600, 700);
+		sceneBuscadorP = new Scene(caja, 1200, 900);
 
 		stage.setTitle("Buscador profesores");
 		sceneBuscadorP.getRoot().getStyleClass().add("BuscadorP");
@@ -168,6 +168,7 @@ public class BuscadorP extends GridPane {
 		}
 
 		stage.setScene(sceneBuscadorP);
+		stage.setResizable(false);
 		stage.show();
 	}
 }

@@ -159,8 +159,9 @@ public class MainPag extends GridPane {
 
 		scene = new Scene(cajon, 600, 700);
 
-		stage.setTitle("Inicio Sesión");
+		stage.setTitle("Página Principal");
 		stage.setScene(scene);
+		stage.setResizable(false);
 		stage.show();
 	}
 }

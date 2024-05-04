@@ -81,13 +81,13 @@ public class BuscadorA extends GridPane {
 					// Puedes ajustar el valor del margen según sea
 					// necesario
 
-					caja.add(txtfecNa, 1, 1);
-					caja.add(txtNombre, 1, 2);
-					caja.add(txtApell, 1, 3);
-					caja.add(txtUser, 1, 4);
-					caja.add(txtTel, 1, 5);
-					caja.add(txtMail, 1, 6);
-					caja.add(txtCur, 1, 7);
+					caja.add(txtfecNa, 1, 2);
+					caja.add(txtNombre, 1, 3);
+					caja.add(txtApell, 1, 4);
+					caja.add(txtUser, 1, 5);
+					caja.add(txtTel, 1, 6);
+					caja.add(txtMail, 1, 7);
+					caja.add(txtCur, 1, 8);
 
 					// Cerramos la ventana actual después de mostrar
 					// los detalles del alumno
@@ -154,7 +154,7 @@ public class BuscadorA extends GridPane {
 		caja.add(txtGetDniA, 1, 1);
 		caja.add(lblGetDniA, 0, 1);
 
-		sceneBuscadorA = new Scene(caja, 600, 700);
+		sceneBuscadorA = new Scene(caja, 1200, 900);
 
 		stage.setTitle("Buscador Alumnos");
 		sceneBuscadorA.getRoot().getStyleClass().add("BuscadorA");
@@ -166,6 +166,7 @@ public class BuscadorA extends GridPane {
 			sceneBuscadorA.getStylesheets().add(cssFile.toExternalForm());
 		}
 		stage.setScene(sceneBuscadorA);
+		stage.setResizable(false);
 		stage.show();
 	}
 }

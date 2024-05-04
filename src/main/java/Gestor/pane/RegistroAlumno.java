@@ -111,7 +111,7 @@ public class RegistroAlumno extends GridPane {
 		caja.add(btnVolver, 0, 10);
 		caja.add(btnConf, 0, 9, 2, 1);
 		// Refactor scene a RegistroAlumno
-		sceneRegistroAlumno = new Scene(caja, 600, 700);
+		sceneRegistroAlumno = new Scene(caja, 750, 900);
 
 		stage.setTitle("Registro de Alumnos");
 		sceneRegistroAlumno.getRoot().getStyleClass().add("RegistroAlumno");
@@ -122,6 +122,7 @@ public class RegistroAlumno extends GridPane {
 		} else {
 			sceneRegistroAlumno.getStylesheets().add(cssFile.toExternalForm());
 		}
+		stage.setResizable(false);
 		stage.setScene(sceneRegistroAlumno);
 		stage.show();
 	}

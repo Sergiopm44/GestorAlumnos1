@@ -28,7 +28,7 @@ public class App extends Application {
 		MainPag mainPag = new MainPag(con, stage);
 		mainPag.setAlignment(Pos.TOP_CENTER);
 
-		scene = new Scene(mainPag, 920, 460);
+		scene = new Scene(mainPag, 1000, 750);
 
 		if (configuracion.getTheme() == 1)
 			scene.getStylesheets().add(getClass().getResource("/css/darkCss.css").toExternalForm());

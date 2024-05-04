@@ -145,6 +145,7 @@ public class InicioProfesor extends GridPane {
 			sceneProfIni.getStylesheets().add(cssFile.toExternalForm());
 		}
 		stage.setScene(sceneProfIni);
+		stage.setResizable(false);
 		stage.show();
 
 	}

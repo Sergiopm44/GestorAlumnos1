@@ -153,6 +153,7 @@ public class InicioAlumno extends GridPane {
 			sceneInicioAlumno.getStylesheets().add(cssFile.toExternalForm());
 		}
 		stageAlumIni.setScene(sceneInicioAlumno);
+		stageAlumIni.setResizable(false);
 		stageAlumIni.show();
 
 	}

@@ -20,18 +20,8 @@
             <artifactId>javafx-fxml</artifactId>
             <version>13</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-controls -->
-<dependency>
-    <groupId>org.openjfx</groupId>
-    <artifactId>javafx-controls</artifactId>
-    <version>13</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/net.imagej/ij -->
-<dependency>
-    <groupId>net.imagej</groupId>
-    <artifactId>ij</artifactId>
-    <version>1.53p</version>
-</dependency>
+       
+
 <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-base -->
 <dependency>
     <groupId>org.openjfx</groupId>

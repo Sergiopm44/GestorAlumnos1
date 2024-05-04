@@ -50,8 +50,7 @@ public class userProfile extends GridPane {
 				txtCur.setEditable(false);
 
 				btnGoBack.setOnAction(e -> {
-					BuscadorA vueltaBusc = new BuscadorA(con, stage);
-					stage.setScene(vueltaBusc.getScene());
+					stage.close();
 
 				});
 
@@ -150,8 +149,7 @@ public class userProfile extends GridPane {
 				txtCur.setEditable(false);
 
 				btnGoBack.setOnAction(e -> {
-					BuscadorA vueltaBusc = new BuscadorA(con, stage);
-					stage.setScene(vueltaBusc.getScene());
+					stage.close();
 
 				});
 

@@ -110,7 +110,7 @@ public class AppMenu extends BorderPane {
 			// Establecemos el título del diálogo
 			alert.setTitle("Acerca de...");
 			// Establecemos el mensaje del diálogo
-			alert.setHeaderText("Pruebas de Programación");
+			alert.setHeaderText("eRegister");
 			alert.setContentText("Github: https://github.com/Sergiopm44/GestorAlumnos1.git\n"
 					+ "Autores: Sergio Pinto Morales, Miguel Gallardo Cota, Francisco Javier Rodríguez Ruiz\n"
 					+ "Profesor: Victor Pablo Galván Flores\n" + "Estado de la aplicación: Beta\n" + "Versión: 1.0\n"
@@ -162,7 +162,7 @@ public class AppMenu extends BorderPane {
 
 			// Crear una instancia de userProfile y mostrarla
 			// en una nueva ventana
-			userProfile profilePane = new userProfile(con, stage);
+			userProfile profilePane = new userProfile(con, new Stage());
 
 		});
 
@@ -170,7 +170,7 @@ public class AppMenu extends BorderPane {
 		MenuItem zoomOutMenuItem = new MenuItem("Zoom Out");
 		viewMenu.getItems().addAll(zoomInMenuItem, zoomOutMenuItem);
 
-		// Escalado
+		// Escalado variable creada publica
 		scaleFactor = 1.0;
 		scale = new Scale(scaleFactor, scaleFactor);
 
@@ -193,6 +193,9 @@ public class AppMenu extends BorderPane {
 			}
 		});
 
+		// Metemos el nuevo botón en configuracion y
+		// hacemos los ajustes necesarios para que cambie
+		// el color del tema
 		MenuItem lightBlueMode = new MenuItem("Cambiar tema");
 		config.getItems().addAll(lightBlueMode);
 
@@ -218,9 +221,37 @@ public class AppMenu extends BorderPane {
 	}
 
 	private void applyScale() {
+		// Tomamos las dimensiones del stage actual
+		double sceneWidth = stage.getScene().getWidth();
+		double sceneHeight = stage.getScene().getHeight();
+
+		// Obtenemos las coordenadas del centro de la
+		// escena
+		double sceneCenterX = sceneWidth / 2;
+		double sceneCenterY = sceneHeight / 2;
+
+		// Actualizamos el factor de escala en el objeto
+		// Scale
 		scale.setX(scaleFactor);
 		scale.setY(scaleFactor);
-		this.getTransforms().clear();
-		this.getTransforms().add(scale);
+
+		// Calcular la nueva posición del centro de la
+		// imagen después del escalado, para que no quede
+		// descentrado
+		double newCenterX = sceneCenterX * scaleFactor;
+		double newCenterY = sceneCenterY * scaleFactor;
+
+		// Calcular el cambio en la posición del centro de
+		// la imagen
+		double deltaX = sceneCenterX - newCenterX;
+		double deltaY = sceneCenterY - newCenterY;
+
+		// Aplicar el escalamiento a toda la aplicación
+		// con el centro de la imagen como pivote
+		stage.getScene().getRoot().getTransforms().clear();
+		stage.getScene().getRoot().getTransforms().add(scale);
+		stage.getScene().getRoot().setTranslateX(deltaX);
+		stage.getScene().getRoot().setTranslateY(deltaY);
+		stage.setResizable(false);
 	}
 }
