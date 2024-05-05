@@ -7,6 +7,7 @@ module org.openjfx.javafx_fxml {
 	requires java.compiler;
 	requires aspose.pdf;
 	requires java.desktop;
+	requires fontawesomefx;
 
     opens org.openjfx.javafx_fxml to javafx.fxml;
     exports org.openjfx.javafx_fxml;

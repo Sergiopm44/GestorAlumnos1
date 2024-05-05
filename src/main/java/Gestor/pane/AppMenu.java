@@ -37,6 +37,7 @@ public class AppMenu extends BorderPane {
 	 */
 	public AppMenu(Stage primaryStage) {
 		this.stage = primaryStage;
+
 		BorderPane borderPane = new BorderPane();
 
 		con = ConexionBD.conectarBD();
