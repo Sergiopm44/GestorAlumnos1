@@ -102,6 +102,7 @@ public class RegistroAlumno extends GridPane {
 			alumno.setEmail(txtMail.getText());
 			alumno.setCurso_idCurso(Integer.parseInt(txtCurso.getText()));
 			AlumnoDAO.insertAlumno(con, alumno);
+			stage.close();
 		});
 
 		btnVolver.setOnAction(e -> {
@@ -111,7 +112,7 @@ public class RegistroAlumno extends GridPane {
 		caja.add(btnVolver, 0, 10);
 		caja.add(btnConf, 0, 9, 2, 1);
 		// Refactor scene a RegistroAlumno
-		sceneRegistroAlumno = new Scene(caja, 750, 900);
+		sceneRegistroAlumno = new Scene(caja, 975, 900);
 
 		stage.setTitle("Registro de Alumnos");
 		sceneRegistroAlumno.getRoot().getStyleClass().add("RegistroAlumno");

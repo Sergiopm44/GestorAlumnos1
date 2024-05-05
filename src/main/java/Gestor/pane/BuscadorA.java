@@ -3,17 +3,26 @@ package Gestor.pane;
 import java.net.URL;
 import java.sql.Connection;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import Gestor.model.AlumnoDAO;
 import Gestor.model.AlumnoDO;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class BuscadorA extends GridPane {
 
@@ -154,6 +163,28 @@ public class BuscadorA extends GridPane {
 		caja.add(txtGetDniA, 1, 1);
 		caja.add(lblGetDniA, 0, 1);
 
+		// Crear la HBox para contener la dateLabel y la
+		// timeLabel
+		HBox dateTimeBox = new HBox();
+		dateTimeBox.setAlignment(Pos.TOP_RIGHT); // Alinear en la esquina superior derecha
+		dateTimeBox.setPadding(new Insets(10)); // Añadir espacio alrededor de la fecha y la hora
+
+		// Crear las etiquetas de fecha y hora
+		Label timeLabel = new Label("Hora: ");
+
+		// Agregar las etiquetas al contenedor HBox
+		dateTimeBox.getChildren().addAll(timeLabel);
+
+		// Agregar la HBox al borde superior derecho del
+		// BorderPane
+		caja.add(dateTimeBox, 0, 9);
+
+		// Crear un Timeline para actualizar la hora cada
+		// segundo
+		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> updateTime(timeLabel)));
+		timeline.setCycleCount(Timeline.INDEFINITE);
+		timeline.play();
+
 		sceneBuscadorA = new Scene(caja, 1200, 900);
 
 		stage.setTitle("Buscador Alumnos");
@@ -169,4 +200,18 @@ public class BuscadorA extends GridPane {
 		stage.setResizable(false);
 		stage.show();
 	}
+
+	// Método para actualizar la hora
+	private void updateTime(Label timeLabel) {
+		// Obtener la fecha y hora actual
+		DateTime currentDateTime = new DateTime();
+
+		// Formatear la hora como una cadena
+		DateTimeFormatter timeFormatter = DateTimeFormat.forPattern("HH:mm:ss");
+		String formattedTime = timeFormatter.print(currentDateTime);
+
+		// Actualizar la etiqueta de la hora
+		timeLabel.setText("Hora: " + formattedTime);
+	}
+
 }

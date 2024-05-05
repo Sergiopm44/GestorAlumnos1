@@ -102,6 +102,7 @@ public class RegistroProfesor extends GridPane {
 			profesor.setEmail(txtMail.getText());
 			profesor.setDepartamentos_idDepartamentos(Integer.parseInt(txtDep.getText()));
 			ProfesorDAO.insertProfesor(con, profesor);
+			stage.close();
 		});
 
 		btnVolver.setOnAction(e -> {
@@ -111,7 +112,7 @@ public class RegistroProfesor extends GridPane {
 		caja.add(btnVolver, 0, 10);
 		caja.add(btnConf, 0, 9, 2, 1);
 		// Refactoriza scene a RegistroProfesor
-		sceneRegisProf = new Scene(caja, 750, 800);
+		sceneRegisProf = new Scene(caja, 985, 800);
 
 		stage.setTitle("Registro de profesores");
 		sceneRegisProf.getRoot().getStyleClass().add("RegistroProfesor");

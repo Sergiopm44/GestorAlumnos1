@@ -92,6 +92,11 @@ public class InicioProfesor extends GridPane {
 			boolean isAl = false;
 			newUser.setUserNameP(userName);
 			newUser.setAlumno(isAl);
+			// Aquí deberías mostrar el resultado de la
+			// autenticación en lugar de mostrar un diálogo
+			// vacío
+			// Mostrar una alerta dependiendo del valor de
+			// isOnDBase
 			if (isOnDBase) {
 				Alert isOk = new Alert(Alert.AlertType.INFORMATION);
 
