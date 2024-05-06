@@ -295,6 +295,9 @@ public class AppMenu extends BorderPane {
 			}
 
 		});
+		// Con el AppMenu.class.getResourceAsStream poodemos poner rutas relativas en
+		// las imagenes
+		// Sin que nos de error.
 		Image IMGOpen = new Image(AppMenu.class.getResourceAsStream("/img/icons8-open-view-50.png"));
 		// Crear un ImageView con la imagen
 		ImageView IVOpen = new ImageView(IMGOpen);
