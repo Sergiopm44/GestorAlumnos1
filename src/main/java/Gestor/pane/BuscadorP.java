@@ -7,6 +7,8 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import Gestor.model.AlumnoDAO;
+import Gestor.model.AlumnoDO;
 import Gestor.model.ProfesorDAO;
 import Gestor.model.ProfesorDO;
 import javafx.animation.KeyFrame;
@@ -34,9 +36,14 @@ public class BuscadorP extends GridPane {
 
 		AppMenu menu = new AppMenu(primaryStage);
 
+		// Objeto del profesor y alumno
 		ProfesorDAO searchP = new ProfesorDAO();
+		AlumnoDAO searchA = new AlumnoDAO();
 
 		Button btnAcept = new Button("Confirmar");
+
+		// Boton para eliminar a un alumno
+		Button btnDelAlu = new Button("Borrar Alumno");
 
 		GridPane caja = new GridPane();
 
@@ -50,63 +57,142 @@ public class BuscadorP extends GridPane {
 			String dniSearch = txtGetDniP.getText();
 			if (!dniSearch.isEmpty()) { // Verificamos si el DNI no está vacío
 				ProfesorDO profesorEncontrado = searchP.busqueda(con, dniSearch);
+				AlumnoDO alumnoEncontrado = searchA.busqueda(con, dniSearch);
+
 				if (profesorEncontrado != null) { // Verificamos si se encontró un alumno
 					// Creamos los TextField para mostrar los datos
 					// del alumno encontrado
-					TextField txtfecNa = new TextField(profesorEncontrado.getFechNa());
-					txtfecNa.setEditable(false);
-					TextField txtNombre = new TextField(profesorEncontrado.getNombre());
-					txtNombre.setEditable(false);
-					TextField txtApell = new TextField(profesorEncontrado.getApellido());
-					txtApell.setEditable(false);
-					TextField txtUser = new TextField(profesorEncontrado.getUsuario());
-					txtUser.setEditable(false);
-					TextField txtTel = new TextField(Integer.toString(profesorEncontrado.getTelefono()));
-					txtTel.setEditable(false);
-					TextField txtMail = new TextField(profesorEncontrado.getEmail());
-					txtMail.setEditable(false);
+
+					TextField txtfecNaP = new TextField(profesorEncontrado.getFechNa());
+					txtfecNaP.setEditable(false);
+					TextField txtNombreP = new TextField(profesorEncontrado.getNombre());
+					txtNombreP.setEditable(false);
+					TextField txtApellP = new TextField(profesorEncontrado.getApellido());
+					txtApellP.setEditable(false);
+					TextField txtUserP = new TextField(profesorEncontrado.getUsuario());
+					txtUserP.setEditable(false);
+					TextField txtTelP = new TextField(Integer.toString(profesorEncontrado.getTelefono()));
+					txtTelP.setEditable(false);
+					TextField txtMailP = new TextField(profesorEncontrado.getEmail());
+					txtMailP.setEditable(false);
 					TextField txtDep = new TextField(
 							Integer.toString(profesorEncontrado.getDepartamentos_idDepartamentos()));
 					txtDep.setEditable(false);
 
 					// Agregamos los TextField al GridPane
-					GridPane.setHalignment(txtApell, HPos.CENTER);
-					GridPane.setHalignment(txtUser, HPos.CENTER);
-					GridPane.setHalignment(txtTel, HPos.CENTER);
-					GridPane.setHalignment(txtMail, HPos.CENTER);
+					GridPane.setHalignment(txtApellP, HPos.CENTER);
+					GridPane.setHalignment(txtUserP, HPos.CENTER);
+					GridPane.setHalignment(txtTelP, HPos.CENTER);
+					GridPane.setHalignment(txtMailP, HPos.CENTER);
 					GridPane.setHalignment(txtDep, HPos.CENTER);
 
 					Insets margen = new Insets(10);
 
-					GridPane.setMargin(txtApell, margen);
-					GridPane.setMargin(txtUser, margen);
-					GridPane.setMargin(txtTel, margen);
-					GridPane.setMargin(txtMail, margen);
+					GridPane.setMargin(txtApellP, margen);
+					GridPane.setMargin(txtUserP, margen);
+					GridPane.setMargin(txtTelP, margen);
+					GridPane.setMargin(txtMailP, margen);
 
 					GridPane.setHalignment(lblGetDniP, HPos.CENTER);
 					GridPane.setHalignment(txtGetDniP, HPos.CENTER);
 
-					// Puede ajustar el valor del margen según sea
-					// necesario
-
-					caja.add(txtfecNa, 1, 2);
-					caja.add(txtNombre, 1, 3);
-					caja.add(txtApell, 1, 4);
-					caja.add(txtUser, 1, 5);
-					caja.add(txtTel, 1, 6);
-					caja.add(txtMail, 1, 7);
-					caja.add(txtDep, 1, 8);
+					// Agregamos los TextField al GridPane solo si no
+					// están ya agregados
+					if (!caja.getChildren().contains(txtfecNaP)) {
+						caja.add(txtfecNaP, 1, 2);
+						caja.add(txtNombreP, 1, 3);
+						caja.add(txtApellP, 1, 4);
+						caja.add(txtUserP, 1, 5);
+						caja.add(txtTelP, 1, 6);
+						caja.add(txtMailP, 1, 7);
+						caja.add(txtDep, 1, 8);
+					}
 
 					// Cerramos la ventana actual despues de mostrar
 					// los detalles del almuno
+				} else if (alumnoEncontrado != null) {
+					// Creamos los TextField para mostrar los datos
+					// del alumno encontrado
+					int idAlumno = alumnoEncontrado.getIdAlumno();
+					TextField txtfecNaA = new TextField(alumnoEncontrado.getFechNa());
+					txtfecNaA.setEditable(false);
+					TextField txtNombreA = new TextField(alumnoEncontrado.getNombre());
+					txtNombreA.setEditable(false);
+					TextField txtApellA = new TextField(alumnoEncontrado.getApellido());
+					txtApellA.setEditable(false);
+					TextField txtUserA = new TextField(alumnoEncontrado.getUsuario());
+					txtUserA.setEditable(false);
+					TextField txtTelA = new TextField(Integer.toString(alumnoEncontrado.getTelefono()));
+					txtTelA.setEditable(false);
+					TextField txtMailA = new TextField(alumnoEncontrado.getEmail());
+					txtMailA.setEditable(false);
+					TextField txtCur = new TextField(Integer.toString(alumnoEncontrado.getCurso_idCurso()));
+					txtCur.setEditable(false);
+					btnDelAlu.setVisible(true);
+
+					btnDelAlu.setOnAction(e -> {
+						Alert delete = new Alert(Alert.AlertType.CONFIRMATION);
+						delete.setTitle("Cuidado");
+						delete.setHeaderText(null);
+						delete.setContentText("¿Desea eliminar a este alumno definitivamente?");
+						// Si cierra la alerta, elimina el alumno
+						delete.setOnCloseRequest(events -> {
+							searchA.eliminarAlumno(idAlumno, con);
+							txtGetDniP.clear();
+							txtfecNaA.setVisible(false);
+							txtNombreA.setVisible(false);
+							txtApellA.setVisible(false);
+							txtUserA.setVisible(false);
+							txtTelA.setVisible(false);
+							txtMailA.setVisible(false);
+							txtCur.setVisible(false);
+							btnDelAlu.setVisible(false);
+
+						});
+
+						delete.showAndWait();
+
+					});
+
+					// Agregamos los TextField al GridPane
+					GridPane.setHalignment(txtApellA, HPos.CENTER);
+					GridPane.setHalignment(txtUserA, HPos.CENTER);
+					GridPane.setHalignment(txtTelA, HPos.CENTER);
+					GridPane.setHalignment(txtMailA, HPos.CENTER);
+					GridPane.setHalignment(txtCur, HPos.CENTER);
+
+					Insets margen = new Insets(10);
+
+					GridPane.setMargin(txtApellA, margen);
+					GridPane.setMargin(txtUserA, margen);
+					GridPane.setMargin(txtTelA, margen);
+					GridPane.setMargin(txtMailA, margen);
+					GridPane.setMargin(txtCur, margen);
+
+					// Puedes ajustar el valor del margen según sea
+					// necesario
+
+					// Agregamos los TextField al GridPane solo si no
+					// están ya agregados
+					if (!caja.getChildren().contains(txtfecNaA)) {
+						caja.add(txtfecNaA, 1, 2);
+						caja.add(txtNombreA, 1, 3);
+						caja.add(txtApellA, 1, 4);
+						caja.add(txtUserA, 1, 5);
+						caja.add(txtTelA, 1, 6);
+						caja.add(txtMailA, 1, 7);
+						caja.add(txtCur, 1, 8);
+						caja.add(btnDelAlu, 1, 9);
+					}
+
 				} else {
 
 					// Mostramos un mensaje indicando que no se
 					// encontró ningún alumno con el DNI proporcionado
 					Alert alert = new Alert(Alert.AlertType.INFORMATION);
-					alert.setTitle("Profesor no encontrado");
+					alert.setTitle("Usuario no encontrado");
 					alert.setHeaderText(null);
-					alert.setContentText("No se encontró ningún profesor con el DNI proporcionado.");
+					alert.setContentText("No se encontró usuario con el DNI proporcionado.");
 					alert.showAndWait();
 				}
 			} else {
@@ -187,7 +273,7 @@ public class BuscadorP extends GridPane {
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		timeline.play();
 
-		sceneBuscadorP = new Scene(caja, 1200, 900);
+		sceneBuscadorP = new Scene(caja, 1230, 900);
 
 		stage.setTitle("Buscador profesores");
 		sceneBuscadorP.getRoot().getStyleClass().add("BuscadorP");

@@ -18,7 +18,7 @@ public class CentroDAO {
 		try {
 			// Borramos el centro con un determinado id
 			// de centro
-			String query = "DELETE FROM Centro WHERE idCentro=?";
+			String query = "DELETE * FROM Centro WHERE idCentro=?";
 			// Creamos statement
 			PreparedStatement pstmt = con.prepareStatement(query);
 			// Establecemos el primer parametro de la

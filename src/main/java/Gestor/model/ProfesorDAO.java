@@ -14,16 +14,16 @@ public class ProfesorDAO {
 	 * @param con
 	 * @return 0 si ha ido bien o -1 si ha ido mal
 	 */
-	public static int eliminarProfesor(int idProfesores, Connection con) {
+	public static int eliminarProfesor(String dniP, Connection con) {
 
 		try {
 
 			// Borramos el dniP (dni de profesores )
-			String query = "DELETE FROM profesores WHERE idProfesor=?";
+			String query = "DELETE FROM profesores WHERE dniP=?";
 			// Creamos statement
 			PreparedStatement pstmt = con.prepareStatement(query);
 
-			pstmt.setInt(1, idProfesores);
+			pstmt.setString(1, dniP);
 
 			return 0;
 
@@ -299,16 +299,16 @@ public class ProfesorDAO {
 	/**
 	* Funcion que recoge todos los datos de un profesor y los almacena en un array segun el dni
 	*@param con
-	*@param dniP
+	*@param dniU
 	*@return profesor1 si ha funcionado bien y nulo si no ha funcionado
 	*/
-	public static ProfesorDO busqueda(Connection con, String dniP) {
+	public static ProfesorDO busqueda(Connection con, String dniU) {
 		try {
 			// Creamos query
 			String query = "SELECT * FROM profesores WHERE dniP = ?";
 			PreparedStatement pstmt = con.prepareStatement(query);
 			// Introducimos como parametro el id de alumno
-			pstmt.setString(1, dniP);
+			pstmt.setString(1, dniU);
 			// Creamos un resultset y ejecutamos la consulta
 			ResultSet rs = pstmt.executeQuery();
 

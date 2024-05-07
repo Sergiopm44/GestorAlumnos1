@@ -84,25 +84,38 @@ public class RegistroProfesor extends GridPane {
 		caja.add(lbluser, 0, 4);
 		caja.add(txtPass, 1, 5);
 		caja.add(lblPass, 0, 5);
-		caja.add(txtTel, 1, 6);
-		caja.add(lblTel, 0, 6);
-		caja.add(txtMail, 1, 7);
-		caja.add(lblMail, 0, 7);
-		caja.add(txtDep, 1, 8);
-		caja.add(lblDep, 0, 8);
+		caja.add(txtTel, 1, 7);
+		caja.add(lblTel, 0, 7);
+		caja.add(txtMail, 1, 8);
+		caja.add(lblMail, 0, 8);
+		caja.add(txtDep, 1, 9);
+		caja.add(lblDep, 0, 9);
 
 		btnConf.setOnAction(e -> {
-			profesor.setDniP(txtdniP.getText());
-			profesor.setFechNa(txtfecNa.getText());
-			profesor.setNombre(txtNombre.getText());
-			profesor.setApellido(txtApell.getText());
-			profesor.setUsuario(txtUser.getText());
-			profesor.setContrasenia(txtPass.getText());
-			profesor.setTelefono(Integer.parseInt(txtTel.getText()));
-			profesor.setEmail(txtMail.getText());
-			profesor.setDepartamentos_idDepartamentos(Integer.parseInt(txtDep.getText()));
-			ProfesorDAO.insertProfesor(con, profesor);
-			stage.close();
+
+			Label lblBadPass = new Label("¡Debe tener minimo 5 caracteres!");
+
+			if (txtPass.getLength() >= 5) {
+				// Comprobamos que tenga 5 carracteres minimo
+				profesor.setDniP(txtdniP.getText());
+				profesor.setFechNa(txtfecNa.getText());
+				profesor.setNombre(txtNombre.getText());
+				profesor.setApellido(txtApell.getText());
+				profesor.setUsuario(txtUser.getText());
+				profesor.setContrasenia(txtPass.getText());
+				profesor.setTelefono(Integer.parseInt(txtTel.getText()));
+				profesor.setEmail(txtMail.getText());
+				profesor.setDepartamentos_idDepartamentos(Integer.parseInt(txtDep.getText()));
+				ProfesorDAO.insertProfesor(con, profesor);
+				stage.close();
+
+			} else {
+				// Sacamos mensaje de error con un syle
+				lblBadPass.setStyle("-fx-text-fill: red; -fx-font-size: 11;");
+
+				caja.add(lblBadPass, 1, 6);
+			}
+			;
 		});
 
 		btnVolver.setOnAction(e -> {

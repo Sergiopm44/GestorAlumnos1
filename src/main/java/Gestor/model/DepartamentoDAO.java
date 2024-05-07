@@ -18,7 +18,7 @@ public class DepartamentoDAO {
 		try {
 			// Borramos el departamento con un determinado id
 			// de departamento
-			String query = "DELETE FROM Departamentos WHERE idDepartamentos=?";
+			String query = "DELETE * FROM Departamentos WHERE idDepartamentos=?";
 			// Creamos statement
 			PreparedStatement pstmt = con.prepareStatement(query);
 			// Establecemos el primer parametro de la

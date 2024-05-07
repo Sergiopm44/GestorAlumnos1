@@ -185,7 +185,7 @@ public class BuscadorA extends GridPane {
 		timeline.setCycleCount(Timeline.INDEFINITE);
 		timeline.play();
 
-		sceneBuscadorA = new Scene(caja, 1200, 900);
+		sceneBuscadorA = new Scene(caja, 1230, 900);
 
 		stage.setTitle("Buscador Alumnos");
 		sceneBuscadorA.getRoot().getStyleClass().add("BuscadorA");

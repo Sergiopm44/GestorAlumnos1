@@ -12,6 +12,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -44,6 +46,12 @@ public class MainPag extends GridPane {
 		isIniOk = false;
 		isAlum = false;
 		isProf = false;
+
+		// Logo de eRegister
+		Image ILogo = new Image(MainPag.class.getResourceAsStream("/img/logo_eRegister_1.jpg"));
+		ImageView IVLogo = new ImageView(ILogo);
+		IVLogo.setFitWidth(200); // Ancho deseado
+		IVLogo.setFitHeight(200);
 
 		// Objetos
 		profOrNo = new ChoiceBox<>();
@@ -127,14 +135,14 @@ public class MainPag extends GridPane {
 		});
 
 		// Se agregan los nodos a la cuadrícula
-
-		this.add(profOrAl, 0, 1);
-		this.add(log, 0, 2);
-		this.add(profOrNo, 0, 3);
-		this.add(btnLoginA, 0, 4);
-		this.add(btnRegisA, 0, 5);
-		this.add(btnLoginP, 0, 4);
-		this.add(btnRegisP, 0, 5);
+		this.add(IVLogo, 0, 0);
+		this.add(profOrAl, 0, 2);
+		this.add(log, 0, 3);
+		this.add(profOrNo, 0, 4);
+		this.add(btnLoginA, 0, 5);
+		this.add(btnRegisA, 0, 6);
+		this.add(btnLoginP, 0, 5);
+		this.add(btnRegisP, 0, 6);
 
 		this.setHalignment(welcome, HPos.CENTER);
 		this.setHalignment(profOrAl, HPos.CENTER);
@@ -144,6 +152,7 @@ public class MainPag extends GridPane {
 		this.setHalignment(btnLoginP, HPos.CENTER);
 		this.setHalignment(btnRegisA, HPos.CENTER);
 		this.setHalignment(btnRegisP, HPos.CENTER);
+		this.setHalignment(IVLogo, HPos.CENTER);
 
 		// Puedes ajustar el valor del margen según sea
 		// necesario

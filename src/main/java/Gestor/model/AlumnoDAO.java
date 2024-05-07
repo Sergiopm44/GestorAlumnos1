@@ -15,27 +15,23 @@ public class AlumnoDAO {
 	 * @return 0 si sale bien o -1 si sale man
 	 */
 	public static int eliminarAlumno(int idAlumno, Connection con) {
-
 		try {
-			// Borramos el alumno con un determinado id
-			// de alumno
+			// Borramos el alumno con un determinado id de
+			// alumno
 			String query = "DELETE FROM alumno WHERE idAlumno=?";
 			// Creamos statement
 			PreparedStatement pstmt = con.prepareStatement(query);
-			// Establecemos el primer parametro de la
-			// consulta
+			// Establecemos el primer parametro de la consulta
 			pstmt.setInt(1, idAlumno);
-			// Devolvemos 0 si todo ha ido bien
-			return 0;
-
+			// Ejecutamos la consulta
+			int filasAfectadas = pstmt.executeUpdate();
+			// Devolvemos el número de filas afectadas
+			return filasAfectadas;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			// Si entra aqui significa que ha dado
-			// error y por lo tanto
-			// debajo devolveremos -1
+			// Si ocurre un error, imprimir la traza y
+			// devolver -1
 			e.printStackTrace();
 			return -1;
-
 		}
 	}
 

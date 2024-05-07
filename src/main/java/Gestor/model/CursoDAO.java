@@ -18,7 +18,7 @@ public class CursoDAO {
 		try {
 			// Borramos el curso con un determinado id
 			// de curso
-			String query = "DELETE FROM Curso WHERE idCurso=?";
+			String query = "DELETE * FROM Curso WHERE idCurso=?";
 			// Creamos statement
 			PreparedStatement pstmt = con.prepareStatement(query);
 			// Establecemos el primer parametro de la
