@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class userConfig {
 
-	public static final String CONFIGURACION = "Z:\\Programacion\\GestorAlumnos1\\src\\main\\java\\Gestor\\utils\\configuracion.txt";
+	public static final String CONFIGURACION = "D:\\Programación\\Proyectos\\GestorAlumnos\\GestorAlumnos1\\GestorAlumnos1\\src\\main\\java\\Gestor\\utils\\configuracion.txt";
 
 	public static void escribirConfig(int theme) {
 
